@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Rusty-Ramos-s-workspace-9h3m5o.ap-southeast-2.xata.sh/db/rethinkdb",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
