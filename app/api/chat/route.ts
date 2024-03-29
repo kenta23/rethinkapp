@@ -2,7 +2,7 @@ import { HfInference } from '@huggingface/inference'
 import { HuggingFaceStream,  StreamingTextResponse } from 'ai'
 import { experimental_buildOpenAssistantPrompt } from 'ai/prompts'
 import { getContext } from '@/lib/context';
-import { Message } from 'ai/react';
+import { Message } from 'ai/react'; 
 
 const Hf = new HfInference(process.env.HF_ACCESS_TOKEN);
 

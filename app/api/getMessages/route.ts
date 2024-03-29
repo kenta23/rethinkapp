@@ -11,7 +11,7 @@ export async function POST(req: Request) {
 
     const res = await xata.db.chats.filter('document_id', id).sort('xata.createdAt', 'asc').getAll();
 
-    return NextResponse.json(res);
+    return NextResponse.json(res); 
 
   } catch (error) {
     console.log('SOME ERROR OCCURED', error)
