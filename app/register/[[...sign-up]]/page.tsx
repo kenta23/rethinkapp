@@ -36,7 +36,7 @@ const RegisterPage = () => {
               redirectUrl={"/archives"}
               path="/register"
               signInUrl="/login"
-              routing="virtual"
+              routing="path"
             />
           </div>
         </div>
