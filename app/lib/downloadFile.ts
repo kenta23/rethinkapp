@@ -13,10 +13,10 @@ export async function downloadFile(file_key: string) {
 
     try {
         // Obtain file URL from the database
-        const getFile = await utapi.getFileUrls(file_key);
+        const getFile = (await utapi.getFileUrls(file_key)).at(0);
 
         // Extract filename from URL
-        const filename = path.basename(getFile[0].url);
+        const filename = path.basename(getFile?.url || '');
         console.log(getFile);
         // Construct folder path
         const folderPath = `/tmp/uploads/${file_key}`;
@@ -28,7 +28,7 @@ export async function downloadFile(file_key: string) {
         const filePath = path.join(folderPath, filename);
 
         // Make HTTP GET request to download the file
-        const response = await axios.get(getFile[0].url, {
+        const response = await axios.get(getFile?.url as string, {
             responseType: 'arraybuffer' // To receive data as Buffer
         });
 
