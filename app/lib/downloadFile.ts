@@ -4,19 +4,20 @@ import fs from 'fs'
 import path from 'path';
 import { mkdirp } from 'mkdirp';
 
-interface File {
-    key: string;
-    url: string;
-}
 
-export async function downloadFile(file_key: string) {
+export async function downloadFile(file_key: string | string[]) {
 
     try {
         // Obtain file URL from the database
-        const getFile = await utapi.getFileUrls(file_key);
+        const getFile = await utapi.getFileUrls([file_key as string], {
+            keyType: "fileKey"
+        })
+        const fileData = getFile.data[0].url;
 
         // Extract filename from URL
-        const filename = path.basename(getFile[0]?.url || '');
+        const filename = path.basename(fileData);
+
+        console.log('GET FILE', getFile);
         console.log(getFile);
         // Construct folder path
         const folderPath = `/tmp/uploads/${file_key}`;
@@ -28,7 +29,7 @@ export async function downloadFile(file_key: string) {
         const filePath = path.join(folderPath, filename);
 
         // Make HTTP GET request to download the file
-        const response = await axios.get(getFile[0]?.url, {
+        const response = await axios.get(fileData, {
             responseType: 'arraybuffer' // To receive data as Buffer
         });
 

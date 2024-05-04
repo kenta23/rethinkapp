@@ -11,6 +11,11 @@ const pinecone = new Pinecone({
   apiKey: process.env.PINECONE_API_KEY!,
 });
 
+const pineconeIndex = pinecone.index("rethink");
+
+const indexes = await pinecone.listIndexes();
+
+console.log('MY INDEXES', indexes)
 type PDFPage = {
   pageContent: string;
   metadata: {
@@ -81,11 +86,12 @@ export async function saveVectorToPinecone(file_key: string) {
     const vectors = await Promise.all(documents.flat().map(embedDocument));
 
     // 4. upload to pinecone
-    const pineconeIndex = pinecone.index("rethink");
     const namespace = pineconeIndex.namespace(convertToAscii(file_key));
 
     console.log("inserting vectors into pinecone");
-    await namespace.upsert(vectors);
+    const vector = await namespace.upsert(vectors);
+
+    console.log('PINECONE DATA', vector);
 
     return documents[0];
   } catch (error) {

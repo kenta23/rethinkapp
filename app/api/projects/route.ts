@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { getXataClient } from "../../../src/xata";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
@@ -40,11 +40,26 @@ export async function POST (req: Request, res: Response) {
       if(data) {
          //DELETE FILE FROM UPLOADTHING
          await utapi.deleteFiles(data?.file_key as string);
-
+ 
          //DELETE EMBEDDINGS FROM PINECONE
-        if(index.namespace(data?.file_key as string)) {
-         await index.namespace(data?.file_key as string).deleteAll();
-          } 
+        if(index.namespace(data?.file_key as string)) { 
+           const pageOne = index.namespace(data?.file_key as string);
+           const itemTodelete = await pageOne.listPaginated(); //retrieve vectors associated in one namespace
+           console.log('ITEM TO DELETE', itemTodelete);
+
+           const pageOneVectorIds = itemTodelete?.vectors?.map((vector) => vector.id); //retrieve each one vector ids,
+           
+           
+          /* if (Array.isArray(pageOneVectorIds) && pageOneVectorIds.length > 0) {
+             await index.deleteMany(pageOneVectorIds);
+             console.log("Vectors deleted successfully:", pageOneVectorIds);
+           } else {
+             console.log("No vectors found to delete.");
+           } */ 
+           await index.namespace(data?.file_key as string).deleteAll();;
+       } 
+
+       
       }
       revalidatePath('/projects');
       return NextResponse.json(data, { status: 200 });

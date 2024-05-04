@@ -62,7 +62,6 @@ const Navbar = () => {
                   variables: {
                     colorPrimary: "#166792",
                     colorDanger: "red",
-                    fontSmoothing: "antialiased",
                     colorSuccess: "green",
                   },
                   baseTheme: dark,

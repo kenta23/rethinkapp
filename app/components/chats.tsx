@@ -6,10 +6,10 @@ import React, { useEffect, useRef } from 'react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { useAuth, currentUser, useUser } from '@clerk/nextjs';
+import { useAuth, useUser } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import Skeleton from 'react-loading-skeleton';
+
 
 
 export default function Chats ({ fileKey, id }: { fileKey: string | null, id: string | null}): JSX.Element  {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getXataClient } from "../../../src/xata";
 import { z } from 'zod';
-import { auth,  } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { saveVectorToPinecone } from "@/lib/pinecone";
 import { loadFileKeyToXataVector } from "@/lib/xata_vectors";
 

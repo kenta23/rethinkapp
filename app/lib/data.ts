@@ -1,6 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { getXataClient } from "../../src/xata";
-import { auth } from '@clerk/nextjs'
+import { auth } from '@clerk/nextjs/server'
 
 
 

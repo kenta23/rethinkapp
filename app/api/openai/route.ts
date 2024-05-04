@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import { Message, OpenAIStream, StreamingTextResponse } from 'ai';
+import { Message, OpenAIStream, StreamingTextResponse } from 'ai'; 
 import { getContext } from '@/lib/context';
 import { NextResponse } from 'next/server';
 import { getXataClient } from '../../../src/xata';

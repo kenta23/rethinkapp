@@ -1,4 +1,3 @@
-import { auth } from "@clerk/nextjs";
 import { getXataClient } from "../../src/xata";
 
 
