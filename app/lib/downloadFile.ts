@@ -3,16 +3,19 @@ import axios from "axios";
 import fs from 'fs'
 import path from 'path';
 import { mkdirp } from 'mkdirp';
-import { getXataClient } from "../../src/xata";
-import { convertToPdf } from "./convertdoc";
-import { string } from "zod";
+
+interface File {
+    key: string;
+    url: string;
+}
+
 
 
 export async function downloadFile(file_key: string) {
-    const xata = getXataClient();
+
     try {
         // Obtain file URL from the database
-        const getFile = await utapi.getFileUrls(file_key as string);
+        const getFile: File[] = await utapi.getFileUrls(file_key);
 
         // Extract filename from URL
         const filename = path.basename(getFile[0].url);

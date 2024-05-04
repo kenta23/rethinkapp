@@ -20,7 +20,7 @@ export default function DocumentFile({ selectedFile }: { selectedFile: string | 
         setContainerWidth(entry.contentRect.width);
         console.log(containerWidth)
       }
-    }, []);
+    }, [containerWidth]);
   
      useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
