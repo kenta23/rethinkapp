@@ -7,18 +7,15 @@ import { getXataClient } from "../../src/xata";
 import { convertToPdf } from "./convertdoc";
 import { string } from "zod";
 
-export async function downloadFile(file_key: string | string[]) {
+
+export async function downloadFile(file_key: string) {
     const xata = getXataClient();
     try {
         // Obtain file URL from the database
-        const getFile = await utapi.getFileUrls(file_key, {
-            keyType: "fileKey"
-        });
-
-        const files: { key: string, url: string }[] = getFile;
+        const getFile = await utapi.getFileUrls(file_key as string);
 
         // Extract filename from URL
-        const filename = path.basename(files[0].url);
+        const filename = path.basename(getFile[0].url);
 
         // Construct folder path
         const folderPath = `/tmp/uploads/${file_key}`;
@@ -30,7 +27,7 @@ export async function downloadFile(file_key: string | string[]) {
         const filePath = path.join(folderPath, filename);
 
         // Make HTTP GET request to download the file
-        const response = await axios.get(files[0].url, {
+        const response = await axios.get(getFile[0].url, {
             responseType: 'arraybuffer' // To receive data as Buffer
         });
 
