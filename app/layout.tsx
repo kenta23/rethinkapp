@@ -10,7 +10,7 @@ import { ourFileRouter } from "./api/uploadthing/core"
 import { Toaster } from "sonner"
 import Footer from "./components/footer"
 
-/**DEFAULT FONT */
+/**DEFAULT FONT */ 
 const rubik = Rubik({
   subsets: ['latin'],
   display: "auto"
