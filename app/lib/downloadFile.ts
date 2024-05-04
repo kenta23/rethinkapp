@@ -9,17 +9,15 @@ interface File {
     url: string;
 }
 
-
-
 export async function downloadFile(file_key: string) {
 
     try {
         // Obtain file URL from the database
-        const getFile: File[] = await utapi.getFileUrls(file_key);
+        const getFile = await utapi.getFileUrls(file_key);
 
         // Extract filename from URL
         const filename = path.basename(getFile[0].url);
-
+        console.log(getFile);
         // Construct folder path
         const folderPath = `/tmp/uploads/${file_key}`;
 
