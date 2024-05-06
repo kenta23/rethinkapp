@@ -3,26 +3,22 @@ import { Message, OpenAIStream, StreamingTextResponse } from 'ai';
 import { getContext } from '@/lib/context';
 import { NextResponse } from 'next/server';
 import { getXataClient } from '../../../src/xata';
- 
-// Create an OpenAI API client (that's edge friendly!)
+
+
 const openai = new OpenAI({
   apiKey: process.env.TOGETHER_API_KEY,
   baseURL: 'https://api.together.xyz/v1',
-});
+}); 
  
 // IMPORTANT! Set the runtime to edge
 export const runtime = 'edge';
 const xata = getXataClient();
  
-/* messages: [
-        prompt,
-        ...messages.filter((message: Message) => message.role === "user"),
-      ],*/
+
 export async function POST(req: Request) {
   const { messages, fileKey, userId, id } = await req.json();
-  //const { messages, fileKey } = await req.json();
- 
-  console.log('USER ID AND ID: ', userId, id);
+
+
   if(!fileKey) return NextResponse.json({ error: "missing file key"}, { status: 404 });
   
   try {
@@ -52,8 +48,9 @@ export async function POST(req: Request) {
         ...messages.filter((message: Message) => message.role === "user"),
       ],
       stream: true,
-    });
-  
+    }); 
+
+
     // Convert the response into a friendly text-stream
    const stream = OpenAIStream(response, {
      onStart: async () => {
@@ -74,8 +71,6 @@ export async function POST(req: Request) {
     },
    }); 
 
-   //const stream = OpenAIStream(response);
-   
    return new StreamingTextResponse(stream);
   } catch (error) {
      console.log("ERROR", error);

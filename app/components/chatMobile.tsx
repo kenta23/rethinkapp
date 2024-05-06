@@ -94,7 +94,7 @@ export default function ChatMobile({ fileKey, id }: { fileKey: string | null, id
           onSubmit={handleSubmit}
           className="flex 
             overflow-hidden 
-            bottom-4 mt-[2px]  h-[70px] items-center gap-2 min-w-full px-2 w-full"
+            bottom-8 mt-[2px] mb-2  h-[70px] items-center gap-2 min-w-full px-2 w-full"
         >
           <input
             onChange={handleInputChange}

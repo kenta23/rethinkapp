@@ -64,9 +64,7 @@ export default function Main({ data }: { data: savedDataDbType}) {
     }
  }
 
-function handleChangeName(e: React.FormEvent) {
-    e.preventDefault();
-   
+function handleChangeName(e: React.FormEvent<HTMLFormElement>) {   
     setEditing(false);
     
     mutate({ item: newName, id: data.id }, {
@@ -129,15 +127,14 @@ function handleChangeName(e: React.FormEvent) {
 
                 <div className="flex gap-1 items-center">
                   <button
-                    type="submit"
-                    onSubmit={handleChangeName}
+                    type="submit" 
                     className="p-1 bg-blue-500 rounded-full"
                   >
-                    <Check size={18} className="text-white" />
+                    <Check  size={18} className="text-white" />
                   </button>
 
                   <button
-                    type="button"
+                    type="reset"
                     onClick={() => setEditing(false)}
                     className="p-1 bg-red-500 rounded-full"
                   >
@@ -159,8 +156,8 @@ function handleChangeName(e: React.FormEvent) {
         </div>
 
         {/**DOCUMENT FILE */}
-        <div className="px-2 md:px-[15px] overflow-y-auto border mx-auto w-full
-          md:w-[600px] lg:w-[640px] xl:w-[700px] max-w-[720px] min-h-full h-full max-h-full">
+        <div className="px-2 md:px-[15px] overflow-y-auto border mx-auto my-auto self-center w-full
+          md:w-[600px] mb-[55px] lg:w-[640px] xl:w-[700px] max-w-[720px] min-h-full h-full max-h-full">
           {/**MAP THE DOCUMENTS HERE */}
           <DocumentFile selectedFile={data.file_link} />
         </div>

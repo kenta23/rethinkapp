@@ -25,7 +25,7 @@ export default function DocumentFile({ selectedFile }: { selectedFile: string | 
      useResizeObserver(containerRef, resizeObserverOptions, onResize);
 
   return (
-    <div ref={setContainerRef} className={`w-full h-full relative`}>
+    <div  className={`w-full h-full max-h-full lg:max-h-[670px] relative`}>
      <iframe
         src={`https://docs.google.com/gview?url=${selectedFile}&embedded=true`} // Replace with the URL or path to your document
         title="Document Viewer"

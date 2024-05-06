@@ -6,18 +6,18 @@ import { savedDataDbType } from '../../types'
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { toast } from 'sonner';
-import { useMutation } from '@tanstack/react-query';
+import { QueryClient, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+
 
 
 export default function Lists({ data }: { data: savedDataDbType}) {
+   const queryClient = new QueryClient();
+
    const { mutate, error, isPending } = useMutation({
-       mutationFn: async (id: string) => axios.post('/api/projects', { id }, ),
-       onSuccess: ()  => router.refresh(), 
+       mutationFn: async (id: string) => axios.post('/api/projects', { id } ), 
        onError: (error: any) => console.log(error)
    })
-   const router = useRouter();
 
    function formatDate(date: string) {
      const newDate = new Date(date);
@@ -40,9 +40,10 @@ export default function Lists({ data }: { data: savedDataDbType}) {
          toast.loading('Deleting file.....')
       }
        mutate(id, {
-         onSuccess: () => {
+         onSuccess: async () => {
            console.log('Done deleted!');
            toast.success(`${data.name} Deleted successfully!`);
+           await queryClient.invalidateQueries({ queryKey: ['projects'],  stale: true });
          }
        })
       //revalidatePath('/projects', 'page');
@@ -52,8 +53,8 @@ export default function Lists({ data }: { data: savedDataDbType}) {
     <Link
       href={`/main/${data.id}`}
       className="border flex items-center gap-4
-       border-primaryColor px-4 py-2 
-      max-w-auto h-auto min-h-[40px] rounded-lg 
+      border-primaryColor px-4 py-2 
+      max-w-auto h-[65px] min-h-[40px] rounded-lg 
       hover:bg-purple-50 duration-200 ease-linear transition-colors
       shadow-md shadow-gray-200 justify-between "
     >

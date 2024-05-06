@@ -20,7 +20,7 @@ export default function NavbarMain() {
           <Link href={"/"}>
             <Image
               src={"/Logo white with text.png"}
-              width={45} 
+              width={45}
               height={45}
               alt="Logo white with text"
             />
@@ -32,12 +32,19 @@ export default function NavbarMain() {
             Home
           </Link>
           {user && isLoaded ? (
-           <UserButton 
-            afterSignOutUrl="/main" 
-            appearance={{
-            baseTheme: dark,
-          }}
-       />
+            <UserButton
+              afterSignOutUrl="/main"
+              appearance={{
+                baseTheme: dark,
+                variables: {
+                  colorPrimary: "#166792",
+                  colorDanger: "red",
+                  colorSuccess: "green",
+                  colorText: "#ffff",
+                  colorNeutral: "#ffff",
+                },
+              }}
+            />
           ) : (
             <Link
               href={pathname.includes("/login") ? "/register" : "/login"}

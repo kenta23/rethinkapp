@@ -15,7 +15,8 @@ const pineconeIndex = pinecone.index("rethink");
 
 const indexes = await pinecone.listIndexes();
 
-console.log('MY INDEXES', indexes)
+console.log('MY INDEXES', indexes);
+
 type PDFPage = {
   pageContent: string;
   metadata: {

@@ -2,9 +2,8 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { SignedIn, SignedOut, UserButton, UserProfile, useClerk } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { Menu } from "lucide-react";
-import { dark, neobrutalism } from '@clerk/themes'
+import { dark, } from '@clerk/themes'
 
 import {
   Popover,
@@ -55,7 +54,7 @@ const Navbar = () => {
       <div className="flex">
         {/**USER ALREADY LOGGED IN */}
         <SignedIn>
-          <div className="flex gap-4 items-center justify-between">
+          <div className="flex gap-4 text-white items-center justify-between">
             <UserButton 
                  afterSignOutUrl="/" 
                  appearance={{
@@ -63,9 +62,11 @@ const Navbar = () => {
                     colorPrimary: "#166792",
                     colorDanger: "red",
                     colorSuccess: "green",
+                    colorText: '#ffff',
+                    colorNeutral: '#ffff'
                   },
                   baseTheme: dark,
-
+               
                 }}
                 showName={true}
             />

@@ -43,25 +43,17 @@ export async function POST (req: Request, res: Response) {
  
          //DELETE EMBEDDINGS FROM PINECONE
         if(index.namespace(data?.file_key as string)) { 
-           const pageOne = index.namespace(data?.file_key as string);
+          /* const pageOne = index.namespace(data?.file_key as string);
            const itemTodelete = await pageOne.listPaginated(); //retrieve vectors associated in one namespace
            console.log('ITEM TO DELETE', itemTodelete);
 
-           const pageOneVectorIds = itemTodelete?.vectors?.map((vector) => vector.id); //retrieve each one vector ids,
+           const pageOneVectorIds = itemTodelete?.vectors?.map((vector) => vector.id); //retrieve each one vector ids, */
+           await index.namespace(data?.file_key as string).deleteAll(); //delete all vectors associated in one namespace
            
-           
-          /* if (Array.isArray(pageOneVectorIds) && pageOneVectorIds.length > 0) {
-             await index.deleteMany(pageOneVectorIds);
-             console.log("Vectors deleted successfully:", pageOneVectorIds);
-           } else {
-             console.log("No vectors found to delete.");
-           } */ 
-           await index.namespace(data?.file_key as string).deleteAll();;
-       } 
+           console.log('DELETED EMBEDDINGS');
 
-       
+       } 
       }
-      revalidatePath('/projects');
       return NextResponse.json(data, { status: 200 });
 
    } catch (error) {
