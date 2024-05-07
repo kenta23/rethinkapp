@@ -8,11 +8,13 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from 'sonner';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 
 
 export default function Lists({ data }: { data: savedDataDbType}) {
    const queryClient = new QueryClient();
+   const router = useRouter();
 
    const { mutate, error, isPending } = useMutation({
        mutationFn: async (id: string) => axios.post('/api/projects', { id } ), 
@@ -43,7 +45,8 @@ export default function Lists({ data }: { data: savedDataDbType}) {
          onSuccess: async () => {
            console.log('Done deleted!');
            toast.success(`${data.name} Deleted successfully!`);
-           await queryClient.invalidateQueries({ queryKey: ['projects'],  stale: true });
+           await queryClient.invalidateQueries({ queryKey: ['projects'] });
+           router.refresh();
          }
        })
       //revalidatePath('/projects', 'page');

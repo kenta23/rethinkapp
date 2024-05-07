@@ -35,7 +35,7 @@ export async function POST (req: Request, res: Response) {
    const { id } = await req.json();
 
    try {
-      const data = await xata.db.document.delete(id as string)
+      const data = await xata.db.document.delete(id as string);
 
       if(data) {
          //DELETE FILE FROM UPLOADTHING
@@ -43,15 +43,14 @@ export async function POST (req: Request, res: Response) {
  
          //DELETE EMBEDDINGS FROM PINECONE
         if(index.namespace(data?.file_key as string)) { 
-          /* const pageOne = index.namespace(data?.file_key as string);
-           const itemTodelete = await pageOne.listPaginated(); //retrieve vectors associated in one namespace
-           console.log('ITEM TO DELETE', itemTodelete);
+           const namespaceVector =  index.namespace(data?.file_key as string).listPaginated();
+           const hasVectors = (await namespaceVector).vectors;
 
-           const pageOneVectorIds = itemTodelete?.vectors?.map((vector) => vector.id); //retrieve each one vector ids, */
-           await index.namespace(data?.file_key as string).deleteAll(); //delete all vectors associated in one namespace
-           
-           console.log('DELETED EMBEDDINGS');
 
+           if(hasVectors) {
+             await index.namespace(data?.file_key as string).deleteAll(); //delete all vectors associated in one namespace
+             console.log('DELETED EMBEDDINGS');
+           }
        } 
       }
       return NextResponse.json(data, { status: 200 });
