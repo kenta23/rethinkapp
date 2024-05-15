@@ -1,5 +1,4 @@
 import NextThemeProvider from "@/components/next-theme-provider"
-import { ClerkProvider } from "@clerk/nextjs"
 import { Rubik } from "next/font/google"
 import '@/styles/globals.css'
 import '@/styles/typography.css'
@@ -9,6 +8,9 @@ import { extractRouterConfig } from 'uploadthing/server';
 import { ourFileRouter } from "./api/uploadthing/core"
 import { Toaster } from "sonner"
 import Footer from "./components/footer"
+import { SessionProvider } from "next-auth/react"
+
+
 
 /**DEFAULT FONT */ 
 const rubik = Rubik({
@@ -22,16 +24,17 @@ export default function RootLayout({
     children: React.ReactNode
   }) {
     return (
-     <ClerkProvider> 
-        <html lang="en" suppressHydrationWarning>
+        <html lang="en" suppressHydrationWarning={true}>
             <body className={rubik.className}>
               <ReactQueryProvider>
                  <NextThemeProvider>     
                     <NextSSRPlugin
-                     routerConfig={extractRouterConfig(ourFileRouter)}
+                       routerConfig={extractRouterConfig(ourFileRouter)}
                      />
-                           {children}
-                          <Footer />
+                        <SessionProvider>
+                            {children}
+                            <Footer />
+                        </SessionProvider>
                           <Toaster 
                             position="top-center"
                             closeButton={true}
@@ -40,6 +43,5 @@ export default function RootLayout({
                </ReactQueryProvider> 
             </body> 
         </html>
-     </ClerkProvider> 
     )
   }

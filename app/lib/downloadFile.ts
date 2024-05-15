@@ -18,7 +18,6 @@ export async function downloadFile(file_key: string | string[]) {
         const filename = path.basename(fileData);
 
         console.log('GET FILE', getFile);
-        console.log(getFile);
         // Construct folder path
         const folderPath = `/tmp/uploads/${file_key}`;
 
@@ -26,19 +25,17 @@ export async function downloadFile(file_key: string | string[]) {
         await mkdirp(folderPath);
 
         // Construct full file path
-        const filePath = path.join(folderPath, filename);
+        const filePath = path.join(folderPath, filename); 
+    
 
         // Make HTTP GET request to download the file
         const response = await axios.get(fileData, {
             responseType: 'arraybuffer' // To receive data as Buffer
         });
-
-        // Save the file to the local machine
-        fs.writeFileSync(filePath, response.data);
-        //convertToPdf(filePath); //convert into pdf
-
+        // just save the original .pdf file to the local machine
+        fs.writeFileSync(filePath, response.data);  
+   
         console.log('File downloaded successfully.', filePath);
-        
         return filePath;
 
     } catch (error) {

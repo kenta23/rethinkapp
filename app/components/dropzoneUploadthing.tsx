@@ -1,7 +1,7 @@
 "use client";
  
 import { UploadButton, UploadDropzone } from "@/lib/uploadthing"; 
-import "@uploadthing/react/styles.css";
+
 
 
 function formatKey(key: string) {
@@ -11,7 +11,7 @@ export default function DropzoneUpload() {
   return (
     <main className=" ">
       <UploadDropzone
-        endpoint="documentUploader"
+        endpoint="pdfUploader" 
         onClientUploadComplete={(res) => {
           // Do something with the response
           console.log("Filesfsfsfsf: ", res);

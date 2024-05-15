@@ -131,9 +131,7 @@ export default function Footer() {
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>DISCLAIMER</AlertDialogTitle>
-                  <AlertDialogDescription>
                     <Disclaimer />
-                  </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Exit</AlertDialogCancel>
@@ -152,9 +150,7 @@ export default function Footer() {
                 <AlertDialogHeader>
                   <AlertDialogTitle>TERMS AND CONDITION</AlertDialogTitle>
                   <div className="h-[500px] md:h-[600px] overflow-y-auto">
-                    <AlertDialogDescription>
                         <TermsAndCondition />
-                    </AlertDialogDescription>
                   </div>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -174,9 +170,7 @@ export default function Footer() {
                   <AlertDialogHeader>
                     <AlertDialogTitle>How to use</AlertDialogTitle>
                     <div className="h-[500px] md:h-[600px] overflow-y-auto">
-                      <AlertDialogDescription>
                          <HowToUse />
-                      </AlertDialogDescription>
                     </div>
                   </AlertDialogHeader>
                   <AlertDialogFooter>

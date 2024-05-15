@@ -1,0 +1,16 @@
+{
+  "id": "mig_cnbknif9205323bgcm0g",
+  "parentID": "mig_cnbe35talnh59uijfp0g",
+  "checksum": "1:c8dccc46098db7179cb7c7b407384fa1840759d6f98a6ef3140bda2480329955",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "file_link",
+          "type": "string"
+        },
+        "table": "document"
+      }
+    }
+  ]
+}

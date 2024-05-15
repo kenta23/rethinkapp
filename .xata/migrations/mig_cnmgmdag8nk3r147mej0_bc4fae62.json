@@ -1,0 +1,12 @@
+{
+  "id": "mig_cnmgmdag8nk3r147mej0",
+  "parentID": "mig_cnmgld2g8nk3r147mei0",
+  "checksum": "1:bc4fae626372aabfab067f0d38c77e5dde4629fba7bfeae00be0cb52a210a4f0",
+  "operations": [
+    {
+      "removeTable": {
+        "table": "vectors"
+      }
+    }
+  ]
+}

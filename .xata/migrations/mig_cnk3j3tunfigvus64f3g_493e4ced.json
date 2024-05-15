@@ -1,0 +1,19 @@
+{
+  "id": "mig_cnk3j3tunfigvus64f3g",
+  "parentID": "mig_cnk3ie5unfigvus64f2g",
+  "checksum": "1:493e4ced0a69c7d2f13373accf9aaae579a4f0487557708521f798e91040ea64",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "contents_hg",
+          "type": "vector",
+          "vector": {
+            "dimension": 384
+          }
+        },
+        "table": "vectors"
+      }
+    }
+  ]
+}

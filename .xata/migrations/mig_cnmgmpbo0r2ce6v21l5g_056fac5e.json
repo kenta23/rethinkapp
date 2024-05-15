@@ -1,0 +1,19 @@
+{
+  "id": "mig_cnmgmpbo0r2ce6v21l5g",
+  "parentID": "mig_cnmgmk3o0r2ce6v21l4g",
+  "checksum": "1:056fac5e02b17c6f95407bb4d7b3b247cbf36b9f56f61bb5c38155ddd46a3a60",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "vector",
+          "type": "vector",
+          "vector": {
+            "dimension": 1536
+          }
+        },
+        "table": "vectors"
+      }
+    }
+  ]
+}

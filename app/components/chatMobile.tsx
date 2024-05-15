@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Send } from 'lucide-react';
 import React, { useEffect, useRef } from 'react'
 import Image from 'next/image';
-
+import { useSession } from 'next-auth/react';
 
 
 export default function ChatMobile({ fileKey, id }: { fileKey: string | null, id: string | null}) {

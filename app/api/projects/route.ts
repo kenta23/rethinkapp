@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth } from "@/auth";
 import { getXataClient } from "../../../src/xata";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
@@ -7,11 +7,11 @@ import { revalidatePath } from "next/cache";
 
 export async function GET() {
         const xata = getXataClient();
-        const { userId } = auth();
+        const session = await auth();
 
         try {
            const data = await xata.db.document.filter({
-               user_id: userId,
+               user_id: session?.user.id,
            }).sort('xata.updatedAt', 'desc').getAll();
       
            return NextResponse.json(data, { status: 200});
@@ -25,11 +25,12 @@ export async function GET() {
 {/**DELETING DOCUMENT */}
 export async function POST (req: Request, res: Response) {
    const xata = getXataClient();
-   const { userId } = auth();
+   const session = await auth();
+
    const pinecone = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
    const index = pinecone.Index("rethink");
 
-   if(!userId) {
+   if(!session?.user) {
       return NextResponse.json({message: "User not authenticated"}, { status: 401 });
     }
    const { id } = await req.json();

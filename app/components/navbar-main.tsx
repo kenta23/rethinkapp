@@ -6,10 +6,12 @@ import React from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { dark } from "@clerk/themes";
+import { useSession } from "next-auth/react";
+import Avatar from "./Avatar";
 
 
 export default function NavbarMain() {
-  const { user, isLoaded } = useUser();
+  const session = useSession();
   const pathname = usePathname();
   
   return (
@@ -31,26 +33,14 @@ export default function NavbarMain() {
           <Link href={"/"} className="text-sm font-normal md:text-[18px]">
             Home
           </Link>
-          {user && isLoaded ? (
-            <UserButton
-              afterSignOutUrl="/main"
-              appearance={{
-                baseTheme: dark,
-                variables: {
-                  colorPrimary: "#166792",
-                  colorDanger: "red",
-                  colorSuccess: "green",
-                  colorText: "#ffff",
-                  colorNeutral: "#ffff",
-                },
-              }}
-            />
+          {session.data?.user ? (
+            <Avatar user={session.data?.user.image as string}/>
           ) : (
             <Link
               href={pathname.includes("/login") ? "/register" : "/login"}
               className="text-md font-normal md:text-[18px]"
             >
-              {pathname.includes("/register") ? "Login" : "Register"}
+              {pathname.includes("/register") ? "Login" : "Sign up"}
             </Link>
           )}
         </div>

@@ -1,0 +1,14 @@
+{
+  "id": "mig_cnmgld2g8nk3r147mei0",
+  "parentID": "mig_cnk3j3tunfigvus64f3g",
+  "checksum": "1:1cbd1bb63bfecc5acdae95f2ab223fef63cb977d3483ccc0514e0853ae8040b3",
+  "operations": [
+    {
+      "renameColumn": {
+        "newName": "contents",
+        "oldName": "contents_hg",
+        "table": "vectors"
+      }
+    }
+  ]
+}

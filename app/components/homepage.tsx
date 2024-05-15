@@ -50,10 +50,10 @@ const features = [
          size={32}
          className="bg-secondaryColor text-md  rounded-full"
      />,
-    title: 'File conversion',
-    description: 'Automatically convert any document file to .pdf',
-    image: '/convert.svg',
-    alt: 'convert.svg'
+    title: 'View and analyze ',
+    description: 'By your pdf files, you can view, ask, and share some idea',
+    image: '/pdf-icon.png',
+    alt: 'pdf icon'
 
   },
   {

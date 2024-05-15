@@ -1,0 +1,16 @@
+{
+  "id": "mig_cnmjnvqg8nk3r147mfc0",
+  "parentID": "mig_cnmjnsro0r2ce6v21lhg",
+  "checksum": "1:537c97d60d6bc0456dbe39ccf01ce9468e05b56dd370fd5b755236b9a30d9440",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "loc",
+          "type": "string"
+        },
+        "table": "vectors"
+      }
+    }
+  ]
+}

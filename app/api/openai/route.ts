@@ -1,8 +1,11 @@
 import OpenAI from 'openai';
-import { Message, OpenAIStream, StreamingTextResponse } from 'ai'; 
+import { Message, OpenAIStream, StreamData, StreamingTextResponse, streamText } from 'ai'; 
 import { getContext } from '@/lib/context';
 import { NextResponse } from 'next/server';
 import { getXataClient } from '../../../src/xata';
+import { getAnswer } from '@/actions/aigenerationtext';
+import { openai as ai } from '@ai-sdk/openai';
+
 
 
 const openai = new OpenAI({
@@ -11,7 +14,7 @@ const openai = new OpenAI({
 }); 
  
 // IMPORTANT! Set the runtime to edge
-export const runtime = 'edge';
+//export const runtime = 'edge';
 const xata = getXataClient();
  
 
@@ -22,8 +25,9 @@ export async function POST(req: Request) {
   if(!fileKey) return NextResponse.json({ error: "missing file key"}, { status: 404 });
   
   try {
-    const lastMessage = messages[messages.length - 1];
-    const context = await getContext(lastMessage.content, fileKey);
+    const lastMessage = messages[messages.length - 1]; //get user input
+    const context = await getContext(lastMessage.content, fileKey); //embed user input 
+
 
     const prompt = {
       role: "system",
@@ -40,7 +44,7 @@ export async function POST(req: Request) {
       `,
     };
 
-    const response = await openai.chat.completions.create({
+    /*const response = await openai.chat.completions.create({
       model: "mistralai/Mixtral-8x7B-Instruct-v0.1",
       max_tokens: 200,
       messages: [
@@ -48,13 +52,41 @@ export async function POST(req: Request) {
         ...messages.filter((message: Message) => message.role === "user"),
       ],
       stream: true,
-    }); 
+    });  */
 
+    const response = await streamText({
+       model: ai("gpt-3.5-turbo"),
+       system: prompt.content,
+       temperature:0.4,
+       prompt: lastMessage.content as string,
+       maxTokens: 300
+    })
+
+    const stream = response.toAIStream({
+      onStart: async () => {
+        await xata.db.chats.create({
+          //save user messages
+          user_id: userId,
+          role: "user",
+          content: lastMessage.content,
+          document_id: id,
+        });
+      },
+      onCompletion: async (completion) => {
+        await xata.db.chats.create({
+          //save ai messages
+          user_id: userId,
+          role: "assistant",
+          content: completion,
+          document_id: id,
+        });
+      },
+    });
 
     // Convert the response into a friendly text-stream
-   const stream = OpenAIStream(response, {
+    /*const stream = OpenAIStream(response, {
      onStart: async () => {
-        await xata.db.chats.create({
+        await xata.db.chats.create({  //save user messages
            user_id: userId,
            role: 'user',
            content: lastMessage.content,
@@ -62,17 +94,19 @@ export async function POST(req: Request) {
         })
     },
     onCompletion: async (completion) => {
-       await xata.db.chats.create({
+       await xata.db.chats.create({ //save ai messages
         user_id: userId,
         role: 'assistant',
         content: completion,
         document_id: id
      })
-    },
-   }); 
+    }, 
+   }); */
 
    return new StreamingTextResponse(stream);
+
   } catch (error) {
+
      console.log("ERROR", error);
   }
 }

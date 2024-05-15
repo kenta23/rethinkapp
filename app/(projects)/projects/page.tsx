@@ -6,7 +6,8 @@ import React, { ChangeEvent,  useState } from 'react'
 import { Plus  } from 'lucide-react'
 import Image from 'next/image'
 import Archive from '@/components/archive'
-import { UserButton, useAuth, useUser } from '@clerk/nextjs'
+import { useSession } from 'next-auth/react'
+
 import { toast } from 'sonner';
 import axios from 'axios';
 import {
@@ -23,10 +24,10 @@ import { Label } from "@/components/ui/label"
 import {  useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import { UploadButton, UploadDropzone } from "@/lib/uploadthing"; 
-import "@uploadthing/react/styles.css";
 import { dark } from '@clerk/themes'
 import { Button } from '@/components/ui/button'
-import { Metadata } from 'next'
+import UserPopover from '@/components/UserPopover'
+
 
 type documentType = {
   userId: string | null | undefined,
@@ -38,12 +39,11 @@ type documentType = {
 
 export default function Projects() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { isSignedIn, user, } = useUser();
+    const session = useSession();
     const [ uploading, setUploading] = useState<boolean>(false); 
-    const { userId } = useAuth();
-    const router = useRouter();
+    const router = useRouter(); 
     const [data, setData] = useState<documentType>({
-      userId: userId as string,
+      userId: session.data?.user.id as string,
       name: '',
       file: [],
       url: '',
@@ -60,14 +60,6 @@ export default function Projects() {
       }
    })
 
- /* useEffect(() => {
-    if (userId) {
-      setData(prev => ({
-        ...prev,
-        userId: userId
-      }));
-    }
-  }, [userId]); */
     
    function handleDataValue(e: ChangeEvent<HTMLInputElement>) {
       const { name, value } = e.target
@@ -75,7 +67,7 @@ export default function Projects() {
       setData(prev => ({
         ...prev,
         [name]: formattedValue,
-        userId: userId
+        userId: session.data?.user.id as string,
       }))
    }
  
@@ -92,14 +84,10 @@ export default function Projects() {
             <Link href={"/"}>Home</Link>
           </li>
 
-          {isSignedIn || user ? (
-            <UserButton 
-              afterSignOutUrl="/projects"
-              appearance={{
-                baseTheme: dark,  
-              }}
-              
-            />
+          {session.data?.user ? (
+            <div className="h-[30px] w-[30px]">
+                <UserPopover data={session.data} />
+            </div>
           ) : (
             <Button
               variant={"default"}
@@ -112,9 +100,11 @@ export default function Projects() {
       </nav>
 
       {/**ARCHIVES */}
-      <div className="border-gray-20 
+      <div
+        className="border-gray-20 
                max-w-[1100px] shadow-lg border-[1px] rounded-md relative w-full mt-[30px] 
-               min-h-[750px] max-h-screen md:mt-[50px] mx-auto">
+               min-h-[750px] max-h-screen md:mt-[50px] mx-auto"
+      >
         <div className="flex w-auto mt-[30px] mx-[10px] p-2 md:p-6 gap-4 items-start flex-col">
           <h3 className="self-center text-[18px] sm:text-[25px] md:text-[27px] text-[#5e5c69]">
             Your Projects
@@ -128,9 +118,9 @@ export default function Projects() {
                   {/**CREATE BUTTON HERE */}
                   <div className="flex flex-col gap-2">
                     <button
-                      disabled={!isSignedIn || !user}
+                      disabled={!session.data?.user}
                       className={`${
-                        !isSignedIn || !user
+                        !session.data?.user
                           ? "bg-gray-500"
                           : "bg-[#4B3F94] hover:bg-violet-700"
                       } text-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] duration-200 ease-in-out text-white rounded-md text-[18px]`}
@@ -144,8 +134,7 @@ export default function Projects() {
                   </div>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[425px]">
-
-                  <form >
+                  <form>
                     <DialogHeader>
                       <DialogTitle>Create new document</DialogTitle>
                       <DialogDescription>
@@ -165,63 +154,70 @@ export default function Projects() {
                           onChange={handleDataValue}
                           name="name"
                           className="col-span-3"
-                          disabled={uploading || isSuccess}  
-                        />             
+                          disabled={uploading || isSuccess}
+                        />
                       </div>
-                    {data.name.length < 6 && <p 
-                    className='w-full text-center font-medium text-[12px] text-red-500'>The length of document name must be 6 
-                    characters long with no special characters or numbers</p>}
-
+                      {data.name.length < 6 && (
+                        <p className="w-full text-center font-medium text-[12px] text-red-500">
+                          The length of document name must be 6 characters long
+                          with no special characters or numbers
+                        </p>
+                      )}
 
                       {/** DROP ZONE FILES**/}
                       <div className="p-2 bg-white rounded-xl">
                         <div>
-                          {data.name.length >= 6  && 
-                          <UploadDropzone
-                            endpoint="documentUploader"
-                            content={{
-                              allowedContent: "Maximum file size is 32mb",
-                            }}
-                            onUploadProgress={() => {
-                              setUploading(true)    
-                            }}
-                            onClientUploadComplete={(res) => {
-                              // Do something with the response
-                              //console.log("File key: ", res[0].key);     
-                              setUploading(false)           
-                              mutate({
-                                ...data, // Preserve other properties from the current state
-                                url: res[0].url,
-                                file_key: res[0].key
-                              }, 
-                              {
-                                onSuccess: (result) => {  //result from the Response api
-                                  toast.success("Successful")
-                                  router.push(`/main/${result.data}`)
-                                  console.log("result: ", result)
-                                },
-                                onError: (err) => {
-                                   toast.error("Error "+ err.message);
-                                },
-                              })
-                            }}
-                            onUploadError={(error: Error) => {
-                              toast.error(`ERROR! ${error.message}`);
-                            }}  
-                            
-                          /> }
-                         </div>
+                          {data.name.length >= 6 && (
+                            <UploadDropzone
+                              endpoint="pdfUploader"
+                              content={{
+                                allowedContent: "Maximum file size is 32mb",
+                              }}
+                              onUploadProgress={() => {
+                                setUploading(true);
+                              }}
+                              onClientUploadComplete={(res) => {
+                                // Do something with the response
+                                //console.log("File key: ", res[0].key);
+                                setUploading(false);
+                                mutate(
+                                  {
+                                    ...data, // Preserve other properties from the current state
+                                    url: res[0].url,
+                                    file_key: res[0].key,
+                                  },
+                                  {
+                                    onSuccess: (result) => {
+                                      //result from the Response api
+                                      toast.success("Successful");
+                                      router.push(`/main/${result.data}`);
+                                      console.log("result: ", result);
+                                    },
+                                    onError: (err) => {
+                                      toast.error("Error " + err.message);
+                                    },
+                                  }
+                                );
+                              }}
+                              onUploadError={(error: Error) => {
+                                toast.error(`ERROR! ${error.message}`);
+                              }}
+                            />
+                          )}
+                        </div>
                       </div>
                     </div>
                     <DialogFooter>
-                      <p className='text-center w-full text-gray-400 font-medium text-[12px]'>Upload document (pdf) to proceed</p>
+                      <p className="text-center w-full text-gray-400 font-medium text-[12px]">
+                        Upload document (pdf) to proceed
+                      </p>
                     </DialogFooter>
                   </form>
                 </DialogContent>
               </Dialog>
 
               {/**ARCHIVES LISTS */}
-              {isSignedIn || user ? (
+              {session.data?.user ? (
                 <div className="overflow-y-clip w-full max-w-full">
                   {/**archive items */}
                   <div className="max-h-[550px] overflow-y-auto w-full min-w-full">
@@ -231,7 +227,7 @@ export default function Projects() {
                 </div>
               ) : (
                 <p className="self-center mx-auto mt-[70px] text-[18px] font-normal text-[#A09EA8]">
-                   Log in to continue
+                  Log in to continue
                 </p>
               )}
             </div>

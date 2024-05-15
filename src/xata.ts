@@ -7,7 +7,69 @@ import type {
 } from "@xata.io/client";
 
 const tables = [
-  { name: "Response", columns: [] },
+  {
+    name: "nextauth_users",
+    columns: [
+      { name: "email", type: "email" },
+      { name: "emailVerified", type: "datetime" },
+      { name: "name", type: "string" },
+      { name: "image", type: "string" },
+    ],
+    revLinks: [
+      { column: "user", table: "nextauth_accounts" },
+      { column: "user", table: "nextauth_users_accounts" },
+      { column: "user", table: "nextauth_users_sessions" },
+      { column: "user", table: "nextauth_sessions" },
+    ],
+  },
+  {
+    name: "nextauth_accounts",
+    columns: [
+      { name: "user", type: "link", link: { table: "nextauth_users" } },
+      { name: "type", type: "string" },
+      { name: "provider", type: "string" },
+      { name: "providerAccountId", type: "string" },
+      { name: "refresh_token", type: "string" },
+      { name: "access_token", type: "string" },
+      { name: "expires_at", type: "int" },
+      { name: "token_type", type: "string" },
+      { name: "scope", type: "string" },
+      { name: "id_token", type: "text" },
+      { name: "session_state", type: "string" },
+    ],
+    revLinks: [{ column: "account", table: "nextauth_users_accounts" }],
+  },
+  {
+    name: "nextauth_verificationTokens",
+    columns: [
+      { name: "identifier", type: "string" },
+      { name: "token", type: "string" },
+      { name: "expires", type: "datetime" },
+    ],
+  },
+  {
+    name: "nextauth_users_accounts",
+    columns: [
+      { name: "user", type: "link", link: { table: "nextauth_users" } },
+      { name: "account", type: "link", link: { table: "nextauth_accounts" } },
+    ],
+  },
+  {
+    name: "nextauth_users_sessions",
+    columns: [
+      { name: "user", type: "link", link: { table: "nextauth_users" } },
+      { name: "session", type: "link", link: { table: "nextauth_sessions" } },
+    ],
+  },
+  {
+    name: "nextauth_sessions",
+    columns: [
+      { name: "sessionToken", type: "string" },
+      { name: "expires", type: "datetime" },
+      { name: "user", type: "link", link: { table: "nextauth_users" } },
+    ],
+    revLinks: [{ column: "session", table: "nextauth_users_sessions" }],
+  },
   {
     name: "document",
     columns: [
@@ -27,12 +89,18 @@ const tables = [
     ],
   },
   {
-    name: "vectors",
+    name: "Credentials",
     columns: [
-      { name: "content", type: "text" },
-      { name: "pageNumber", type: "int" },
-      { name: "embedding", type: "vector", vector: { dimension: 1536 } },
-      { name: "text", type: "string" },
+      { name: "password", type: "string" },
+      { name: "username", type: "string", unique: true },
+      {
+        name: "secretcode",
+        type: "string",
+        notNull: true,
+        defaultValue: "no value",
+      },
+      { name: "name", type: "string" },
+      { name: "image", type: "string", unique: true },
     ],
   },
 ] as const;
@@ -40,8 +108,25 @@ const tables = [
 export type SchemaTables = typeof tables;
 export type InferredTypes = SchemaInference<SchemaTables>;
 
-export type Response = InferredTypes["Response"];
-export type ResponseRecord = Response & XataRecord;
+export type NextauthUsers = InferredTypes["nextauth_users"];
+export type NextauthUsersRecord = NextauthUsers & XataRecord;
+
+export type NextauthAccounts = InferredTypes["nextauth_accounts"];
+export type NextauthAccountsRecord = NextauthAccounts & XataRecord;
+
+export type NextauthVerificationTokens =
+  InferredTypes["nextauth_verificationTokens"];
+export type NextauthVerificationTokensRecord = NextauthVerificationTokens &
+  XataRecord;
+
+export type NextauthUsersAccounts = InferredTypes["nextauth_users_accounts"];
+export type NextauthUsersAccountsRecord = NextauthUsersAccounts & XataRecord;
+
+export type NextauthUsersSessions = InferredTypes["nextauth_users_sessions"];
+export type NextauthUsersSessionsRecord = NextauthUsersSessions & XataRecord;
+
+export type NextauthSessions = InferredTypes["nextauth_sessions"];
+export type NextauthSessionsRecord = NextauthSessions & XataRecord;
 
 export type Document = InferredTypes["document"];
 export type DocumentRecord = Document & XataRecord;
@@ -49,14 +134,19 @@ export type DocumentRecord = Document & XataRecord;
 export type Chats = InferredTypes["chats"];
 export type ChatsRecord = Chats & XataRecord;
 
-export type Vectors = InferredTypes["vectors"];
-export type VectorsRecord = Vectors & XataRecord;
+export type Credentials = InferredTypes["Credentials"];
+export type CredentialsRecord = Credentials & XataRecord;
 
 export type DatabaseSchema = {
-  Response: ResponseRecord;
+  nextauth_users: NextauthUsersRecord;
+  nextauth_accounts: NextauthAccountsRecord;
+  nextauth_verificationTokens: NextauthVerificationTokensRecord;
+  nextauth_users_accounts: NextauthUsersAccountsRecord;
+  nextauth_users_sessions: NextauthUsersSessionsRecord;
+  nextauth_sessions: NextauthSessionsRecord;
   document: DocumentRecord;
   chats: ChatsRecord;
-  vectors: VectorsRecord;
+  Credentials: CredentialsRecord;
 };
 
 const DatabaseClient = buildClient();

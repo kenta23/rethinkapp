@@ -1,0 +1,13 @@
+{
+  "id": "mig_cnpdl04ladid5ccjqfj0",
+  "parentID": "mig_cnpdkpsladid5ccjqfi0",
+  "checksum": "1:838bc930628dd0ff85dd770164f1ac6dd433d6c0c41ae6bb3aa89c5aee54f5d1",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "messages",
+        "table": "chats"
+      }
+    }
+  ]
+}

@@ -40,3 +40,6 @@ pnpm-lock.yaml
 /bin
 
 .env
+
+
+/react-email-starter/*

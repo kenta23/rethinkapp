@@ -1,20 +1,22 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function TermsAndCondition() {
   return (
     <>
-        <p className="font-medium">
-          These terms and conditions apply to your use of the ReThink website.
+        <p className="font-medium mb-3">
+          These Terms and Conditions apply to your use of the ReThink website.
           You accept these Terms by using or accessing this website. You are not
           permitted to use the Website if you disagree with any part of the
           Terms.
         </p>
-        <ol>
-          <li>
-            <p>
-              <strong>1. Use of Service</strong>
-            </p>
-            <ol type="a">
+        <ol className='space-y-2'>
+
+          <ul className='space-y-2'>
+            <h5>
+              1.Use of Service
+            </h5>
+            <ol type="a" >
               <li>
                 <p>
                  1.1 ReThink offers a platform where users can upload PDF files for
@@ -37,12 +39,13 @@ export default function TermsAndCondition() {
                 </p>
               </li>
             </ol>
-          </li>
-          <li>
-            <p>
-              <strong>2. User Responsibilities</strong>
-            </p>
-            <ol type="a">
+          </ul>
+          
+          <ul className='space-y-2'>
+            <h5>
+              2.User Responsibilities
+            </h5>
+            <ol type="a" >
               <li>
                 <p>
                  2.1 You are solely responsible for the PDF files you upload to the
@@ -66,12 +69,14 @@ export default function TermsAndCondition() {
                 </p>
               </li>
             </ol>
-          </li>
-          <li>
-            <p>
-              <strong>3. Limitation of Liability</strong>
-            </p>
-            <ol type="a">
+          </ul>
+
+
+          <ul className='space-y-2'>
+            <h5>
+              3.Limitation of Liability
+            </h5>
+            <ol type="a" >
               <li>
                 <p>
                  3.1 ReThink shall not be liable for any damages—direct, indirect,
@@ -88,11 +93,13 @@ export default function TermsAndCondition() {
                 </p>
               </li>
             </ol>
-          </li>
-          <li>
-            <p>
-              <strong>4. Indemnification</strong>
-            </p>
+          </ul>
+
+
+          <ul className='space-y-2'>
+            <h5>
+               4.Indemnification
+            </h5>
             <p>
               You agree to indemnify and hold harmless ReThink, its affiliates,
               officers, directors, employees, agents, and licensors from and
@@ -101,21 +108,24 @@ export default function TermsAndCondition() {
               in any way related to your use of the Website or violation of
               these Terms.
             </p>
-          </li>
-          <li>
-            <p>
-              <strong>Modifications to Terms</strong>
-            </p>
+          </ul>
+
+
+          <ul className='space-y-2'>
+            <h5>
+               Modifications to Terms
+            </h5>
             <p>
               ReThink has the right to amend these Terms at any moment without
               prior notice. By continuing to use the Website following such
               changes, you agree to be bound by the new Terms.
             </p>
-          </li>
+          </ul>
         </ol>
-        <p>
+
+        <p className='mt-3'>
           <strong>Contact Us</strong> If you have any questions or concerns
-          about these Terms, please contact us at <em>[ReThink Email HERE]</em>.
+          about these Terms, please contact us at our email <Link href={'/'} className='hover:underline text-blue-600'>here. </Link>
           By using the ReThink website, you acknowledge that you have read,
           understood, and agree to be bound by these Terms.
         </p>

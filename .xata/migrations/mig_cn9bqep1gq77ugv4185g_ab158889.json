@@ -1,0 +1,17 @@
+{
+  "id": "mig_cn9bqep1gq77ugv4185g",
+  "parentID": "mig_cn89sr11gq77ugv410hg",
+  "checksum": "1:ab158889a7c73d78df98d7ba7334dc4141e49aa2824ad57cf37183c751e604a7",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "uid",
+          "type": "string",
+          "unique": true
+        },
+        "table": "document"
+      }
+    }
+  ]
+}
