@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { ImageResponse } from 'next/og'
  
 // Image metadata
@@ -24,7 +25,7 @@ export default function Icon() {
           color: 'white',
         }}
       >
-        A
+        R
       </div>
     ),
     // ImageResponse options

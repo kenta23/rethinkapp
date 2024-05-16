@@ -26,7 +26,7 @@ export default function UserPopover({ data }: { data: Session | null}) {
         <Avatar user={data?.user.image as string} />
         </PopoverTrigger>
 
-        <PopoverContent className="bg-[#e1e0e9] text-black flex flex-col gap-2 w-[200px] h-auto py-2 ">
+        <PopoverContent className="bg-[#e1e0e9] text-black flex flex-col gap-2 w-[200px] h-auto py-2  ">
           <div className="w-full pb-2 border-b-2 border-gray-300 flex items-center flex-row-reverse justify-end gap-3">
             <p className="text-gray-600 font-medium text-sm">
               {data?.user.name ? data?.user.name : data?.user.email}
@@ -46,7 +46,7 @@ export default function UserPopover({ data }: { data: Session | null}) {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <div className="flex gap-2 items-center">
+                <div className="flex items-center">
                   <LogOut />
                   <Button
                     variant={"link"}

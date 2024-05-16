@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { CreateMessage, useChat, useCompletion } from 'ai/react'
+import { CreateMessage, } from 'ai/react'
 import { SendHorizontal } from 'lucide-react';
 import axios from 'axios';
-import { getSuggestionContext } from '@/actions/aigenerationtext';
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query';
+import { QueryClient, useMutation } from '@tanstack/react-query';
 import { Message } from 'ai/react';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
 import { ChatRequestOptions } from 'ai';
 
 
@@ -48,35 +46,6 @@ export default function QuestionsMadeByAI({
             (question, index) =>
               index < 3 && (
                 <form
-                  /*onSubmit={async (e: React.FormEvent) => {
-                    e.preventDefault();
-
-                    console.log(question);
-                    mutateAsync(
-                      {
-                        question,
-                        id,
-                        fileKey,
-                      },
-                      {
-                        onSettled: async (data) => {
-                          console.log("loading");
-                          setClicked(true);
-                          await queryClient.cancelQueries({
-                            queryKey: ["chats", id],
-                            exact: true,
-                          });
-                        },
-                        onSuccess: async () => {
-                          await queryClient.refetchQueries({
-                            queryKey: ["chats", id],
-                            fetchStatus: "fetching",
-                            type: "active",
-                          });
-                        },
-                      }
-                    );
-                  } }*/
                   onSubmit={handleSubmit}
                   key={index}
                   className="p-2 flex gap-2 items-center cursor-pointer shadow-sm text-[#40545e] 

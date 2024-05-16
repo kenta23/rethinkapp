@@ -7,7 +7,6 @@ import z from 'zod';
 import { useForm } from 'react-hook-form';
 import {  Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -34,28 +33,32 @@ const FormSchema = z
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" })
-      .optional(),
-    confirmPassword: z.string().optional(),
+      .optional()
+      .or(z.literal('')), // allows empty string
+    confirmPassword: z
+      .string()
+      .optional()
+      .or(z.literal('')), // allows empty string
     firstName: z
       .string()
       .min(4, { message: "First name must be at least 4 characters long" })
-      .optional(),
+      .optional()
+      .or(z.literal('')), // allows empty string
     lastName: z
       .string()
       .min(4, { message: "Last name must be at least 4 characters long" })
-      .optional(),
+      .optional()
+      .or(z.literal('')), // allows empty string
   })
   .refine((data) => {
-      if (data.password || data.confirmPassword) {
-        data.password === data.confirmPassword;
-      }
-      return true;
-    },
-    {
-      message: "Passwords do not match",
-      path: ["confirmPassword"], // specify the path of the error
+    if (data.password && data.confirmPassword) {
+      return data.password === data.confirmPassword;
     }
-  );
+    return true;
+  }, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"], // specify the path of the error
+  });
 
 export default function ProfileSetting({ session }: { session: Session | null}) {
 
@@ -78,12 +81,16 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
     async function onSubmit (datas: z.infer<typeof FormSchema>) {
 
          //upload files 
-       
+     console.log("Data submitted", datas);
      const data = await axios.post('/api/profile', datas);
 
       if(data.status === 200) {
           console.log(data.data.message);
           setStatus(data.data.message);
+         const timeOutId = setTimeout(() => {
+             setStatus('');
+          }, 2000);
+        clearTimeout(timeOutId);
       }
           console.log('Successful');
           toast.success("Successfully updated Profile")
@@ -179,7 +186,7 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
               />
 
               {isOpen ? (
-                <div className="relative w-max h-auto">
+                <div className="relative flex flex-col gap-4 w-[200px] sm:w-[250px] lg:w-[350px]">
                   <FormField
                     control={form.control}
                     name="password"

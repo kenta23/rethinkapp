@@ -13,7 +13,7 @@ export async function updateProfileAvatar(imagelink: string) {
     throw new Error ("Unauthorized user");
   }
    try {
-      const res = xata.db.Credentials.update(session.user.id as string, {
+      const res = xata.db.Credentials.createOrUpdate(session.user.id as string, {
          image: imagelink
       })
 

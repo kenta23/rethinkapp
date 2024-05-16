@@ -13,11 +13,8 @@ export const config = {
   // except static assets.
   matcher: [ '/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
 }; */
-
- 
 import { auth } from '@/auth'
 import { cookies } from 'next/headers';
-
 
 export default auth((req) => {
 
@@ -31,8 +28,11 @@ export default auth((req) => {
           return Response.redirect(url);
       } 
    }
-  
-   
+    if((req.nextUrl.pathname.startsWith('/main'))) {
+      if(!req.auth?.user) {
+         return Response.redirect('/projects')
+      }
+    } 
 })
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],

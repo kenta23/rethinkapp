@@ -4,9 +4,8 @@ import { XataAdapter } from '@auth/xata-adapter'
 import Github from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 import Credentials from 'next-auth/providers/credentials'
-import { UserAccountValidation, saltHashedPassword } from './lib/userAccountValidation'
 import { ZodError } from 'zod'
-import bcrypt, { compare } from 'bcryptjs';
+import { compare } from 'bcryptjs';
 
 
 const client = new XataClient();
@@ -124,6 +123,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
         //(2)
         token.userId = account.providerAccountId; // this is Id that coming from authorize() callback
         token.provider = account?.provider as string;
+        token.name = user.name as string
       }
       if (user && account?.type === "oauth") {
         token.userId = user.id as string;
@@ -141,6 +141,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
           ...session.user,
           id: token.userId, //(3)
           provider: token.provider,
+          name: token.name
         };
       }
       return session;

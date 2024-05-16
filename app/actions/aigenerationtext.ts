@@ -3,10 +3,8 @@
 
 import { generateText } from 'ai';
 import { openai } from '@ai-sdk/openai';
-import { Metadata, getContext } from '@/lib/context';
-import { Pinecone } from '@pinecone-database/pinecone';
-import { createStreamableValue } from 'ai/rsc';
-import { CoreMessage, streamText } from 'ai';
+import { getContext } from '@/lib/context';
+
 
 export async function getAnswer(question: string) {
     const { text, finishReason, usage } = await generateText({

@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import z from 'zod';
 import { saltHashedPassword } from "@/lib/userAccountValidation";
 
-const xata =  getXataClient();
+const xata = getXataClient();
 
 export async function signup(formdata: FormData) {
     try {
@@ -51,44 +51,6 @@ export async function signup(formdata: FormData) {
     }
 }
 
-export async function signin(prevState: any, formdata: FormData) {
-  const validateSchema = z.object({
-    username: z.string({ invalid_type_error: 'Invalid Email'}).min(4, 'Username is required'),
-    password: z.string({ required_error: "Password is requird", invalid_type_error: "Password is invalid"}).min(8, "Password must need atleast 8 characters long")
-  }) 
-
-  const username = formdata.get('username');
-  const password = formdata.get('password');
-
-  if (typeof username === 'string' && typeof password === 'string') {
- 
-    const validatedUser = validateSchema.safeParse({ username, password });
-
-    if (validatedUser.success) {
-        const newFormdata = new FormData;
-        const { username, password } = validatedUser.data;
-        formdata.append('username', username);
-        formdata.append('password', password);
-        
-       await signIn('credentials', newFormdata).then(() => {
-         redirect('/')
-       }).catch(err => { return { message: err }}); 
-
-    } else {
-        return {
-          message: validatedUser.error.flatten().fieldErrors
-        } 
-    }
-
-} else {
-    return {
-       message: new Error()
-    }
-}
-    return {
-      message: 'Please enter a valid email',
-    }
-}
 
 export async function changePassword (p: string) {
 

@@ -42,7 +42,7 @@ export const LinkButton = ({
   className?: string;
 }) => {
   return (
-    <Link href={href} className="flex gap-2 items-center">
+    <Link href={href} className="flex items-center">
       {icon}
       <Button
         variant={variant}
@@ -113,7 +113,7 @@ const Navbar = () => {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <div className="flex gap-2 items-center">
+                <div className="flex  items-center">
                   <LogOut />
                   <Button
                     variant={"link"}
