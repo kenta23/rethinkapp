@@ -8,7 +8,7 @@ import { ZodError } from 'zod'
 import { compare } from 'bcryptjs';
 
 
-const client = new XataClient();
+const client = getXataClient();
 
 export const { auth, handlers, signOut, signIn } = NextAuth({
   adapter: XataAdapter(client),
