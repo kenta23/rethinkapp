@@ -1,5 +1,5 @@
-import NextAuth, { CredentialsSignin, NextAuthConfig, User, } from 'next-auth'
-import { XataClient, getXataClient } from '../src/xata'
+import NextAuth from 'next-auth'
+import { XataClient } from '../src/xata'
 import { XataAdapter } from '@auth/xata-adapter'
 import Github from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
@@ -7,8 +7,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { ZodError } from 'zod'
 import { compare } from 'bcryptjs';
 
-
-const client = getXataClient();
+const client = new XataClient();
 
 export const { auth, handlers, signOut, signIn } = NextAuth({
   adapter: XataAdapter(client),
@@ -47,7 +46,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
               password: string;
             };
 
-            const userdata = await client.db.Credentials.filter({
+            const userdata = await client.db.Credentials.filter({ 
               username: username,
             }).getFirst();
 

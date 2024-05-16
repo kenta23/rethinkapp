@@ -24,4 +24,5 @@ Todolist to improve system ui and performance:
   ☐ display video tutorial on homepage 
   ✔ Add validations on signin and signup (if user failed to sign in etc.) @done(24-05-12 21:22)
   ☐ Add card on projects dialog content for good styling 
+  ☐ Update delete project implementation
 

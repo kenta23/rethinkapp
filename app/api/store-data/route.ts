@@ -2,8 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getXataClient } from "../../../src/xata";
 import { z } from 'zod';
 import { auth } from "@/auth";
-import { saveVectorDocx, saveVectorToPinecone } from "@/lib/pinecone";
-import { loadFileKeyToXataVector } from "@/lib/xata_vectors";
+import { saveVectorToPinecone } from "@/lib/pinecone";
 
 const xata = getXataClient();
 
