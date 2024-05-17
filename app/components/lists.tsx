@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { deleteProject } from '@/actions/projects';
 
 
 
@@ -16,8 +17,8 @@ export default function Lists({ data }: { data: savedDataDbType}) {
    const queryClient = new QueryClient();
    const router = useRouter();
 
-   const { mutate, error, isPending } = useMutation({
-       mutationFn: async (id: string) => axios.post('/api/projects', { id } ), 
+   const { mutate, error, isPending, data: message } = useMutation({
+       mutationFn: async (i: string) => await deleteProject(i),
        onError: (error: any) => console.log(error)
    })
 
@@ -39,13 +40,13 @@ export default function Lists({ data }: { data: savedDataDbType}) {
      e.preventDefault();
 
       if(isPending) {
-         toast.loading('Deleting file.....')
+         toast.loading('Deleting file.....');
       }
        mutate(id, {
          onSuccess: async () => {
            console.log('Done deleted!');
            toast.success(`${data.name} Deleted successfully!`);
-           await queryClient.invalidateQueries({ queryKey: ['projects'] });
+           await queryClient.refetchQueries({ queryKey: ['projects'] });
            router.refresh();
          }
        })
