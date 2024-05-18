@@ -89,7 +89,6 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
   ],
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      // Checking if the user is logged in
       const isLoggedIn = auth?.user;
 
       // Determining if the user is currently on the main page
@@ -123,6 +122,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
         token.userId = account.providerAccountId; // this is Id that coming from authorize() callback
         token.provider = account?.provider as string;
         token.name = user.name as string
+        token.picture = user.image
       }
       if (user && account?.type === "oauth") {
         token.userId = user.id as string;
@@ -140,7 +140,8 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
           ...session.user,
           id: token.userId, //(3)
           provider: token.provider,
-          name: token.name
+          name: token.name,
+          image: token.picture
         };
       }
       return session;

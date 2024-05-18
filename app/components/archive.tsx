@@ -8,7 +8,7 @@ export default function Archive() {
   const { isPending, error, data } = useQuery({
     queryKey: ['projects'],
     queryFn: () => axios.get('/api/projects').then((res) => res.data),
-    staleTime: 1000 * 60,
+    staleTime: 1000 * 60, //1 minute staletime
   })
 
   return (
@@ -20,7 +20,7 @@ export default function Archive() {
       ) : !data ?  (
         <p className="text-gray-600">No projects yet.</p>
       ) : (
-        data.map((item: any) => <Lists data={item} key={item.id} />)
+        data.map((item: any) => <Lists data={item} key={item.id} />) 
       )}
     </div>
   ); 

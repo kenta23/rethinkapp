@@ -78,11 +78,14 @@ const Navbar = () => {
             {data?.user.name ? data?.user.name : data?.user.email}
           </p>
 
-             <UserPopover data={data}/>
+          <UserPopover data={data} />
           {/* User not authenticated */}
         </div>
       ) : (
-        <Link href={"/login"} className="text-md font-normal md:text-[18px]">
+        <Link
+          href={"/login"}
+          className="text-md hidden md:block font-normal md:text-[18px]"
+        >
           Log in
         </Link>
       )}
@@ -94,54 +97,64 @@ const Navbar = () => {
         </PopoverTrigger>
 
         <PopoverContent className="bg-[#e1e0e9] text-black flex flex-col gap-2 w-[200px] h-auto py-2 ">
-          <div className="w-full pb-2 border-b-2 border-gray-300 flex items-center flex-row-reverse justify-end gap-3">
-            <p className="text-gray-600 font-medium text-sm">
-              {data?.user.name ? data?.user.name : data?.user.email}
-            </p>
-            <div className="h-[30px] w-[30px]">
-              <Avatar user={data?.user.image as string} />
-            </div>
-          </div>
-
-          <div>
-            <LinkButton
-              href={"/profile"}
-              icon={<Settings size={24} className="text-black" />}
-              text="Profile Setings"
-              variant={"link"}
-            />
-
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <div className="flex  items-center">
-                  <LogOut />
-                  <Button
-                    variant={"link"}
-                    className={`text-black font-medium sm:text-[16px] md:text-[20px]`}
-                  >
-                    Logout
-                  </Button>
+          {data?.user ? (
+            <>
+              <div className="w-full pb-2 border-b-2 border-gray-300 flex items-center flex-row-reverse justify-end gap-3">
+                <p className="text-gray-600 font-medium text-sm">
+                  {data?.user.name ? data?.user.name : data?.user.email}
+                </p>
+                <div className="h-[30px] w-[30px]">
+                  <Avatar user={data?.user.image as string} />
                 </div>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>
-                    Are you absolutely sure you want to logout?
-                  </AlertDialogTitle>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    Continue
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </div>
+              </div>
+              <div>
+                <LinkButton
+                  href={"/profile"}
+                  icon={<Settings size={24} className="text-black" />}
+                  text="Profile Setings"
+                  variant={"link"}
+                />
+
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <div className="flex  items-center">
+                      <LogOut />
+                      <Button
+                        variant={"link"}
+                        className={`text-black font-medium sm:text-[16px] md:text-[20px]`}
+                      >
+                        Logout
+                      </Button>
+                    </div>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        Are you absolutely sure you want to logout?
+                      </AlertDialogTitle>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={() => {
+                          signOut();
+                        }}
+                      >
+                        Continue
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>{" "}
+            </>
+          ) : (
+            <Link
+              href={"/login"}
+              className="text-md font-normal md:text-[18px]"
+            >
+              Log in
+            </Link>
+          )}
         </PopoverContent>
       </Popover>
     </nav>

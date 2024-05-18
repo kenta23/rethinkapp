@@ -1,31 +1,11 @@
 'use client'
 
-import React, { useState, useCallback } from 'react'
-import { useResizeObserver } from '@wojtekmaj/react-hooks'
-
-const maxWidth = 1290;
-const resizeObserverOptions = {};
+import React from 'react'
 
 
 export default function DocumentFile({ selectedFile }: { selectedFile: string | null | undefined }) {
-    const [containerWidth, setContainerWidth] = useState<number>();
-    const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
-    
-
-    //automatically resizing
-    const onResize = useCallback<ResizeObserverCallback>((entries) => {
-      const [entry] = entries;
-  
-      if (entry) {
-        setContainerWidth(entry.contentRect.width);
-        console.log(containerWidth)
-      }
-    }, [containerWidth]);
-  
-     useResizeObserver(containerRef, resizeObserverOptions, onResize);
-
   return (
-    <div  className={`w-full h-full max-h-full lg:max-h-[670px] relative`}>
+    <div className={`w-full h-full max-h-full lg:max-h-[670px] relative`}>
      <iframe
         src={`https://docs.google.com/gview?url=${selectedFile}&embedded=true`} // Replace with the URL or path to your document
         title="Document Viewer"

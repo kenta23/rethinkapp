@@ -66,93 +66,101 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
 }, [chatdata, loading, isFetching, fileKey]) 
 
     return (
-      <div className="overflow-y-auto relative max-h-screen flex flex-col gap-3 h-full ">
-        <div
-          ref={messageContainer}
-          className="w-full h-[560px] p-3 flex flex-col relative items-start justify-end overflow-y-auto"
-        >
-          <div className="flex self-end overflow-y-scroll flex-col gap-[24px] h-auto w-full">
-            {/**CHAT STREAMING HERE */}
-            {messages.map((m) => (
-              <div
-                key={m.id}
-                className={cn("flex items-start", {
-                  "self-end": m.role === "user",
-                })}
-              >
-                {/**CHAT BOX */}
-                <div
-                  className={cn(
-                    "text-wrap mx-2 whitespace-normal break-words text-white w-fit p-2 rounded-md",
-                    {
-                      "bg-[#8768a5]": m.role === "assistant",
-                      "bg-[#3970b8]": m.role === "user",
-                    }
-                  )}
-                >
-                  <div>
-                    <p className="text-md">{m.content}</p>
-                  </div>
-                </div>
-
-                {m.role === "user" && (
-                  <Image
-                    src={session.data?.user.image || "/empty user.jpg"}
-                    alt="user avatar"
-                    width={500}
-                    height={500}
-                    className="rounded-full size-8 object-cover"
-                  />
-                )}
-              </div>
-            ))}
-
-            {isLoading && (
-              <div className="self-end text-start text-sm left-0 flex items-start text-gray-400 w-full">
-                Waiting for response.....
-              </div>
-            )}
-          </div>
-        </div>
-
-        <div className="absolute bottom-16 w-full left-0">
-          {!chatdata?.length && !loading && !clicked && (
-             <QuestionsMadeByAI
-               fileKey={fileKey as string} 
-               id={id as string} 
-               append={append}
-               handleSubmit={handleSubmit}
-               Aiquestions={Aiquestions}
-               setClicked={setClicked}
-              />
-          )}
-          {/**USER INPUTS HERE */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex items-start justify-center overflow-hidden w-ful gap-2 min-w-full px-2"
+      <div className="overflow-y-auto h-full max-h-screen min-h-screen  "> 
+        <div className='flex gap-2 flex-col w-full h-full'>
+          <div
+            ref={messageContainer}
+            className="w-full 
+            h-[100px]
+            md:min-h-[calc(100% - 200px)] flex-1 p-3 flex 
+            flex-col relative items-start justify-end overflow-y-auto"
           >
-            <input
-              onChange={handleInputChange}
-              type="text"
-              className="border-accentColor bg-white focus:outline-accentColor lg:flex-1 border rounded-full md:w-[160px] lg:w-[255px] h-[50px] indent-3"
-              placeholder="Ask any question"
-              value={input}
-              disabled={isLoading}
-            />
-            <button
-              type="submit"
-              className={`self-start ${
-                isLoading ? "opacity-70" : "opacity-100"
-              }`}
-              disabled={isLoading}
-            >
-              <Send
-                color="#ffff"
-                size={32}
-                className="bg-secondaryColor md:w-[60px] lg:w-[40px] lg:h-auto rounded-lg p-2 hover:bg-[#5C87C7] cursor-pointer duration-200 ease-in-out"
+            <div className="flex self-end overflow-y-scroll flex-col gap-6 md:gap-[24px] h-auto w-full">
+              {/**CHAT STREAMING HERE */}
+              {messages.map((m) => (
+                <div
+                  key={m.id}
+                  className={cn("flex items-start", {
+                    "self-end": m.role === "user",
+                  })}
+                >
+                  {/**CHAT BOX */}
+                  <div
+                    className={cn(
+                      "text-wrap mx-2 whitespace-normal break-words text-white w-fit p-2 rounded-md",
+                      {
+                        "bg-[#8768a5]": m.role === "assistant",
+                        "bg-[#3970b8]": m.role === "user",
+                      }
+                    )}
+                  >
+                    <div>
+                      <p className="text-md">{m.content}</p>
+                    </div>
+                  </div>
+
+                  {m.role === "user" && (
+                    <Image
+                      src={session.data?.user.image || "/empty user.jpg"}
+                      alt="user avatar"
+                      width={500}
+                      height={500}
+                      className="rounded-full size-8 object-cover"
+                    />
+                  )}
+                </div>
+              ))}
+
+              {isLoading && (
+                <div className="self-end text-start text-sm left-0 flex items-start text-gray-400 w-full">
+                  Waiting for response.....
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="w-full h-[220px] md:h-[190px]">
+            {!chatdata?.length && !loading && !clicked && (
+              <QuestionsMadeByAI
+                fileKey={fileKey as string}
+                id={id as string}
+                append={append}
+                handleSubmit={handleSubmit}
+                Aiquestions={Aiquestions}
+                setClicked={setClicked}
               />
-            </button>
-          </form>
+            )}
+            {/**USER INPUTS HERE */}
+            <form
+              onSubmit={handleSubmit}
+              className="flex items-center 
+                justify-center overflow-hidden 
+                w-full gap-2 min-w-full px-2"
+            >
+              <input
+                onChange={handleInputChange}
+                type="text"
+                className="border-accentColor bg-white
+                 focus:outline-accentColor border rounded-full w-full h-[50px] indent-3"
+                placeholder="Ask any question"
+                value={input}
+                disabled={isLoading}
+              />
+              <button
+                type="submit"
+                className={`${
+                  isLoading ? "opacity-70" : "opacity-100"
+                }`}
+                disabled={isLoading}
+              >
+                <Send
+                  color="#ffff"
+                  size={32}
+                  className="bg-secondaryColor md:w-[60px] lg:w-[40px] lg:h-auto rounded-lg p-2 hover:bg-[#5C87C7] cursor-pointer duration-200 ease-in-out"
+                />
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     );

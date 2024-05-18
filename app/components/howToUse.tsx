@@ -2,7 +2,7 @@ const steps = [
     {
       id: 1,
       desc: "1.Sign Up and Unlock Features:",
-      sub: "Visit https://rethinkapp.vercel.app/ and create a free account. This unlocks features like creating your own AI chat assistants."
+      sub: "Login or Create a new account. This unlocks features like creating your own AI chat assistants."
     },
     {
       id: 2,

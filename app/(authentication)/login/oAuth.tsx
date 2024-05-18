@@ -15,7 +15,7 @@ export default function OAuth() {
         <Button
           id='google'
           name='google'
-          className="w-full h-[45px] text-black bg-purple-50 hover:text-white  border-gray-600 shadow-sm "
+          className="w-full h-[45px] text-black bg-purple-50 hover:bg-gray-500 hover:text-white  border-gray-600 shadow-sm "
           type="submit"
           aria-placeholder="Log in"
         >
@@ -31,7 +31,7 @@ export default function OAuth() {
        
       </form>
 
-      <form action={async () => {
+    {/* <form action={async () => {
          "use server"
          
          await signIn("github");
@@ -39,7 +39,7 @@ export default function OAuth() {
         <Button
           id='github'
           name='github'
-          className="w-full h-[45px] text-black bg-purple-50 hover:text-white  border-gray-600 shadow-sm "
+          className="w-full h-[45px] text-black bg-purple-50 hover:text-white hover:bg-gray-500  border-gray-600 shadow-sm "
           type="submit"
           aria-placeholder="Log in"
         >
@@ -50,12 +50,8 @@ export default function OAuth() {
             alt="github icon"
           />
           <span className='ms-6 text-[15px] font-medium'>Continue with Github</span>
-        </Button>
-
-       
-      </form>
-
-      
+        </Button> 
+    </form> */}
     </div>
   );
 }

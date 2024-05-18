@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import ChatMobile from './chatMobile'
 import '@/styles/main.css'
+import { changeName } from '@/actions/projects'
 
 const menuVariants = {
   clicked: { opacity: 1, x: -6, },
@@ -31,9 +32,10 @@ export default function Main({ data }: { data: savedDataDbType}) {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
+
  //FOR UPDATING NAME
   const {mutate, isPending } = useMutation({
-    mutationFn: async ({ item, id }: { item: string, id: string}) => axios.post('/api/changename', { item, id }),
+    mutationFn: (formdata: FormData) => changeName(formdata),
     onSuccess: (res) =>  {
       console.log(res);
     },
@@ -65,9 +67,14 @@ export default function Main({ data }: { data: savedDataDbType}) {
  }
 
 function handleChangeName(e: React.FormEvent<HTMLFormElement>) {   
+    e.preventDefault();
     setEditing(false);
     
-    mutate({ item: newName, id: data.id }, {
+    const formdata = new FormData();
+    formdata.append('id', data.id);
+    formdata.append('newName', newName);
+    
+    mutate(formdata, {
       onSuccess: (res) => {
         toast.success("Updated document name")
         console.log("RES: ", res)
@@ -91,84 +98,101 @@ function handleChangeName(e: React.FormEvent<HTMLFormElement>) {
   };
 
   return (
-    <div className="w-full min-h-screen min-w-full h-screen overflow-x-hidden overflow-y-hidden ">
+    <div className="w-full min-h-screen min-w-full h-screen overflow-x-hidden overflow-y-hidden">
       <NavbarMain />
-      <main id='maincontainer' className="min-w-min w-full h-[700px] sm:h-full">
-        {/**SIDEBAR */}
-        <div id='sidebar' className="border w-full px-4 py-4 block h-full">
-          {/**NAME OF THE DOCUMENT */}
-          <div id='sidebar-content' className="py-3">
-            {!editing ? (
-              <div className="flex text-gray-700 gap-1 w-full max-w-full items-center cursor-pointer">
-                <p className="text-[16px] break-words md:text-[18px] max-w-full w-fit">{data.name}</p>
-                <Pencil
-                  size={20}
-                  className='text-[16px] md:text-[18px]'
-                  onClick={() => setEditing(true)}
-                />
-              </div>
-            ) : (
-              <AnimatePresence>
-              <motion.form
-                initial={{ width: 0 }}
-                animate={{ width: '100%'}}
-                exit={{ width: 0, opacity: 0 }}
-                onSubmit={handleChangeName}
-                className="flex gap-2 items-center max-w-full  cursor-pointer"
-              >
-                <input
-                  type="text"
-                  placeholder={data.name}
-                  value={newName}
-                  onChange={formatName}
-                  ref={inputRef}
-                  className="bg-transparent border-1 rounded-xl outline-none border-purple-500 py-1 indent-2 border md:w-full w-[150px]"
-                />
-
-                <div className="flex gap-1 items-center">
-                  <button
-                    type="submit" 
-                    className="p-1 bg-blue-500 rounded-full"
-                  >
-                    <Check  size={18} className="text-white" />
-                  </button>
-
-                  <button
-                    type="reset"
-                    onClick={() => setEditing(false)}
-                    className="p-1 bg-red-500 rounded-full"
-                  >
-                    <X size={18} className=" text-white" />
-                  </button>
+      <main className="min-w-min flex w-full h-full sm:h-full">
+        
+        <div className='flex flex-col w-full lg:w-full h-auto md:flex-row'>
+          {/**SIDEBAR */}
+          <div className="border w-full md:max-w-[180px] lg:max-w-[200px] 
+          px-4 py-4 block h-full">
+            {/**NAME OF THE DOCUMENT */}
+            <div  className="py-3 flex items-start h-[92%] flex-row w-full md:flex-col justify-between ">
+              {!editing ? (
+                <div className="flex text-gray-700 gap-1 w-full max-w-full items-center cursor-pointer">
+                  <p className="text-[16px] break-words md:text-[18px] max-w-full w-fit">
+                    {data.name}
+                  </p>
+                  <Pencil
+                    size={20}
+                    className="text-[16px] md:text-[18px]"
+                    onClick={() => setEditing(true)}
+                  />
                 </div>
-               </motion.form>
-              </AnimatePresence>
-            )}
+              ) : (
+                <AnimatePresence>
+                  <motion.form
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    exit={{ width: 0, opacity: 0 }}
+                    onSubmit={handleChangeName}
+                    className="flex gap-2 items-center max-w-full  cursor-pointer"
+                  >
+                    <input
+                      type="text"
+                      placeholder={data.name}
+                      value={newName}
+                      onChange={formatName}
+                      ref={inputRef}
+                      className="bg-transparent border-1 rounded-xl outline-none border-purple-500 py-1 indent-2 border md:w-full w-[150px]"
+                    />
 
-            {/**OPTIONS AVAILABLE */}
-            <div className="text-gray-700  min-w-[150px] items-center flex flex-col gap-1">
-              <Link className="flex items-center gap-2" href={"/projects"}>
-                <FolderClosed size={22} className='text-[16px] md:text-[20px]'/>
-                <span className='text-[16px] md:text-[18px]'>My Projects</span>
-              </Link>
+                    <div className="flex gap-1 items-center">
+                      <button
+                        type="submit"
+                        className="p-1 bg-blue-500 rounded-full"
+                      >
+                        <Check size={18} className="text-white" />
+                      </button>
+
+                      <button
+                        type="reset"
+                        onClick={() => setEditing(false)}
+                        className="p-1 bg-red-500 rounded-full"
+                      >
+                        <X size={18} className=" text-white" />
+                      </button>
+                    </div>
+                  </motion.form>
+                </AnimatePresence>
+              )}
+
+              {/**OPTIONS AVAILABLE */}
+              <div className="text-gray-700  min-w-[150px] items-center flex flex-col gap-1">
+                <Link className="flex items-center gap-2" href={"/projects"}>
+                  <FolderClosed
+                    size={22}
+                    className="text-[16px] md:text-[20px]"
+                  />
+                  <span className="text-[16px] md:text-[18px]">
+                    My Projects
+                  </span>
+                </Link>
+              </div>
             </div>
+          </div>
+
+          {/**DOCUMENT FILE */}
+          <div
+            className="px-2 
+          md:px-[15px] overflow-y-auto border mx-auto my-auto self-center w-full
+          md:w-[500px] lg:w-[600px] xl:w-[720px] max-w-[760px] 
+          min-h-full h-full max-h-full"
+          >
+            {/**MAP THE DOCUMENTS HERE */}
+            <DocumentFile selectedFile={data.file_link} />
           </div>
         </div>
 
-        {/**DOCUMENT FILE */}
-        <div className="px-2 md:px-[15px] overflow-y-auto border mx-auto my-auto self-center w-full
-          md:w-[600px] mb-[55px] lg:w-[640px] xl:w-[700px] max-w-[720px] min-h-full h-full max-h-full">
-          {/**MAP THE DOCUMENTS HERE */}
-          <DocumentFile selectedFile={data.file_link} />
-        </div>
-
         {/**FOR MOBILE DISPLAY CHAT */}
-        <div className="bottom-5 lg:hidden fixed right-5">
+        <div className="bottom-5 md:hidden fixed right-5">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={toggleChat}
-            className={`w-16 ${isOpen ? 'hidden' : 'block'} h-16 bg-white text-white
+            className={`w-16 ${
+              isOpen ? "hidden" : "block"
+            } h-16 bg-white text-white
                   rounded-full flex items-center justify-center 
                   border-violet-500 border hover:bg-violet-500 focus:outline-none`}
           >
@@ -228,17 +252,18 @@ function handleChangeName(e: React.FormEvent<HTMLFormElement>) {
                     </svg>
                   </button>
                 </div>
-                {/* Add your chat messages or components here */}          
-                   <ChatMobile fileKey={data?.file_key} id={data?.id} />
+                {/*  Add your chat messages or components here  <ChatMobile fileKey={data?.file_key} id={data?.id} /> */}
+                 <Chats fileKey={data?.file_key} id={data?.id}/>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
         {/**CHAT BOX */}
-        <div className="border-[#C0BCD1] bg-[#f8f6fa] hidden lg:flex flex-col border w-[490px] h-full min-h-full">
+        <div className="border-[#C0BCD1] bg-[#f8f6fa] hidden md:flex flex-col border 
+           w-full lg:max-w-[500px] h-full min-h-full">
           {/**TOP */}
-          <div className="flex gap-2 text-primaryColor w-auto z-50  items-center m-4">
+          <div className="flex gap-2 text-primaryColor w-auto z-50 items-center m-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -257,7 +282,7 @@ function handleChangeName(e: React.FormEvent<HTMLFormElement>) {
           </div>
 
           {/**CHAT COMPLETION  */}
-              <Chats fileKey={data?.file_key} id={data?.id} />
+          <Chats fileKey={data?.file_key} id={data?.id} />
         </div>
       </main>
     </div>

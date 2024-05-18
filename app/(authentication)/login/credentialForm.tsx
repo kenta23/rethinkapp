@@ -94,9 +94,11 @@ export default function CredentialForm() {
           }
         </div>
 
-        <div className='flex items-end gap-2 w-full'>
+        <div className='flex items-end w-full'>
              <Link href={'/forgot-password'} className='self-end'>
-                <p className='text-purple-600 hover:text-purple-300 hover:underline duration-150 ease-in-out transition-colors text-sm'>Forgot Password</p>
+                <p className='text-violet-900 hover:text-purple-600 
+                hover:underline duration-150 ease-in-out 
+                transition-colors text-sm'>Forgot Password</p>
              </Link>
         </div>
         <Button

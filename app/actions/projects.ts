@@ -7,36 +7,66 @@ import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
 
 
-export async function getProjects() {
-        const xata = getXataClient();
-        const session = await auth();
+const xata = getXataClient();
+{/**GETTING ALL THE DOCUMENTS */}
 
-        if(!session?.user) {
-            return {
-                message: "User not authenticated"
-            }
-        }
-
-        try {
-           const data = await xata.db.document.filter({
-               user_id: session?.user.id,
-           }).sort('xata.updatedAt', 'desc').getAll();
-      
-           return NextResponse.json(data, { status: 200});
-
-        } catch (error) {
-           console.log('Error rendering data', error);
-           return  NextResponse.json(error, { status: 400});
-        }
-}
-
-{/**DELETING DOCUMENT */}
-export async function deleteProject (id: string) {
+export async function getAllDocuments() {
    const xata = getXataClient();
    const session = await auth();
 
+   try {
+      const data = await xata.db.document.filter({
+          user_id: session?.user.id,
+      }).sort('xata.updatedAt', 'desc').getAll();
+ 
+      return JSON.stringify(data); 
+
+   } catch (error) {
+      console.log('Error rendering data', error);
+      return  {
+          error: error
+      }
+   }
+}
+
+
+{/**UPDATING DOCUMENT NAME */}
+export async function changeName(formdata: FormData) {
+     const session = await auth();
+     const id = formdata.get("id") as string;
+     const newName = formdata.get('newName') as string;
+     
+     if (!session?.user) {
+      return { message: "User not authenticated" }
+     }
+
+
+     if (!id || !newName) {
+        return { message: "Invalid input data" };
+    }
+ 
+     try {  
+        await xata.db.document.update(id, {
+          name: newName 
+       })
+       return {
+          message: "Successfully updated document"
+       }
+     }
+     catch(err) {
+       return {
+          message: err
+       }
+     }
+ }
+ 
+ 
+{/**DELETING DOCUMENT */}
+export async function deleteProject (id: string) {
    const pinecone = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
    const index = pinecone.Index("rethink");
+   const session = await auth();
+
 
    if(!session?.user) {
       return {

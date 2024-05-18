@@ -16,7 +16,7 @@ Todolist to improve system ui and performance:
   ✔ add Skeleton loader when loading main chat @done(24-03-21 16:55)
   ✔ Ui responsiveness in main chat @done(24-03-21 16:55)
   ✔ Ui in homepage @done(24-05-10 21:28)
-  ☐ real time update on /projects 
+  ✔ real time update on /projects @done(24-05-17 09:49)
   ✔ Fix Disclaimer and Terms and condition on footer @done(24-05-15 16:57)
   ☐ Add terms and condition on Signin and Signup 
   ✔ Add suggestions on chat box using openai (create inputs with no display inside of it.) @done(24-05-11 21:52)
@@ -24,5 +24,11 @@ Todolist to improve system ui and performance:
   ☐ display video tutorial on homepage 
   ✔ Add validations on signin and signup (if user failed to sign in etc.) @done(24-05-12 21:22)
   ☐ Add card on projects dialog content for good styling 
-  ☐ Update delete project implementation
+  ✔ Update delete project implementation @done(24-05-17 09:48)
+
+ Need to fix: 
+  ✔ Fix the change name not working @done(24-05-18 22:00)
+  ✔ Redesign the main page @done(24-05-18 09:24)
+  ✔ Format on last name @done(24-05-18 22:00)
+  ✔ convert back to useMutation on changeName function from rendered as formAction @done(24-05-18 22:00)
 

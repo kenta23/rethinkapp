@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation';
 import { deleteProject } from '@/actions/projects';
 
 
-
 export default function Lists({ data }: { data: savedDataDbType}) {
    const queryClient = new QueryClient();
    const router = useRouter();

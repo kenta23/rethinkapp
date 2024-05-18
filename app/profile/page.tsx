@@ -16,6 +16,7 @@ export default async function Profile() {
   return (
     <div className="w-full min-h-screen h-full">
        <NavbarMain />
+       
        <ProfileSetting session={session}/>
     </div>
   );

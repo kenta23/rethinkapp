@@ -14,7 +14,7 @@ import {  Form,
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
-import { X } from 'lucide-react';
+import { X, ChevronLeft } from 'lucide-react';
 import { Session } from 'next-auth';
 import axios from 'axios';
 import { toast } from 'sonner';
@@ -73,8 +73,8 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
              username: session?.user.email as string,
              password: '',
              confirmPassword: '',
-             firstName: session?.user.name?.slice(0, session?.user.name.indexOf(' ')) as string,
-             lastName: session?.user.name?.slice(session?.user.name.indexOf(' ')+1) as string,
+             firstName: session?.user.name?.slice(0, session?.user.name.lastIndexOf(' ')) as string,
+             lastName: session?.user.name?.slice(session?.user.name.lastIndexOf(' ')+1) as string,
          }
     })
 
@@ -97,7 +97,17 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
      }
 
   return (
-    <div className="flex place-items-center w-full justify-center h-screen lg:px-24 px-12">
+    <>
+       <div 
+          onClick={() => router.back()}
+          className='mx-6 cursor-pointer mt-12 md:mx-24 w-auto flex items-center gap-2 '>
+         <ChevronLeft 
+            size={24}
+           />
+           <span className='text-md'>Go back</span>
+       </div>
+     
+    <div className="flex place-items-center w-full justify-center h-screen lg:px-24 px-12">   
       <div className="w-auto max-w-[780px] h-auto px-6 py-4 border">
         <Form {...form}>
           <form
@@ -114,6 +124,7 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
                 placeholder='blur'
                 className="size-24 lg:size-28 rounded-full object-cover border-violet-600 border-2"
               />
+             {session?.user.provider === "credentials" && 
               <UploadButton
                 endpoint='AvatarUploader'
                 content={{
@@ -136,7 +147,7 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
                    console.log("data picture", data);
                    router.refresh();
                 }}
-              />
+              />}
               {status && <p className="text-green-500">{status}</p>}
             </div>
 
@@ -224,7 +235,7 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
                 </div>
               ) : (
                 <Button
-                  className="bg-purple-600 hover:bg-purple-400"
+                  className="bg-purple-700 hover:bg-purple-500"
                   type="button"
                   onClick={() => setIsOpen(true)}
                 >
@@ -240,5 +251,6 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
         <p></p>
       </div>
     </div>
+    </>
   );
 }
