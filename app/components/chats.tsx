@@ -67,13 +67,15 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
 
     return (
       <div className="overflow-y-auto h-full max-h-screen min-h-screen  "> 
-        <div className='flex gap-2 flex-col w-full h-full'>
+        <div className='flex relative flex-col w-full h-full'>
           <div
             ref={messageContainer}
             className="w-full 
-            h-[100px]
-            md:min-h-[calc(100% - 200px)] flex-1 p-3 flex 
-            flex-col relative items-start justify-end overflow-y-auto"
+            h-[65%]
+            md:h-[75%]
+            min-h-[calc(100% - 200px)]
+            p-3 flex 
+            flex-col relative items-end justify-end overflow-y-auto"
           >
             <div className="flex self-end overflow-y-scroll flex-col gap-6 md:gap-[24px] h-auto w-full">
               {/**CHAT STREAMING HERE */}
@@ -119,8 +121,8 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
             </div>
           </div>
 
-          <div className="w-full h-[220px] md:h-[190px]">
-            {!chatdata?.length && !loading && !clicked && (
+          <div className={`w-full ${!chatdata?.length && "absolute bottom-44 md:bottom-36"} h-auto self-end flex items-center flex-col left-0`}>
+            {!chatdata?.length && !loading && !clicked ? (
               <QuestionsMadeByAI
                 fileKey={fileKey as string}
                 id={id as string}
@@ -129,7 +131,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 Aiquestions={Aiquestions}
                 setClicked={setClicked}
               />
-            )}
+            ) : <div className='h-auto'/>}
             {/**USER INPUTS HERE */}
             <form
               onSubmit={handleSubmit}
