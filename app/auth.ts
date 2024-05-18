@@ -19,7 +19,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
         clientId: process.env.AUTH_GOOGLE_ID,
         clientSecret: process.env.AUTH_GOOGLE_SECRET,
     }),
-    Github({
+   /* Github({
       clientId: process.env.AUTH_GITHUB_ID,
       clientSecret: process.env.AUTH_GITHUB_SECRET,
       profile(profile) {
@@ -31,7 +31,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
           username: profile.login,
         };
       },
-    }),
+    }), */
 
     Credentials({
       credentials: {

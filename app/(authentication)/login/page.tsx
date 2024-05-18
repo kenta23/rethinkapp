@@ -19,7 +19,7 @@ const LoginPage = async () => {
   return (
     <>
       <NavbarMain />
-      <main className="min-h-screen  w-full flex items-center justify-center">
+      <main className="min-h-screen w-full flex items-center justify-center">
         <div className="flex flex-col min-w-full md:flex-row w-full min-h-screen justify-center items-center mx-auto">
           <Image
             src={"/Sign in.svg"}
@@ -30,7 +30,7 @@ const LoginPage = async () => {
           />
 
 
-          <div className="h-automax-h-[550px] flex-1 min-w-[320px] md:w-[370px] md:flex-none px-4 py-6 border rounded-lg shadow-md">
+          <div className="h-auto max-h-[550px] flex-1 min-w-[320px] md:w-[370px] md:flex-none px-4 py-6 border rounded-lg shadow-md">
             <h1 className="text-[25px] leading-relaxed font-medium text-gray-800 ">
                Welcome to <span className="text-primaryColor font-bold">ReThink</span>     
             </h1>

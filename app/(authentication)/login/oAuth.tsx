@@ -26,9 +26,7 @@ export default function OAuth() {
             alt="google icon"
           />
           <span className='ms-6 text-[15px] font-medium'>Continue with Google</span>
-        </Button>
-
-       
+        </Button>  
       </form>
 
     {/* <form action={async () => {
