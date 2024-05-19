@@ -66,25 +66,28 @@ export default function Main({ data }: { data: savedDataDbType}) {
     }
  }
 
-function handleChangeName(e: React.FormEvent<HTMLFormElement>) {   
-    e.preventDefault();
-    setEditing(false);
-    
-    const formdata = new FormData();
-    formdata.append('id', data.id);
-    formdata.append('newName', newName);
-    
-    mutate(formdata, {
-      onSuccess: (res) => {
-        toast.success("Updated document name")
-        console.log("RES: ", res);
-        router.refresh();
-      },
-      onError: (err) => {
-        toast.error("Error updating document name: "+err.message);
-      }
-    })
-  }
+ function handleChangeName(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault(); // Prevent the default form submission behavior
+
+  console.log("Form submitted"); // Debugging statement to check if function is called
+
+  
+
+  const formdata = new FormData();
+  formdata.append('id', data.id);
+  formdata.append('newName', newName);
+
+  mutate(formdata, {
+    onSuccess: (res) => {
+      toast.success("Updated document name");
+      console.log("RES: ", res);
+      router.refresh();
+    }, 
+    onError: (err) => {
+      toast.error("Error updating document name: " + err.message);
+    }
+  });
+}
 
   function formatName (e: ChangeEvent<HTMLInputElement>) {
     const { value } = e.target

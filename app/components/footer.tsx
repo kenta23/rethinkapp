@@ -47,8 +47,10 @@ export default function Footer() {
   };
   return (
     <main
-      className={`w-full min-w-full relative z-[-20] bottom-0 bg-[#24202b] text-gray-400 text-xs md:text-[18px] py-4 md:py-8 px-2 md:px-12  ${
-         "flex"
+      className={`w-full min-w-full relative bottom-0 bg-[#24202b] text-gray-400 text-xs md:text-[18px] py-8 px-2 md:px-12  ${
+        pathname.includes("/main")
+          ? "hidden"
+          : "flex"
       }`}
     >
       <div className="w-full flex flex-col gap-4 sm:gap-0 md:flex-row md:justify-between md:items-center">
@@ -137,14 +139,14 @@ export default function Footer() {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="link" className="text-gray-400 text-sm">
+                <Button variant="link" className="text-gray-400 ">
                   Terms and Condition
                 </Button>
               </AlertDialogTrigger>
 
               <AlertDialogContent>
                 <AlertDialogHeader>
-                  <AlertDialogTitle className="text-sm">TERMS AND CONDITION</AlertDialogTitle>
+                  <AlertDialogTitle>TERMS AND CONDITION</AlertDialogTitle>
                   <div className="h-[500px] md:h-[600px] overflow-y-auto">
                         <TermsAndCondition />
                   </div>
@@ -158,7 +160,7 @@ export default function Footer() {
             <div className="items-center ">
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant="link" className="text-gray-400 text-sm">
+                  <Button variant="link" className="text-gray-400 ">
                     How to Use
                   </Button>
                 </AlertDialogTrigger>
@@ -179,7 +181,7 @@ export default function Footer() {
         </div>
 
         <div className="mx-auto sm:mx-0">
-          <span className="text-[12px] md:text-sm">Copyright © 2024 ReThink</span>
+          <span className="text-sm">Copyright © 2024 ReThink</span>
         </div>
       </div>
     </main>

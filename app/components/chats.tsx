@@ -70,7 +70,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
         <div className="flex justify-between flex-col w-full h-full max-h-[490px] md:max-h-[620px] lg:max-h-[650px]">
           <div
             ref={messageContainer}
-            className={`w-full flex-1 p-3 flex flex-col items-end justify-end overflow-y-auto`}
+            className={`w-full flex-1 p-3 h-auto flex flex-col items-end justify-end overflow-y-auto`}
           >
             <div className="flex self-end overflow-y-scroll flex-col gap-6 md:gap-[24px] w-full">
               {/** CHAT STREAMING HERE */}
@@ -112,7 +112,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
           </div>
 
           {/** CHAT INPUTS AND SUGGESTIONS */}
-          <div className={`w-full ${!chatdata?.length ? 'h-auto max-h-full md:max-h-[370px]' : 'h-auto'} py-2 items-end mb-0 lg:mb-8 flex flex-col justify-end `}>
+          <div className={`w-full ${!chatdata?.length ? 'h-auto max-h-full md:max-h-[370px]' : 'h-auto'} py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}>
             {!chatdata?.length && !loading && !clicked && (
               <div className="h-auto justify-end  mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI
