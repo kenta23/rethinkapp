@@ -127,10 +127,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
             )}
             {/** USER INPUTS HERE */}
             <form
-              onSubmit={() => {
-                setClicked(true) 
-                handleSubmit
-              }}
+              onSubmit={handleSubmit}
               className="flex items-center justify-center w-full gap-2 px-2"
             >
               <input
