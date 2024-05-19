@@ -3,12 +3,14 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 import Image from 'next/image'
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { CheckCircle2 } from 'lucide-react';
 import { motion, useScroll, m, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer';
 import Hero from "@/components/Hero";
 import StickyNavbar from "./StickyNavbar";
+import { getVideoFile } from "@/actions/videosrc";
+import { useQuery } from "@tanstack/react-query";
 
 
 const purpose = [
@@ -108,6 +110,11 @@ const Home = () => {
     threshold: 0,
   });
 
+  const {data, isLoading, isPending, isError } = useQuery({
+     queryFn: async () => await getVideoFile(),
+     queryKey: ['video']
+  })
+  
 
   /**LANDING PAGE */
   return (
@@ -139,9 +146,28 @@ const Home = () => {
            via-[#6654ad]
            to-[#4D3FA3] 
            flex items-center -z-10 justify-center"
-          >
-              
-            </div>
+          ></div>
+        </div>
+
+        {/**VIDEO DEMO */}
+        <div className="w-full flex-col rounded-lg gap-6 lg:flex-row md:gap-2 px-12 justify-around mt-14 sm:mt-28 h-auto py-6 flex items-center ">
+          <div className="max-w-[320px]">
+            <h1 className="text-[#1e1e30] leading-normal font-normal text-[25px] sm:text-[40px]">
+              Discover How It Works
+            </h1>
+            <p className="font-light text-sm md:text-[18px]">
+              See how easy it is to upload document files and interact
+              seamlessly with our AI. Watch the demo now!
+            </p>
+          </div>
+          <video
+            src={data}
+            width={580}
+            height={850}
+            autoPlay
+            controls
+            className="shadow-md border border-gray-100 h-[400px]"
+          />
         </div>
 
         {/**SECOND CONTENT */}
@@ -151,18 +177,17 @@ const Home = () => {
             opacity: scrollYProgress,
           }}
           transition={{ ease: "linear", delay: 1 }}
-          className="w-full mt-[60px] md:mt-[70px]  
-           h-[240px] md:h-[350px] justify-center items-center flex mb-4"
+          className="w-full mt-[40px] md:mt-[70px]  
+           h-[240px] md:h-[270px] justify-center items-center flex mb-4"
         >
           <div className="flex justify-evenly w-full items-center">
-              <Image
-                width={170}
-                height={170}
-                src={"/chatbot.svg"}
-                alt="chatbot png"
-                className="w-[140px] md:w-[190px] lg:w-[230px]"
-              />
-   
+            <Image
+              width={170}
+              height={170}
+              src={"/chatbot.svg"}
+              alt="chatbot png"
+              className="w-[140px] md:w-[190px] lg:w-[230px]"
+            />
 
             <div className="h-auto w-[45%]">
               <p className="text-[#362D73] text-center sm:text-[25px] md:text-[30px] text-md leading-normal">
@@ -190,16 +215,16 @@ const Home = () => {
                 </motion.h1>
               </AnimatePresence>
 
-               <motion.p
-                  initial={{ scale: 0 }}
-                  viewport={{ once: true }}
-                  whileInView={{ scale: 1.1 }}
-                  exit={{ scale: 0}}
-                  transition={{ type: "spring" }}
-                  className="text-[17px] text-wrap md:text-[25px]"
-                >
-                  Discover exclusive features on our site
-                </motion.p>
+              <motion.p
+                initial={{ scale: 0 }}
+                viewport={{ once: true }}
+                whileInView={{ scale: 1.1 }}
+                exit={{ scale: 0 }}
+                transition={{ type: "spring" }}
+                className="text-[17px] text-wrap md:text-[25px]"
+              >
+                Discover exclusive features on our site
+              </motion.p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-[20px] lg:mt-[65px] items-center w-full">
@@ -239,12 +264,14 @@ const Home = () => {
         <div className="w-full h-auto my-[15px] md:my-[50px] lg:my-[60px]">
           <div className="flex justify-evenly  items-center">
             {purpose.map((item) => (
-              <motion.div 
-               initial={{ y: 100, opacity: 0 }}
-               whileInView={{ y: 0, opacity: 1 }}
-               viewport={{ once: true }}
-               transition={{ type: "spring" }}
-               key={item.id} className="flex items-center gap-3">
+              <motion.div
+                initial={{ y: 100, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring" }}
+                key={item.id}
+                className="flex items-center gap-3"
+              >
                 <CheckCircle2
                   color="white"
                   className="bg-secondaryColor size-[18px] sm:size-[20px] md:size-[25px] lg:size[27px]  text-md rounded-full"
@@ -274,12 +301,11 @@ const Home = () => {
         </div>
       </div>
 
-
-    {/**CIRCLE BACKGROUND */}
+      {/**CIRCLE BACKGROUND */}
       <div className="absolute bottom-[-200px] blur-sm bg-blend-soft-light w-full max-w-full h-[1350px] rounded-t-[600px] -z-20  bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[15%]" />
       <div className="absolute bottom-[-200px] blur-md bg-blend-soft-light w-full max-w-full h-[1250px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[20%]" />
-      <div className="absolute bottom-[-200px] blur-lg bg-blend-light w-full max-w-full h-[1160px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[30%]" /> 
-      <div className="absolute bottom-[-200px] blur-xl bg-blend-light w-full max-w-full h-[860px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[50%]" /> 
+      <div className="absolute bottom-[-200px] blur-lg bg-blend-light w-full max-w-full h-[1160px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[30%]" />
+      <div className="absolute bottom-[-200px] blur-xl bg-blend-light w-full max-w-full h-[860px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[50%]" />
     </motion.div>
   );
 };

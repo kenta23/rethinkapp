@@ -77,11 +77,23 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
               {messages.map((m) => (
                 <div
                   key={m.id}
-                  className={`flex items-start ${
+                  className={cn(
+                    "flex items-start",
                     m.role === "user" ? "self-end" : ""
-                  }`}
+                  )}
                 >
                   {/** CHAT BOX */}
+                  {m.role === "assistant" && (
+                    <div className='rounded-full size-auto '>
+                      <Image
+                        src={"/chatbot.png"}
+                        alt="assistant avatar"
+                        width={500}
+                        height={500}
+                        className="rounded-full size-6 md:size-8 object-cover"
+                      />
+                    </div>
+                  )}
                   <div
                     className={`text-wrap mx-2 whitespace-normal break-words text-white w-fit p-2 rounded-md ${
                       m.role === "assistant" ? "bg-[#8768a5]" : "bg-[#3970b8]"
@@ -112,7 +124,13 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
           </div>
 
           {/** CHAT INPUTS AND SUGGESTIONS */}
-          <div className={`w-full ${!chatdata?.length ? 'h-auto max-h-full md:max-h-[370px]' : 'h-auto'} py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}>
+          <div
+            className={`w-full ${
+              !chatdata?.length
+                ? "h-auto max-h-full md:max-h-[370px]"
+                : "h-auto"
+            } py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}
+          >
             {!chatdata?.length && !loading && !clicked && (
               <div className="h-auto justify-end  mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI

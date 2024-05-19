@@ -180,7 +180,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mx-auto sm:mx-0">
+        <div className="mx-auto md:mx-0">
           <span className="text-sm">Copyright © 2024 ReThink</span>
         </div>
       </div>
