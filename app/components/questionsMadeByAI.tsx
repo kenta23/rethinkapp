@@ -41,7 +41,7 @@ export default function QuestionsMadeByAI({
       )}
       <p>{questionPicked}</p>
 
-        <ul className="text-start text-sm flex gap-3 flex-col w-fit px-6 py-8">
+        <ul className="text-start text-sm flex gap-3 flex-col w-fit px-4 py-3 mb-2">
           {Aiquestions.map(
             (question, index) =>
               index < 3 && (
@@ -67,7 +67,7 @@ export default function QuestionsMadeByAI({
                     <div className="size-5">
                       <SendHorizontal size={20} className="text-[#4181A2]" />
                     </div>
-                    <span className="text-wrap">{question}</span>
+                    <span className="text-wrap text-[12px] md:text-sm">{question}</span>
                   </button>
                 </form>
               )

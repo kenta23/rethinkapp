@@ -77,7 +77,7 @@ function handleChangeName(e: React.FormEvent<HTMLFormElement>) {
     mutate(formdata, {
       onSuccess: (res) => {
         toast.success("Updated document name")
-        console.log("RES: ", res)
+        console.log("RES: ", res);
         router.refresh();
       },
       onError: (err) => {
@@ -176,7 +176,7 @@ function handleChangeName(e: React.FormEvent<HTMLFormElement>) {
           <div
             className="px-2 
           md:px-[15px] overflow-y-auto border mx-auto my-auto self-center w-full
-          md:w-[500px] lg:w-[600px] xl:w-[720px] max-w-[760px] 
+          md:w-[500px] lg:w-[500px] xl:w-[720px] max-w-[760px] 
           min-h-full h-full max-h-full"
           >
             {/**MAP THE DOCUMENTS HERE */}
