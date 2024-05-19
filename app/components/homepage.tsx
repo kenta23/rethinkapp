@@ -161,13 +161,15 @@ const Home = () => {
             </p>
           </div>
           <video
-            src={data}
             width={580}
             height={850}
             autoPlay
             controls
             className="shadow-md border border-gray-100 h-[400px]"
-          />
+          >
+            <source src="https://utfs.io/f/92514730-8eaa-4410-a334-34838bfc2b85-rat9qd.webm" type="video/webm"/>
+               Your browser does not support the video.
+          </video>
         </div>
 
         {/**SECOND CONTENT */}
