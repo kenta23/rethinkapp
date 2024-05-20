@@ -84,13 +84,13 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 >
                   {/** CHAT BOX */}
                   {m.role === "assistant" && (
-                    <div className='rounded-full size-auto '>
+                    <div className='rounded-full size-auto p-1'>
                       <Image
                         src={"/chatbot.png"}
                         alt="assistant avatar"
                         width={500}
                         height={500}
-                        className="rounded-full size-6 md:size-8 object-cover"
+                        className="rounded-full size-6 md:size-8 object-contain"
                       />
                     </div>
                   )}

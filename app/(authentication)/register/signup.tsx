@@ -4,9 +4,10 @@ import { signup } from '@/actions/account';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { signIn } from 'next-auth/react';
+import { useMutation } from '@tanstack/react-query';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler  } from 'react-hook-form'
 import { toast } from 'sonner';
 
@@ -31,8 +32,18 @@ export default function Signup() {
             
     })
     const [strformat, setStrformat] = useState<string>('');
-    const handleFormatStr = (s: string) => setStrformat(s.replace(/\s/g, ""));
-
+    const handleFormatStr = (s: string) => {
+      setStrformat(s.replace(/\s/g, ""));
+      console.log(strformat);
+    }
+    const { mutateAsync, data: newdata, isError, isPending } = useMutation({
+      mutationFn: async (formdata: FormData) => await signup(formdata),
+    }) 
+  
+    useEffect(() => {
+      setValue('secretCode', strformat); 
+    }, [strformat, setValue]); 
+    
 
     const onSubmit: SubmitHandler<signupInputs> = async (data) => {
             setValue('secretCode', strformat, {
@@ -40,28 +51,42 @@ export default function Signup() {
             })
             const formdata = new FormData();
           
-            formdata.append('username', data.username);
+            formdata.append('username', data.username); 
             formdata.append('password', data.password);
             formdata.append('secretcode', data.secretCode);
             
-           const res = await signup(formdata);
+          // const res = await signup(formdata);
 
-           if(res?.message) {
-              toast.error("Username already exists");
-           }
-
-           if(res?.result) {
-              reset();
-              toast.info("Successfully created your account");
-
-              
-              await signIn('credentials', {
-                 username: data.username,
-                 password: data.confirmPassword
-              })
-              router.push('/projects');
-           }
+          mutateAsync(formdata, {
+             onError: () => {
+               toast.error("Something went error");
+             }
+          })  
+             /* await signIn('credentials', {
+                 username: newdata?.result?.username,
+                 password: data.confirmPassword as string
+              }) */
+              console.log(data);
       }
+
+      useEffect(() => {
+         if(isPending) {
+           toast.info("Please wait")
+         } 
+         if(isError) {
+           toast.error("Something went wrong");
+         }
+         if(newdata?.error) { 
+          toast.error("Account username already existed");
+        }
+        if(newdata?.result) {
+            toast.success("Successfully created your account please try to login again");
+            router.push('/');
+        }
+      }, [isPending, isError, newdata, router]);
+      
+
+
   return (
     <div className="mt-[30px] px-4">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -140,7 +165,7 @@ export default function Signup() {
             placeholder="Secret code" //rusty2322
             value={strformat}
             onChange={(e) => handleFormatStr(e.target.value)}
-          />
+          /> 
 
           {errors.secretCode && (
             <p role="alert" className="text-red-500 text-sm">

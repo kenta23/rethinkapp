@@ -9,7 +9,7 @@ import { compare } from 'bcryptjs';
 
 const client = new XataClient();
 
-export const { auth, handlers, signOut, signIn } = NextAuth({
+export const { auth, handlers, signOut, signIn, unstable_update } = NextAuth({
   adapter: XataAdapter(client),
   session: {
     strategy: "jwt",
@@ -116,7 +116,12 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
       return true;
     },
 
-    async jwt({ token, account, user, profile }) {
+    async jwt({ token, account, user, profile, trigger, session }) {
+
+       if(trigger === 'update' && session) {
+           return { ...token, ...session?.user }
+       }
+       
       if (account && account.type === "credentials") {
         //(2)
         token.userId = account.providerAccountId; // this is Id that coming from authorize() callback
@@ -141,7 +146,7 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
           id: token.userId, //(3)
           provider: token.provider,
           name: token.name,
-          image: token.picture
+          image: token.picture,
         };
       }
       return session;

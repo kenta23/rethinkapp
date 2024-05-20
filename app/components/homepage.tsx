@@ -165,6 +165,7 @@ const Home = () => {
             height={850}
             autoPlay
             controls
+            muted
             className="shadow-md border border-gray-100 h-[400px]"
           >
             <source src="https://utfs.io/f/92514730-8eaa-4410-a334-34838bfc2b85-rat9qd.webm" type="video/webm"/>
