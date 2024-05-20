@@ -67,7 +67,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
 
     return (
       <div className="overflow-y-auto h-full max-h-screen min-h-screen  ">
-        <div className="flex justify-between flex-col w-full h-full max-h-[490px] md:max-h-[620px] lg:max-h-[650px]">
+        <div className="flex justify-between flex-col w-full h-full max-h-[490px] md:max-h-[620px] lg:max-h-[650px] xl:max-h-[89%]">
           <div
             ref={messageContainer}
             className={`w-full flex-1 p-3 h-auto flex flex-col items-end justify-end overflow-y-auto`}
@@ -116,7 +116,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
               ))}
 
               {isLoading && (
-                <div className="self-end text-start text-sm left-0 flex items-start text-gray-400 w-full">
+                <div className="self-end text-start mx-2 my-1 text-sm left-0 flex items-start text-gray-400 w-full">
                   Waiting for response.....
                 </div>
               )}

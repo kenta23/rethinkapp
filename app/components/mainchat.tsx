@@ -81,6 +81,7 @@ export default function Main({ data }: { data: savedDataDbType}) {
     onSuccess: (res) => {
       toast.success("Updated document name");
       console.log("RES: ", res);
+      setEditing(false);
       router.refresh();
     }, 
     onError: (err) => {

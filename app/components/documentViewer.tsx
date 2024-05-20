@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function DocumentFile({ selectedFile }: { selectedFile: string | null | undefined }) {
   return (
-    <div className={`w-full h-full max-h-full lg:max-h-[670px] relative`}>
+    <div className={`w-full h-full max-h-full lg:max-h-[670px] xl:max-h-[90%] relative`}>
      <iframe
         src={`https://docs.google.com/gview?url=${selectedFile}&embedded=true`} // Replace with the URL or path to your document
         title="Document Viewer"

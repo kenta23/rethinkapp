@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import NavbarMain from "@/components/navbar-main";
 import { Metadata } from "next";
-import { signIn, signOut } from "@/auth";
 import CredentialForm from "./credentialForm";
 import Link from "next/link";
 import { auth } from "@/auth";
@@ -19,6 +18,7 @@ const LoginPage = async () => {
   return (
     <>
       <NavbarMain />
+      
       <main className="min-h-screen w-full flex items-center justify-center">
         <div className="flex flex-col min-w-full md:flex-row w-full min-h-screen justify-center items-center mx-auto">
           <Image
