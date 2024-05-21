@@ -351,6 +351,10 @@ export default function ProfileSetting({ session }: { session: Session | null}) 
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
                         <AlertDialogAction
                           onClick={handleDeleteAccount}
+                          disabled={
+                            session?.user.provider !== "credentials" ||
+                            isPending
+                          } 
                           className="bg-red-600 hover:bg-red-800"
                         >
                           DELETE MY ACCOUNT
