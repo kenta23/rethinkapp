@@ -6,14 +6,14 @@ import { savedDataDbType } from '../../types'
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { toast } from 'sonner';
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { deleteProject } from '@/actions/projects';
 
 
 export default function Lists({ data }: { data: savedDataDbType}) {
-   const queryClient = new QueryClient();
+   const queryClient = useQueryClient();
    const router = useRouter();
 
    const { mutate, error, isPending, data: message } = useMutation({
@@ -45,7 +45,7 @@ export default function Lists({ data }: { data: savedDataDbType}) {
          onSuccess: async () => {
            console.log('Done deleted!');
            toast.success(`${data.name} Deleted successfully!`);
-           await queryClient.refetchQueries({ queryKey: ['projects'] });
+           await queryClient.invalidateQueries({ queryKey: ['projects'] });
            router.refresh();
          }
        })
