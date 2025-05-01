@@ -1,13 +1,12 @@
-/** @type {import('next').NextConfig} */
+import type { NextConfig } from 'next'
+// const webpack = require("webpack"); 
 
-const webpack = require("webpack"); 
-
-const nextConfig = {
-  webpack: (config) => {
-    config.resolve.alias.canvas = false;
+const nextConfig: NextConfig = {
+  // webpack: (config) => {
+  //   config.resolve.alias.canvas = false;
     
-    return config;
-   },
+  //   return config;
+  //  },
    images: {
     remotePatterns: [
       {
@@ -30,4 +29,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig

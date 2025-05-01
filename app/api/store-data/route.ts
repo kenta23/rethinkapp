@@ -3,8 +3,10 @@ import { getXataClient } from "../../../src/xata";
 import { z } from 'zod';
 import { auth } from "@/auth";
 import { saveVectorToPinecone } from "@/lib/pinecone";
+import prisma from '../../lib/prisma';
 
-const xata = getXataClient();
+
+// const xata = getXataClient();
 
 const documentData = z.object({
    userId: z.string(),
@@ -31,12 +33,21 @@ export async function POST(req: Request, res: Response) {
            file_key: file_key
          })
            
-          const result = await xata.db.document.create({
+        //   const result = await xata.db.document.create({
+        //     user_id: session.user.id as string,
+        //     name: name,
+        //     file_link: url,
+        //     file_key: file_key
+        //  })
+
+        const result = await prisma.documents.create({
+          data: {
             user_id: session.user.id as string,
             name: name,
             file_link: url,
             file_key: file_key
-         })
+          }
+        })
 
          if (result.file_key) {
               await saveVectorToPinecone(file_key); 

@@ -1,6 +1,6 @@
 "use server"
 
-import { auth, signIn, signOut } from "@/auth";
+import { auth, signIn, signOut } from "../../auth";
 import { getXataClient } from "../../src/xata"
 import bcrypt from 'bcryptjs';
 import { redirect } from "next/navigation";

@@ -16,7 +16,8 @@ export async function POST(req: Request, res: Response) {
         const res = await xata.db.document.update(id, {
            name: item
         })
-        return NextResponse.json(res, { status: 200});
+        return NextResponse.json(/* @next-codemod-error 'res' is passed as an argument. Any asynchronous properties of 'props' must be awaited when accessed. */
+        res, { status: 200});
       }
       catch(err) {
         return NextResponse.json(err, { status: 400});

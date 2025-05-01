@@ -1,6 +1,6 @@
 "use server"
 
-import { auth } from "@/auth";
+import { auth } from "../../auth";
 import { getXataClient } from "../../src/xata";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";

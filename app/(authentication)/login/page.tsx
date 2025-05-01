@@ -6,15 +6,18 @@ import NavbarMain from "@/components/navbar-main";
 import { Metadata } from "next";
 import CredentialForm from "./credentialForm";
 import Link from "next/link";
-import { auth } from "@/auth";
+import { auth } from "../../../auth";
 import OAuth from "./oAuth";
 
 export const metadata: Metadata ={ 
   title: 'Sign in',
 }
 
-const LoginPage = async () => {
+export default async function LoginPage() {
+
   const session = await auth(); 
+
+
   return (
     <>
       <NavbarMain />
@@ -57,4 +60,3 @@ const LoginPage = async () => {
   );
 };
 
-export default LoginPage;

@@ -12,7 +12,7 @@ const pinecone = new Pinecone({
   apiKey: process.env.PINECONE_API_KEY!,
 });
 
-const pineconeIndex = pinecone.index("rethink");
+const pineconeIndex = pinecone.index("rethink-reupdate");
 
 const indexes = await pinecone.listIndexes();
 
@@ -54,7 +54,7 @@ async function prepareDocument(page: DocumentPage) {
 
 async function embedDocument(doc: Document) {
   try {
-    const embeddings = await getEmbeddings(doc.pageContent);
+    const embeddings = await getEmbeddings(doc.pageContent); //array of numbers
     const hash = md5(doc.pageContent);
 
     return {
@@ -84,14 +84,14 @@ export async function saveVectorDocx(file_key: string) {
       const vectors = await Promise.all(documents.flat().map(embedDocument));
   
       // 4. upload to pinecone
-      const namespace = pineconeIndex.namespace(convertToAscii(file_key));
-  
+      const namespace = await pineconeIndex.namespace(convertToAscii(file_key)).upsert(vectors);
       console.log("inserting vectors into pinecone");
-      const vector = await namespace.upsert(vectors);
+     
   
-      console.log('PINECONE DATA', vector);
+      console.log('PINECONE DATA', namespace);
   
       return documents[0];
+
     } catch (error) {
       console.error("Error loading file to Pinecone:", error);
     }

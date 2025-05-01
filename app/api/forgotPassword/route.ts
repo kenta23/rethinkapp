@@ -17,7 +17,7 @@ export async function POST(req: Request, res: NextApiResponse) {
 
         if (user && user.secretcode === secretCode) {
             console.log("User validated successfully.");
-            const cookieStore = cookies();
+            const cookieStore = await cookies();
 
             const fiveMinutes = 5 * 60 * 1000;
             const expirationDate = new Date(Date.now() + fiveMinutes);

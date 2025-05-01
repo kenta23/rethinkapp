@@ -1,19 +1,25 @@
-import { auth } from "@/auth";
+import { auth } from "../../../auth";
 import { getXataClient } from "../../../src/xata";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { revalidatePath } from "next/cache";
+import prisma from '../../lib/prisma';
+
 
 export async function GET() {
-        const xata = getXataClient();
         const session = await auth();
 
         try {
-           const data = await xata.db.document.filter({
-               user_id: session?.user.id,
-           }).sort('xata.updatedAt', 'desc').getAll();
-      
+           const data = await prisma.documents.findMany({ 
+             where: { 
+                user_id: session?.user.id,
+             },
+               orderBy: { 
+                  updated_at: 'desc'
+               }
+           })
+         
            return NextResponse.json(data, { status: 200});
 
         } catch (error) {

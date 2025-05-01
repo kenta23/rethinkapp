@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import React from 'react'
 import Image from 'next/image'
-import { signIn } from '@/auth';
+import { signIn } from '../../../auth.ts';
 
 
 export default function OAuth() {

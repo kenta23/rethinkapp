@@ -14,7 +14,7 @@ export async function matchesEmbeddings(embeddings: number[], fileKey: string) {
  
   // QUERYING NAMESPACE HERE
   try {
-    const index = pinecone.index("rethink");
+    const index = pinecone.index("rethink-reupdate");
     const namespace = index.namespace(convertToAscii(fileKey));
     const queryResponse = await namespace.query({
       topK: 5,

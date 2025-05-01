@@ -2,7 +2,7 @@
 
 import { Message, useChat, useCompletion } from 'ai/react';
 import { Send, SendHorizontal, X } from 'lucide-react';
-import React, { ChangeEvent, useEffect, useMemo, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useMemo, useRef, useState, type JSX } from 'react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';

@@ -1,24 +1,41 @@
-//import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-/*const protectedRoute = createRouteMatcher([
-  '/main/(.*)',
-])
-
-export default clerkMiddleware((auth, req) => {
-    if(protectedRoute(req)) auth().protect()
-});
+// import { auth } from './auth';
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
+import { getToken } from 'next-auth/jwt'; 
+import { NextResponse, NextRequest } from 'next/server';
+import authconfig from './auth.config';
+import NextAuth from "next-auth"
 
 
-export const config = {
-  // The following matcher runs middleware on all routes
-  // except static assets.
-  matcher: [ '/((?!.*\\..*|_next).*)', '/', '/(api|trpc)(.*)'],
-}; */
-import { auth } from '@/auth'
-import { cookies } from 'next/headers';
+const { auth: authMiddleware } = NextAuth(authconfig);
 
-export default auth((req) => {
+export default authMiddleware (async function middleware(req: NextRequest) {
+  // Your custom middleware logic goes here
+})
 
-   const getCookie = cookies();
+
+// export { auth as middleware } from "./auth";
+
+// export async function middleware(req) {
+//   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
+
+//   if (req.nextUrl.pathname === "/change-password" && !token) {
+//     const url = req.nextUrl.clone();
+//     url.pathname = "/forgot-password";
+//     return NextResponse.redirect(url);
+//   }
+
+//   if (req.nextUrl.pathname.startsWith("/main") && !token) {
+//     const url = req.nextUrl.clone();
+//     url.pathname = "/projects";
+//     return NextResponse.redirect(url);
+//   }
+
+//   return NextResponse.next();
+// }
+
+/*export default auth((req) => {
+
+   const getCookie = (cookies() as unknown as UnsafeUnwrappedCookies);
    getCookie.get('user');
 
   
@@ -33,7 +50,7 @@ export default auth((req) => {
          return Response.redirect('/projects')
       }
     } 
-})
+}) */
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 }

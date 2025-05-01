@@ -8,7 +8,7 @@ const xata =  getXataClient();
 
 export async function POST(req: Request, res: Response) {
     const { password } = await req.json();
-    const cookieStore = cookies();
+    const cookieStore = await cookies();
     const userCookie = cookieStore.get('user')?.value;
   
     const hashedPassword =  saltHashedPassword(password);

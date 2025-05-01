@@ -148,13 +148,13 @@ export type DatabaseSchema = {
   document: DocumentRecord;
   chats: ChatsRecord;
   Credentials: CredentialsRecord;
-};
+}; 
 
 const DatabaseClient = buildClient();
 
 const defaultOptions = {
   databaseURL:
-    "https://Rusty-Ramos-s-workspace-9h3m5o.ap-southeast-2.xata.sh/db/rethinkdb",
+    "hhttps://Rusty-Ramos-s-workspace-9h3m5o.us-east-1.xata.sh/db/Rethink_new:main",
 };
 
 export class XataClient extends DatabaseClient<DatabaseSchema> {

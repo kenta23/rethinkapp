@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import React from "react";
+import React, { type JSX } from "react";
 import { Button } from "./ui/button";
 import { LogOut, Menu, Settings } from "lucide-react";
 import { useSession } from 'next-auth/react'

@@ -38,7 +38,6 @@ type documentType = {
 }
 
 export default function Projects() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const session = useSession();
     const [ uploading, setUploading] = useState<boolean>(false); 
     const router = useRouter(); 

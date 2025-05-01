@@ -7,5 +7,5 @@ export async function getVideoFile() {
         keyType: 'fileKey'
      });
 
-     return data.data[0].url;
+     return data.data[0]?.url || null;
 }
