@@ -11,6 +11,7 @@ import Hero from "@/components/Hero";
 import StickyNavbar from "./StickyNavbar";
 import { getVideoFile } from "@/actions/videosrc";
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 
 const purpose = [
@@ -110,11 +111,6 @@ const Home = () => {
     threshold: 0,
   });
 
-  const {data, isLoading, isPending, isError } = useQuery({
-     queryFn: async () => await getVideoFile(),
-     queryKey: ['video']
-  })
-  
 
   /**LANDING PAGE */
   return (
@@ -126,7 +122,7 @@ const Home = () => {
     >
       <StickyNavbar inView={inView} />
 
-      <main className="w-full z-10 px-2 sm:px-8 md:px-[80px] py-4 lg:px-[90px] min-w-full h-auto min-h-full relative">
+      <main className="w-full bg-white dark:bg-[#0e0c0f]  z-10 px-2 sm:px-8 md:px-[80px] py-4 lg:px-[90px] min-w-full h-auto min-h-full relative">
         <div className="">
           <div ref={ref}>
             <Navbar />
@@ -152,7 +148,7 @@ const Home = () => {
         {/**VIDEO DEMO */}
         <div className="w-full flex-col rounded-lg gap-6 lg:flex-row md:gap-2 px-12 justify-around mt-14 sm:mt-28 h-auto py-6 flex items-center ">
           <div className="max-w-[320px]">
-            <h1 className="text-[#1e1e30] leading-normal font-normal text-[25px] sm:text-[40px]">
+            <h1 className="text-[#1e1e30] dark:text-white leading-normal font-normal text-[25px] sm:text-[40px]">
               Discover How It Works
             </h1>
             <p className="font-light text-sm md:text-[18px]">
@@ -168,7 +164,7 @@ const Home = () => {
             muted
             className="shadow-md border border-gray-100 h-[400px]"
           >
-            <source src="https://utfs.io/f/92514730-8eaa-4410-a334-34838bfc2b85-rat9qd.webm" type="video/webm"/>
+            <source src={"https://hl1femsdux.ufs.sh/f/botOgo9j3m8OK0pLQKm8e5qrik0xXW2LtoawGRMy4czIFZUd"} type="video/webm"/>
                Your browser does not support the video.
           </video>
         </div>
@@ -193,7 +189,7 @@ const Home = () => {
             />
 
             <div className="h-auto w-[45%]">
-              <p className="text-[#362D73] text-center sm:text-[25px] md:text-[30px] text-md leading-normal">
+              <p className="text-center sm:text-[25px] md:text-[30px] text-md leading-normal bg-gradient-to-r from-blue-400 to-[#7a6eca] text-transparent bg-clip-text">
                 Working with AI to enhance your prompts and for accurate
                 results.
               </p>
@@ -212,7 +208,7 @@ const Home = () => {
                   viewport={{ once: true }}
                   exit={{ scale: 0 }}
                   transition={{ type: "spring" }}
-                  className="text-[#1e1e30] leading-normal sm:leading-[70px] font-normal text-[35px] sm:text-[50px]"
+                  className="text-[#1e1e30] dark:text-white leading-normal sm:leading-[70px] font-normal text-[35px] sm:text-[50px]"
                 >
                   See features in action
                 </motion.h1>
@@ -238,7 +234,7 @@ const Home = () => {
                   variants={itemVariants}
                   viewport={{ once: true }}
                   key={index}
-                  className="w-auto shadow-sm justify-center rounded-lg flex items-center py-2 px-4 h-[150px]  "
+                  className="w-auto shadow-xs justify-center rounded-lg flex items-center py-2 px-4 h-[150px]  "
                 >
                   <div className="flex items-start min-w-[250px] max-w-[400px] gap-4 ">
                     <Image
@@ -250,10 +246,10 @@ const Home = () => {
                     />
 
                     <div className="flex text-start flex-col gap-4">
-                      <h2 className="text-[20px] text-[#381E6F] md:text-[22px] lg:text-[25px] font-medium">
+                      <h2 className="text-[20px] text-[#381E6F] dark:text-[#a493ca] md:text-sm lg:text-xl font-normal">
                         {item.title}
                       </h2>
-                      <p className="text-sm font-light md:text-[15] lg:text-[15px] text-pretty">
+                      <p className="text-sm font-light md:text-xs lg:text-[14px] text-pretty">
                         {item.description}
                       </p>
                     </div>
@@ -277,9 +273,9 @@ const Home = () => {
               >
                 <CheckCircle2
                   color="white"
-                  className="bg-secondaryColor size-[18px] sm:size-[20px] md:size-[25px] lg:size[27px]  text-md rounded-full"
+                  className="bg-secondaryColor size-[12px] sm:size-[15px] md:size-[20px] lg:size[25px] text-md rounded-full"
                 />
-                <p className="font-medium text-[10px] sm:text-md md:text-xl text-secondaryColor">
+                <p className="font-medium text-xs sm:text-sm md:text-lg text-secondaryColor">
                   {item.title}
                 </p>
               </motion.div>
@@ -302,13 +298,18 @@ const Home = () => {
             Read, Search, Interact
           </h1>
         </div>
+
+
+              {/**CIRCLE BACKGROUND */}
+      <div className="absolute bottom-[-200px] blur-sm bg-blend-soft-light w-full max-w-full h-[1350px] rounded-t-[600px] -z-20  bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[45%]" />
+      <div className="absolute bottom-[-200px] blur-md bg-blend-soft-light w-full max-w-full h-[1250px] rounded-t-[600px] -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[50%]" />
+      <div className="absolute bottom-[-200px] blur-lg bg-blend-light w-full max-w-full h-[1160px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[60%]" />
+      <div className="absolute bottom-[-200px] blur-xl bg-blend-light w-full max-w-full h-[860px] rounded-t-[600px] -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[70%]" />
+
+      
       </div>
 
-      {/**CIRCLE BACKGROUND */}
-      <div className="absolute bottom-[-200px] blur-sm bg-blend-soft-light w-full max-w-full h-[1350px] rounded-t-[600px] -z-20  bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[15%]" />
-      <div className="absolute bottom-[-200px] blur-md bg-blend-soft-light w-full max-w-full h-[1250px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[20%]" />
-      <div className="absolute bottom-[-200px] blur-lg bg-blend-light w-full max-w-full h-[1160px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[30%]" />
-      <div className="absolute bottom-[-200px] blur-xl bg-blend-light w-full max-w-full h-[860px] rounded-t-[600px]  -z-20 bg-gradient-to-b from-[#F9EDF8] via-[#96A4EE] to-[#804da7] opacity-[50%]" />
+
     </motion.div>
   );
 };

@@ -1,23 +1,27 @@
 "use server"
 
 import { auth } from "../../auth";
-import { getXataClient } from "../../src/xata";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
+import prisma from "@/lib/prisma";
 
 
-const xata = getXataClient();
 {/**GETTING ALL THE DOCUMENTS */}
 
 export async function getAllDocuments() {
-   const xata = getXataClient();
    const session = await auth();
 
    try {
-      const data = await xata.db.document.filter({
-          user_id: session?.user.id,
-      }).sort('xata.updatedAt', 'desc').getAll();
+      const data = await prisma.documents.findMany({
+         where: { 
+             user_id: session?.user.id,
+         },
+        orderBy: { 
+          updated_at: 'desc'
+        }
+      });
+
  
       return JSON.stringify(data); 
 
@@ -46,9 +50,11 @@ export async function changeName(formdata: FormData) {
     }
  
      try {  
-        await xata.db.document.update(id, {
-          name: newName 
-       })
+        await prisma.documents.update({ 
+            where: { id },
+            data: { name: newName }
+        })
+
        return {
           message: "Successfully updated document"
        }
@@ -75,7 +81,9 @@ export async function deleteProject (id: string) {
     }
 
    try {
-      const data = await xata.db.document.delete(id as string);
+      const data = await prisma.documents.delete({
+         where: { id}
+      });
 
       if(data) {
          //DELETE FILE FROM UPLOADTHING

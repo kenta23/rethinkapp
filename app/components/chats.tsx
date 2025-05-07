@@ -1,6 +1,6 @@
 'use client'
 
-import { Message, useChat, useCompletion } from 'ai/react';
+import { Message, useChat, useCompletion } from '@ai-sdk/react';
 import { Send, SendHorizontal, X } from 'lucide-react';
 import React, { ChangeEvent, useEffect, useMemo, useRef, useState, type JSX } from 'react';
 import { toast } from 'sonner';
@@ -10,7 +10,6 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { getAnswer, getSuggestionContext } from '@/actions/aigenerationtext';
-import { auth } from '@/auth';
 import QuestionsMadeByAI from './questionsMadeByAI';
 
 
@@ -33,13 +32,18 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
       staleTime: 40 * 1000, //40 seconds staletime
    })
   
-    const { input, handleSubmit, handleInputChange, messages, isLoading, data, append } = useChat({
+    const { input, handleSubmit, handleInputChange, messages, status, append } = useChat({
         api: '/api/openai',
+        maxSteps: 3,
+        onToolCall({ toolCall, }) {
+            console.log('tool call', toolCall);
+        },
         body: {
           fileKey,
           userId,
           id
         },
+        sendExtraMessageFields: true,
         onFinish: (res) => {
              console.log("Successfully created chat");
         },
@@ -47,26 +51,31 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
     })
     
 
-   useEffect(() => {
-    if (messageContainer.current) {
-      messageContainer.current.scrollTop = messageContainer.current?.scrollHeight;
-    }
-   }, [messages, isLoading])
+    // console.log('MESSAGE PARTS', messages.map(m => m.parts.map(p => p.type === 'tool-invocation')));
+    // console.log('tool result', messages.map(m => m.parts.map(p => p.type === 'tool-invocation' && p.toolInvocation?.state === 'result')));
+
+    console.log('MESSAGES', messages);
+
+  //  useEffect(() => {
+  //   if (messageContainer.current) {
+  //     messageContainer.current.scrollTop = messageContainer.current?.scrollHeight;
+  //   }
+  //  }, [messages])
    
 
-  useEffect(() => {
-    async function getData() {
-       const { text } = await getSuggestionContext(fileKey);
-       const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
-       setAiquestions(dividedQuestions);  
-    }
-     if(!chatdata?.length && !loading && !isFetching) {
-       getData();
-     }
-}, [chatdata, loading, isFetching, fileKey]) 
+//   useEffect(() => {
+//     async function getData() {
+//        const { text } = await getSuggestionContext(fileKey);
+//        const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
+//        setAiquestions(dividedQuestions);  
+//     }
+//      if(!chatdata?.length && !loading && !isFetching) {
+//        getData();
+//      }
+// }, [chatdata, loading, isFetching, fileKey]) 
 
     return (
-      <div className="overflow-y-auto h-full max-h-screen min-h-screen  ">
+      <div className="overflow-y-auto bg-gray-400 h-full max-h-screen min-h-screen  ">
         <div className="flex justify-between flex-col w-full h-full max-h-[490px] md:max-h-[620px] lg:max-h-[650px] xl:max-h-[89%]">
           <div
             ref={messageContainer}
@@ -74,7 +83,8 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
           >
             <div className="flex self-end overflow-y-scroll flex-col gap-6 md:gap-[24px] w-full">
               {/** CHAT STREAMING HERE */}
-              {messages.map((m) => (
+             {/* @ts-ignore */}
+              {messages.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).map((m) => (
                 <div
                   key={m.id}
                   className={cn(
@@ -83,7 +93,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                   )}
                 >
                   {/** CHAT BOX */}
-                  {m.role === "assistant" && (
+                  {m.role === "assistant" && (             
                     <div className='rounded-full size-auto p-1'>
                       <Image
                         src={"/chatbot.png"}
@@ -101,6 +111,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                   >
                     <div>
                       <p className="text-sm md:text-[16px]">{m.content}</p>
+                      {/* <p>{m?.parts[0]?.type === 'tool-invocation' && m?.parts[0]?.toolInvocation?.toolName}</p> */}
                     </div>
                   </div>
                   {m.role === "user" && (
@@ -115,7 +126,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 </div>
               ))}
 
-              {isLoading && (
+              {status === 'submitted' && (
                 <div className="self-end text-start mx-2 my-1 text-sm left-0 flex items-start text-gray-400 w-full">
                   Waiting for response.....
                 </div>
@@ -131,7 +142,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 : "h-auto"
             } py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}
           >
-            {!chatdata?.length && !loading && !clicked && (
+            {/*!chatdata?.length && !loading && !clicked && (
               <div className="h-auto justify-end  mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI
                   fileKey={fileKey as string}
@@ -142,7 +153,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                   setClicked={setClicked}
                 />
               </div>
-            )}
+            )*/}
             {/** USER INPUTS HERE */}
             <form
               onSubmit={handleSubmit}
@@ -151,17 +162,17 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
               <input
                 onChange={handleInputChange}
                 type="text"
-                className="border-accentColor bg-white focus:outline-accentColor border rounded-full w-full h-[50px] indent-3"
+                className="border-accentColor bg-white text-black focus:outline-accentColor border rounded-full w-full h-[50px] indent-3"
                 placeholder="Ask any question"
                 value={input}
-                disabled={isLoading}
+                disabled={status === 'streaming'}
               />
               <button
                 type="submit"
                 className={`${
-                  isLoading ? "opacity-70" : "opacity-100"
+                  status === 'streaming' ? "opacity-70" : "opacity-100"
                 } bg-secondaryColor size-10 rounded-lg p-2 hover:bg-[#5C87C7] flex items-center justify-center cursor-pointer duration-200 ease-in-out`}
-                disabled={isLoading}
+                disabled={status === 'streaming'}
               >
                 <Send color="#ffff" size={32} className="" />
               </button>

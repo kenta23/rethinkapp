@@ -2,6 +2,9 @@ import GitHub from "next-auth/providers/github"
 import Google from 'next-auth/providers/google'
 import Credentials from 'next-auth/providers/credentials'
 import type { NextAuthConfig } from "next-auth"
+import prisma from "@/lib/prisma";
+import { compare } from "bcryptjs";
+import { ZodError } from "zod";
  
 
 export default {
@@ -28,53 +31,6 @@ export default {
         credentials: {
           username: { label: "Username", type: "text" },
           password: { label: "Password", type: "password" },
-        },
-        authorize: async (credentials, req) => {
-          try {
-            if (credentials) {
-              const { username, password } = credentials as {
-                username: string;
-                password: string;
-              };
-      
-              const userdata = await client.db.Credentials.filter({ 
-                username: username,
-              }).getFirst();
-      
-              console.log("USERDATA", userdata);
-              const retrievePasswordfromDB = userdata?.password as string;
-              console.log("PASSWORD", retrievePasswordfromDB);
-      
-              console.log("PASSWORD", credentials.password as string);
-      
-              const isPasswordMatch = await compare(
-                credentials.password as string,
-                retrievePasswordfromDB as string
-              );
-              
-      
-              if (!isPasswordMatch) {
-                throw new Error("Invalid identifier or password");
-              } else {
-                //SUCCESSFULLY CREATED ACCOUNT
-                console.log("credentials", credentials);
-                return {
-                  email: userdata?.username,
-                  id: userdata?.id,
-                  name: userdata?.name || "",
-                  image: userdata?.image || "",
-                };
-              }
-            } else {
-              return null; // Return null if credentials are not provided
-            }
-          } catch (error) {
-            if (error instanceof ZodError) {
-              return error;
-            } else {
-              throw error;
-            }
-          }
         },
       }),
       ],

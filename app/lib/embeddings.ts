@@ -1,6 +1,6 @@
 import { HfInference } from "@huggingface/inference";
 import { OpenAIApi, Configuration } from "openai-edge";
-import { Pinecone } from '@pinecone-database/pinecone';
+import { EmbeddingsList, Pinecone } from '@pinecone-database/pinecone';
 
 export const runtime = 'edge';
 
@@ -15,29 +15,19 @@ const config = new Configuration({
  
  const openai = new OpenAIApi(config); 
  
- export async function getEmbeddings(text: string) {
-  //  try {
-  //    const response = await openai.createEmbedding({
-  //      model: "text-embedding-ada-002" ,
-  //      input: text.replace(/\n/g, " "),
-  //    });
-  //    const result = await response.json();
-  //    //console.log('RESULT FROM AI: ', result);
-  //    return result.data[0].embedding as number[]; 
-  //  } catch (error) {
-  //    console.log("error calling openai embeddings api", error);
-  //    throw error;
-  //  }
-
+ export async function getEmbeddings(text: string) { //doc.pageContent
   try {
-    const embeddings = await pc.inference.embed(
-      'multilingual-e5-large',
-      data.map(d => d.text),
-      { inputType: 'passage', truncate: 'END' }
+    const embeddings: EmbeddingsList = await pc.inference.embed(
+      'llama-text-embed-v2',
+      [text.replace(/\n/g, " ")], //removes multiple new lines
+      { inputType: 'passage', truncate: 'END', } //1024 is the dimension of the embedding model
     );
 
-    return embeddings[0].data.values as number[];
+    console.log('VALUESSS', embeddings); // Check the structure of the response
 
+    //ignore type error
+    // @ts-ignore
+    return embeddings.data[0].values; //returns the embedding of the first text
   } catch (error) {
     console.log("Error embed text", error);
     throw error;

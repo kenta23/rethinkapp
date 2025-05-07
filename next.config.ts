@@ -7,19 +7,17 @@ const nextConfig: NextConfig = {
     
   //   return config;
   //  },
+
    images: {
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'img.clerk.com',
-      },
       {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com'
       },
       {
         protocol: 'https',
-        hostname: 'utfs.io'
+        hostname: 'hl1femsdux.ufs.sh',
+        pathname: '/f/*'
       },
       {
         protocol: 'https',

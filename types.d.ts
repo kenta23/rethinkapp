@@ -3,23 +3,15 @@ import NextAuth, { DefaultSession, DefaultJWT } from "next-auth";
 import { JWT } from "next-auth/jwt";
 
 
-export type savedDataDbType  = {
-    id: string,
-    name: string,
-    document: XataArrayFile[] | null | undefined,
-    thumbnail_url: string | null,
-    file_link: string | null | undefined,
-    file_key: string | null,
-    user_id: string,
-    document_vector: number[],
-    xata: {
-      createdAt: string,
-      updatedAt: string,
-      version: number,
-    };
-} 
-
-
+export type savedDataDbType = {
+  id: string;
+  name: string;
+  file_link: string | null | undefined;
+  file_key: string | null;
+  user_id: string;
+  created_at: Date;
+  updated_at: Date;
+}; 
 
 
 declare module "next-auth" {

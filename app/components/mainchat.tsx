@@ -10,7 +10,6 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 import { savedDataDbType } from '../../types'
 import { toast } from 'sonner'
-import { revalidatePath } from 'next/cache'
 import Chats from './chats'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
@@ -138,7 +137,7 @@ export default function Main({ data }: { data: savedDataDbType}) {
                       value={newName}
                       onChange={formatName}
                       ref={inputRef}
-                      className="bg-transparent border-1 rounded-xl outline-none border-purple-500 py-1 indent-2 border md:w-full w-[150px]"
+                      className="bg-transparent border-1 rounded-xl outline-none border-purple-500 py-1 indent-2 md:w-full w-[150px]"
                     />
 
                     <div className="flex gap-1 items-center">

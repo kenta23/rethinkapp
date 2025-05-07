@@ -7,9 +7,9 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { toast } from 'sonner';
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { deleteProject } from '@/actions/projects';
+
 
 
 export default function Lists({ data }: { data: savedDataDbType}) {
@@ -49,7 +49,6 @@ export default function Lists({ data }: { data: savedDataDbType}) {
            router.refresh();
          }
        })
-      //revalidatePath('/projects', 'page');
    } 
 
   return (
@@ -65,7 +64,7 @@ export default function Lists({ data }: { data: savedDataDbType}) {
       <div>
         <p className="font-medium">{data.name}</p>
         <p className="font-light text-[14px] text-gray-500">
-          {formatDate(data.xata.updatedAt)}
+          {formatDate(data.updated_at.toString())}
         </p>
       </div>
 

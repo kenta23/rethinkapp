@@ -6,7 +6,6 @@ import { Metadata } from 'next';
 import { getXataClient } from '../../../../src/xata';
 import prisma from '../../../lib/prisma';
 
-const xata = getXataClient();
 
 export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {
     const params = await props.params;

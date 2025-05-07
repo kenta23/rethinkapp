@@ -3,7 +3,8 @@ import React from 'react'
 
 
 export const metadata: Metadata = {
-    title: "Projects"
+    title: "Projects",
+    description: "Projects page"
 }
   
 export default function DashboardLayout({
@@ -12,7 +13,7 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-      <section>
+      <section className='bg-white dark:bg-[#0e0c0f]'>
         {/* Include shared UI here e.g. a header or sidebar */}
         {children}
       </section>

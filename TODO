@@ -36,7 +36,11 @@ Todolist to improve system ui and performance:
  April 30, 2025 
  Redesigned project:
  ☐ update packages
- ☐ change database and embeddings 
+ ✔ change database and embeddings @done(25-05-06 22:20)
  ☐ add new features to the project
+
+
+ Todo for tomorrow May 07, 2025:
+  ☐ fix /api/openai and chats component
 
 

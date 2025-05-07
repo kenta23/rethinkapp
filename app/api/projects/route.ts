@@ -1,5 +1,4 @@
 import { auth } from "../../../auth";
-import { getXataClient } from "../../../src/xata";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
@@ -30,7 +29,7 @@ export async function GET() {
 
 {/**DELETING DOCUMENT */}
 export async function POST (req: Request, res: Response) {
-   const xata = getXataClient();
+
    const session = await auth();
 
    const pinecone = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
@@ -42,7 +41,9 @@ export async function POST (req: Request, res: Response) {
    const { id } = await req.json();
 
    try {
-      const data = await xata.db.document.delete(id as string);
+      const data = await prisma.documents.delete({
+          where: { id }
+      });
 
       if(data) {
          //DELETE FILE FROM UPLOADTHING
