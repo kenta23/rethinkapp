@@ -33,7 +33,7 @@ model chats {
 
 model documents {
   id             String    @id @default(cuid())
-  name           String?
+  name           String?  
   user_id        String?
   file_link      String?
   file_key       String?

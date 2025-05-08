@@ -35,12 +35,21 @@ Todolist to improve system ui and performance:
 
  April 30, 2025 
  Redesigned project:
- ☐ update packages
+ ✔ update packages @done(25-05-07 22:51)
  ✔ change database and embeddings @done(25-05-06 22:20)
- ☐ add new features to the project
+ ☐ add new features to the project 
 
 
  Todo for tomorrow May 07, 2025:
-  ☐ fix /api/openai and chats component
+  ✔ fix /api/openai and chats component @done(25-05-07 22:51)
 
+ May 08, 2025: 
+  ☐ change ui of main page
+  ☐ create a feature that allows user to use chat for one time as guest without need to sign in.
+  ☐ saving chat history limited for the authenticated users.
+
+
+  
+ 
+ 
 
