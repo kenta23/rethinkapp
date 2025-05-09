@@ -47,11 +47,11 @@ export default function Projects() {
       {/**ARCHIVES */}
       <div
         className="border-gray-20 
-               max-w-[1100px] shadow-lg border-[1px] rounded-md relative w-full mt-[30px] 
-               min-h-[750px] max-h-screen md:mt-[50px] mx-auto"
+               max-w-3/4 shadow-lg border-[1px] rounded-md relative w-full mt-[30px] 
+               h-full min-h-[500px] max-h-auto md:mt-[50px] mx-auto"
       >
         <div className="flex w-auto mt-[30px] mx-[10px] p-2 md:p-6 gap-4 items-start flex-col">
-          <h3 className="self-center text-xs sm:text-sm md:text-xl text-[#4a4952] dark:text-gray-200">
+          <h3 className="self-center text-xs sm:text-sm md:text-2xl text-[#4a4952] dark:text-gray-200">
             Your Projects
           </h3>
 

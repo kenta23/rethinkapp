@@ -36,39 +36,74 @@ export function AppSidebar() {
     const { state } = useSidebar();
     
     return (
-      <Sidebar collapsible="icon" className="bg-linear-to-b from-[#252031] to-[#383440]">
-         <SidebarHeader>
-             <SidebarGroup className="flex flex-row justify-between items-center">
-              <Image className={`${state === "collapsed" ? "hidden" : "block"}`} src={'/Logo white with text.png'} alt="rethink logo" width={50} height={110}/>
-                <SidebarTrigger />
-             </SidebarGroup>
-          </SidebarHeader>
-          
+      <Sidebar
+        collapsible="icon"
+        className="bg-linear-to-b from-[#252031] to-[#383440]"
+      >
+        <SidebarHeader>
+          <SidebarGroup className="flex flex-row justify-between items-center">
+            <Image
+              className={`${state === "collapsed" ? "hidden" : "block"}`}
+              src={"/Logo white with text.png"}
+              alt="rethink logo"
+              width={50}
+              height={110}
+            />
+            <SidebarTrigger />
+          </SidebarGroup>
+        </SidebarHeader>
+
         <SidebarContent hidden={state === "collapsed"} className="px-4 py-2">
-            {/**RENDER CHAT HISTORY HERE */}
-            <SidebarMenu className="flex flex-col h-auto w-full gap-3 items-start">
-                {isFetching ? <p>Loading...</p> : chatHistory?.data.map((chat: any) => (
-                      <SidebarMenuItem key={chat.id} className="px-3 py-4 rounded-xl bg-white/10 backdrop-blur-sm w-full flex justify-between items-center">
-                             <div className="flex flex-row gap-1 items-center">
-                               <MessageCircleMore /> 
-                               <p className="text-sm">{chat.name}</p>
-                             </div> 
-   
-                           
-                                <MoreHorizontal />
-                  
-                      </SidebarMenuItem>
-                ))}
-            </SidebarMenu>
+          {/**RENDER CHAT HISTORY HERE */}
+          <SidebarMenu className="flex flex-col h-auto w-full gap-3 items-start">
+            {isFetching ? (
+              <p>Loading...</p>
+            ) : (
+              chatHistory?.data.map((chat: any) => (
+                <SidebarMenuItem
+                  key={chat.id}
+                  className="px-3 py-4 rounded-xl bg-white/10 backdrop-blur-sm w-full flex justify-between items-center"
+                >
+                  <div className="flex flex-row gap-1 items-center">
+                    <MessageCircleMore />
+                    <p className="text-sm">{chat.name}</p>
+                  </div>
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <SidebarMenuAction>
+                        <MoreHorizontal />
+                      </SidebarMenuAction>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent side="right" align="start">
+                      <DropdownMenuItem>
+                        <span>Edit Project</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <span>Delete Project</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </SidebarMenuItem>
+              ))
+            )}
+          </SidebarMenu>
         </SidebarContent>
-        
+
         <SidebarFooter>
-            <div className="flex flex-row justify-start items-center gap-2">
-                <Image className="border-[#8E61EC] border-2 rounded-full" src={session.data?.user?.image || ''} alt="rethink logo" width={40} height={110} objectFit="cover"/>        
-                <p className="text-sm">{session.data?.user?.name}</p>
-            </div>
+          <div className="flex flex-row justify-start items-center gap-2">
+            <Image
+              className="border-[#8E61EC] border-2 rounded-full"
+              src={session.data?.user?.image || ""}
+              alt="rethink logo"
+              width={40}
+              height={110}
+              objectFit="cover"
+            />
+            <p className="text-sm">{session.data?.user?.name}</p>
+          </div>
         </SidebarFooter>
       </Sidebar>
-    )
+    );
   }
   

@@ -7,7 +7,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   return (
     <SidebarProvider>
         <AppSidebar />
-    <main>
+    <main className='bg-white dark:bg-[#0e0c0f]'>
       {children}
     </main>
   </SidebarProvider>    

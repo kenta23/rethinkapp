@@ -57,26 +57,24 @@ export default function AddProjectDialog({ session }: { session: Session | null 
 
    
   return (
-    <div className="flex items-start gap-2 flex-col">
-    <Dialog>
+    <div className="mt-8 flex items-center justify-center gap-6 flex-col">
+     <Dialog>
       <DialogTrigger asChild>
         {/**CREATE BUTTON HERE */}
-        <div className="flex flex-col gap-2">
-          <button
-            disabled={!session?.user}
-            className={`${
-              !session?.user
-                ? "bg-gray-500"
-                : "bg-[#4B3F94] hover:bg-violet-700"
-            } text-center w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] duration-200 ease-in-out text-white rounded-md text-[18px]`}
-            type="button"
-          >
-            <Plus size={32} className="m-auto" />
-          </button>
-          <span className="text-[#55545E] dark:text-gray-400 font-medium ">
-            Create new
-          </span>
-        </div>
+         <UploadDropzone
+         endpoint="pdfUploader"
+         content={{
+          allowedContent: "Maximum file size is 32mb",
+         }}
+         className='py-4'
+         appearance={{
+          button:
+            "ut-ready:bg-yellow-500 rounded-lg ut-uploading:cursor-not-allowed px-3 py-2 bg-violet-500 text-sm after:bg-green-400",
+          uploadIcon: "text-gray-400", 
+          container: "border-dashed border-[#998CEE]",
+          label: "text-lg dark:text-white",
+        }}
+         />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form>
@@ -163,13 +161,7 @@ export default function AddProjectDialog({ session }: { session: Session | null 
 
     {/**ARCHIVES LISTS */}
     {session?.user ? (
-      <div className="overflow-y-clip w-full max-w-full">
-        {/**archive items */}
-        <div className="max-h-[550px] overflow-y-auto w-full min-w-full"> 
-          {/**START MAPPING ITEMS HERE */}
           <Archive />
-        </div>
-      </div>
     ) : (
       <p className="self-center mx-auto mt-[70px] text-[18px] font-normal text-[#A09EA8]">
         Log in to continue

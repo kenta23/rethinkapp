@@ -56,11 +56,16 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
 
     console.log('MESSAGES', messages);
 
-  //  useEffect(() => {
-  //   if (messageContainer.current) {
-  //     messageContainer.current.scrollTop = messageContainer.current?.scrollHeight;
-  //   }
-  //  }, [messages])
+   useEffect(() => {
+    if (messageContainer.current) {
+      setTimeout(() => {
+        messageContainer.current?.scrollTo({
+          top: messageContainer.current.scrollHeight,
+          behavior: 'smooth'
+        });
+      }, 100);
+    }
+   }, [messages, status]);
    
 
 //   useEffect(() => {
@@ -75,13 +80,13 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
 // }, [chatdata, loading, isFetching, fileKey]) 
 
     return (
-      <div className="overflow-y-auto bg-gray-400 h-full max-h-screen min-h-screen  ">
-        <div className="flex justify-between flex-col w-full h-full max-h-[490px] md:max-h-[620px] lg:max-h-[650px] xl:max-h-[89%]">
+      <div className="h-full max-h-screen">
+        <div className="w-full h-[90%] justify-content-between items-center">
           <div
             ref={messageContainer}
-            className={`w-full flex-1 p-3 h-auto flex flex-col items-end justify-end overflow-y-auto`}
-          >
-            <div className="flex self-end overflow-y-scroll flex-col gap-6 md:gap-[24px] w-full">
+            className={`w-full p-3 h-full flex flex-col overflow-y-auto`}
+          > 
+            <div className="flex self-end flex-col gap-4 w-full">
               {/** CHAT STREAMING HERE */}
              {/* @ts-ignore */}
               {messages.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).map((m) => (
@@ -93,17 +98,6 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                   )}
                 >
                   {/** CHAT BOX */}
-                  {m.role === "assistant" && (             
-                    <div className='rounded-full size-auto p-1'>
-                      <Image
-                        src={"/chatbot.png"}
-                        alt="assistant avatar"
-                        width={500}
-                        height={500}
-                        className="rounded-full size-6 md:size-8 object-contain"
-                      />
-                    </div>
-                  )}
                   <div
                     className={`text-wrap mx-2 whitespace-normal break-words text-white w-fit p-2 rounded-md ${
                       m.role === "assistant" ? "bg-[#8768a5]" : "bg-[#3970b8]"
@@ -157,12 +151,12 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
             {/** USER INPUTS HERE */}
             <form
               onSubmit={handleSubmit}
-              className="flex items-center justify-center w-full gap-2 px-2"
+              className="flex align-self-end items-center justify-center w-full gap-1 px-2"
             >
               <input
                 onChange={handleInputChange}
                 type="text"
-                className="border-accentColor bg-white text-black focus:outline-accentColor border rounded-full w-full h-[50px] indent-3"
+                className="outline-[#C86BDC] bg-white text-black outline rounded-full w-full h-[50px] indent-3"
                 placeholder="Ask any question"
                 value={input}
                 disabled={status === 'streaming'}
@@ -171,7 +165,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 type="submit"
                 className={`${
                   status === 'streaming' ? "opacity-70" : "opacity-100"
-                } bg-secondaryColor size-10 rounded-lg p-2 hover:bg-[#5C87C7] flex items-center justify-center cursor-pointer duration-200 ease-in-out`}
+                } bg-[#5C87C7] size-10 rounded-lg p-2 flex items-center justify-center cursor-pointer duration-200 ease-in-out`}
                 disabled={status === 'streaming'}
               >
                 <Send color="#ffff" size={32} className="" />

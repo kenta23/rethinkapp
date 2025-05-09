@@ -4,6 +4,19 @@ import { useQuery } from '@tanstack/react-query';
 import { Loader, Loader2 } from 'lucide-react';
 import axios from 'axios';
 
+
+const dummyData = Array.from({ length: 30 }, (_, index) => ({
+  id: (index + 1).toString(),
+  name: `Project ${index + 1}`,
+  file_link: null,
+  file_key: null,
+  user_id: `user_${index + 1}`,
+  created_at: new Date(),
+  updated_at: new Date(),
+}));
+
+
+
 export default function Archive() {
   const { isPending, error, data } = useQuery({
     queryKey: ['projects'],
@@ -12,7 +25,7 @@ export default function Archive() {
   })
 
   return (
-    <div className="p-4 gap-6 w-full max-h-[600px] overflow-y-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="p-4 gap-5 w-3/4 mx-auto h-full max-h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {isPending ? (
         <Loader2 className="size-8 text-violet-600 text-center animate-spin" />
       ) : error ? (
@@ -25,3 +38,5 @@ export default function Archive() {
     </div>
   ); 
 } 
+
+
