@@ -20,31 +20,26 @@ export async function POST(req: Request) {
   
   try {
     const lastMessage = messages[messages.length - 1];
-    // const context = await getContext(lastMessage.content, fileKey);
+    const context = await getContext(lastMessage.content, fileKey);
 
-    // console.log("CONTEXT", context);
+    const promptContent = `You are a helpful AI assistant that can answer related to the provided context.
+      AI is always friendly, kind, and inspiring, and he is eager to provide vivid and thoughtful responses, and suggestions to the user.
+      AI has the sum of all knowledge in their brain, and is able to accurately answer nearly any question about the provided context from the document.
+      START CONTEXT BLOCK
+       ${context} 
+      END OF CONTEXT BLOCK
+      AI assistant will take into account any CONTEXT BLOCK that is provided in a conversation.
+      If the context does not provide the answer to question, the AI assistant will say, "I'm sorry, but I don't know the answer to that question".
+      AI assistant will not apologize for previous responses, but instead will indicated new information was gained.
+      AI assistant will not invent anything that is not drawn directly from the context.
+      `
+
     console.log('MESSAGE RECEIVED', messages);
 
     const result = streamText({ 
       model: aiModel("meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"),
-      messages,
-      system: `You are a helpful assistant. When users ask questions:
-      1. First try to answer directly if it's a general question
-      2. If the question is out of your knowledge base or seems specific to a document, use the getContextFromDocument tool to get relevant information
-      3. After getting context, provide a natural response incorporating that information
-      4. If no relevant information is found, respond with "I don't have enough information to answer that question."
-      Always respond in a conversational manner, not in tool call format.`,
-      tools: {
-        getContextFromDocument: {
-          description: "Get context from document. Use this tool when user asking questions related to the document embedded in the chat",
-          parameters: z.object({
-            question: z.string().describe("The question to answer")
-          }),
-          execute: async ({ question }) => {
-            return await getContext(question, fileKey);
-          }
-        }
-      },
+      prompt: lastMessage.content,
+      system: promptContent,
       maxSteps: 3,
       maxTokens: 300,
       async onStepFinish({ stepType, response, text, toolCalls}) {
@@ -80,18 +75,6 @@ export async function POST(req: Request) {
             },
           ],
         });
-       
-        //  console.log(
-        //    "RESULTT",
-        //    response.messages
-        //    // @ts-ignore
-        //      .flatMap((msg) => msg.content) // Flatten array of arrays
-        //      // @ts-ignore
-        //      .filter((part) => part.type === "text") // Optional: ensure type is 'text'
-        //      // @ts-ignore
-        //      .map((part) => part.text) // Extract just the text
-        //      .join("\n")
-        //  );
       }, 
     });
 

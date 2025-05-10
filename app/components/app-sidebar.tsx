@@ -14,13 +14,28 @@ import {
     SidebarMenuAction,
   } from "@/components/ui/sidebar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
-import { ChevronUp, Home, MessageCircleMore, MoreHorizontal } from "lucide-react";
+import { Archive, ChevronUp, Home, MessageCircleMore, MoreHorizontal } from "lucide-react";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import Image from "next/image";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { User2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import Link from "next/link";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import AppSidebarForm from "./app-sidebar-form";
 
 
 
@@ -38,7 +53,7 @@ export function AppSidebar() {
     return (
       <Sidebar
         collapsible="icon"
-        className="bg-linear-to-b from-[#252031] to-[#383440]"
+        className="bg-linear-to-b overflow-x-hidden from-[#252031] to-[#383440]"
       >
         <SidebarHeader>
           <SidebarGroup className="flex flex-row justify-between items-center">
@@ -55,42 +70,30 @@ export function AppSidebar() {
 
         <SidebarContent hidden={state === "collapsed"} className="px-4 py-2">
           {/**RENDER CHAT HISTORY HERE */}
-          <SidebarMenu className="flex flex-col h-auto w-full gap-3 items-start">
+          <SidebarMenu className="flex overflow-x-hidden relative flex-col h-auto w-full gap-3 items-start">
             {isFetching ? (
               <p>Loading...</p>
             ) : (
               chatHistory?.data.map((chat: any) => (
                 <SidebarMenuItem
                   key={chat.id}
-                  className="px-3 py-4 rounded-xl bg-white/10 backdrop-blur-sm w-full flex justify-between items-center"
+                  className="px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm w-full flex justify-between items-center"
                 >
-                  <div className="flex flex-row gap-1 items-center">
-                    <MessageCircleMore />
-                    <p className="text-sm">{chat.name}</p>
-                  </div>
+                  <SidebarMenuButton asChild>
+                    <div className="flex flex-row gap-1 items-center">
+                      <MessageCircleMore />
+                      <p className="text-sm">{chat.name}</p>
+                    </div>
+                  </SidebarMenuButton>
 
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <SidebarMenuAction>
-                        <MoreHorizontal />
-                      </SidebarMenuAction>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent side="right" align="start">
-                      <DropdownMenuItem>
-                        <span>Edit Project</span>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                        <span>Delete Project</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  <AppSidebarForm id={chat.id} />
                 </SidebarMenuItem>
               ))
             )}
           </SidebarMenu>
         </SidebarContent>
 
-        <SidebarFooter>
+        <SidebarFooter className="flex flex-row justify-between items-center">
           <div className="flex flex-row justify-start items-center gap-2">
             <Image
               className="border-[#8E61EC] border-2 rounded-full"
@@ -102,6 +105,10 @@ export function AppSidebar() {
             />
             <p className="text-sm">{session.data?.user?.name}</p>
           </div>
+
+          <Link href={"/projects"} className="">
+            <Archive cursor={"pointer"} />
+          </Link>
         </SidebarFooter>
       </Sidebar>
     );

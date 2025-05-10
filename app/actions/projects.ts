@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
 import prisma from "@/lib/prisma";
+import { z } from "zod";
 
 
 {/**GETTING ALL THE DOCUMENTS */}
@@ -33,6 +34,31 @@ export async function getAllDocuments() {
    }
 }
 
+{/**EDITING THE PROJECT */}
+export async function editProject(name: string, id: string) { 
+   const session = await auth();
+
+   if(!session?.user) {
+      return {
+         message: "User not authenticated"
+      }
+   }
+
+   try {
+      const data = await prisma.documents.update({
+         where: { id },
+         data: { name }
+      })
+
+      return data;
+   }
+
+   catch(err) { 
+       if(err) { 
+          return err;
+       }
+   }
+}
 
 {/**UPDATING DOCUMENT NAME */}
 export async function changeName(formdata: FormData) {
@@ -82,7 +108,7 @@ export async function deleteProject (id: string) {
 
    try {
       const data = await prisma.documents.delete({
-         where: { id}
+         where: { id }
       });
 
       if(data) {

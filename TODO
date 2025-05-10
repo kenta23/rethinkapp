@@ -44,9 +44,12 @@ Todolist to improve system ui and performance:
   ✔ fix /api/openai and chats component @done(25-05-07 22:51)
 
  May 08, 2025: 
-  ☐ change ui of main page
+  ✔ change ui of main page @done(25-05-10 21:30)
   ☐ create a feature that allows user to use chat for one time as guest without need to sign in.
   ☐ saving chat history limited for the authenticated users.
+
+ May 10, 2025:
+  ☐ fix pinecone data deletion
 
 
   
