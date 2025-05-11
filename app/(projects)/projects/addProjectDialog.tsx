@@ -1,3 +1,5 @@
+'use client';
+
 import { DialogDescription, DialogTitle, DialogContent, DialogHeader, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
 import { Dialog } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -15,9 +17,6 @@ import { Session } from 'next-auth';
 
 
 type documentType = {
-    userId: string | null | undefined,
-    name: string,
-    file: globalThis.File[],
     url: string,
     file_key: string
 }
@@ -27,9 +26,6 @@ export default function AddProjectDialog({ session }: { session: Session | null 
     const [ uploading, setUploading] = useState<boolean>(false); 
     const router = useRouter(); 
     const [data, setData] = useState<documentType>({
-      userId: session?.user.id as string,
-      name: '',
-      file: [],
       url: '',
       file_key: ''
    })
@@ -43,6 +39,8 @@ export default function AddProjectDialog({ session }: { session: Session | null 
        console.log('Successful Please wait...');
       }
    })
+
+   console.log("uploading", uploading );
 
     
    function handleDataValue(e: ChangeEvent<HTMLInputElement>) {
@@ -58,115 +56,57 @@ export default function AddProjectDialog({ session }: { session: Session | null 
    
   return (
     <div className="mt-8 flex items-center justify-center gap-6 flex-col">
-     <Dialog>
-      <DialogTrigger asChild>
-        {/**CREATE BUTTON HERE */}
-         <UploadDropzone
-         endpoint="pdfUploader"
-         content={{
+      {/**CREATE BUTTON HERE */}
+      <UploadDropzone
+        endpoint="pdfUploader"
+        content={{
           allowedContent: "Maximum file size is 32mb",
-         }}
-         className='py-4'
-         appearance={{
+        }}
+        className="py-4"
+        appearance={{
           button:
             "ut-ready:bg-yellow-500 rounded-lg ut-uploading:cursor-not-allowed px-3 py-2 bg-violet-500 text-sm after:bg-green-400",
-          uploadIcon: "text-gray-400", 
+          uploadIcon: "text-gray-400",
           container: "border-dashed border-[#998CEE]",
           label: "text-lg dark:text-white",
         }}
-         />
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <form>
-          <DialogHeader>
-            <DialogTitle>Create new document</DialogTitle>
-            <DialogDescription>
-              Make changes to your new work here. Click save when
-              youre done.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name of your work
-              </Label>
-              <Input
-                id="name"
-                value={data.name}
-                onChange={handleDataValue}
-                name="name"
-                className="col-span-3"
-                disabled={uploading || isSuccess}
-              />
-            </div>
-            {data.name.length < 6 && (
-              <p className="w-full text-center font-medium text-[12px] text-red-500">
-                The length of document name must be 6 characters long
-                with no special characters or numbers
-              </p>
-            )}
-
-            {/** DROP ZONE FILES**/}
-            <div className="p-2 bg-white rounded-xl">
-              <div>
-                {data.name.length >= 6 && (
-                  <UploadDropzone
-                    endpoint="pdfUploader"
-                    content={{
-                      allowedContent: "Maximum file size is 32mb",
-                    }}
-                    onUploadProgress={() => {
-                      setUploading(true);
-                    }}
-                    onClientUploadComplete={(res) => {
-                      // Do something with the response
-                      //console.log("File key: ", res[0].key);
-                      setUploading(false);
-                      mutate(
-                        {
-                          ...data,
-                          url: res[0].ufsUrl,
-                          file_key: res[0].key,
-                        },
-                        {
-                          onSuccess: (result) => {
-                            //result from the Response api
-                            toast.success("Successful");
-                            router.push(`/main/${result.data}`);
-                            console.log("result: ", result);
-                          },
-                          onError: (err) => {
-                            toast.error("Error " + err.message);
-                          },
-                        }
-                      );
-                    }}
-                    onUploadError={(error: Error) => {
-                      toast.error(`ERROR! ${error.message}`);
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-          <DialogFooter>
-            <p className="text-center w-full text-gray-400 font-medium text-[12px]">
-              Upload document (pdf) to proceed
-            </p>
-          </DialogFooter>
-        </form>
-      </DialogContent>
-    </Dialog>
-
-    {/**ARCHIVES LISTS */}
-    {session?.user ? (
-          <Archive />
-    ) : (
-      <p className="self-center mx-auto mt-[70px] text-[18px] font-normal text-[#A09EA8]">
-        Log in to continue
-      </p>
-    )}
-  </div>
-  )
+        onUploadProgress={() => {
+          setUploading(true);
+        }}
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          setUploading(false);
+          console.log("RES: ", res);
+          mutate(
+            {
+              url: res[0].ufsUrl,
+              file_key: res[0].key,
+            },
+            {
+              onSuccess: (result) => {
+                //result from the Response api
+                toast.success("Successful");
+                router.push(`/main/${result.data}`);
+                console.log("result: ", result);
+              },
+              onError: (err) => {
+                toast.error("Error " + err.message);
+              },
+            }
+          );
+        }}
+        onUploadError={(error: Error) => {
+          toast.error(`ERROR! ${error.message}`);
+        }}
+      />
+      {/**ARCHIVES LISTS */}
+      {session?.user ? (
+        <Archive />
+      ) : (
+        <p className="self-center mx-auto mt-[70px] text-[18px] font-normal text-[#A09EA8]">
+          Log in to continue
+        </p>
+      )}
+    </div>
+  );
 }

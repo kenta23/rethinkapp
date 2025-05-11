@@ -13,7 +13,6 @@ const config = new Configuration({
    apiKey: process.env.OPENAI_API_KEY_2,
  });
  
- const openai = new OpenAIApi(config); 
  
  export async function getEmbeddings(text: string) { //doc.pageContent
   try {

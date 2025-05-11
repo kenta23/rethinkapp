@@ -9,23 +9,28 @@ import { Input } from './ui/input';
 import { deleteProject, editProject } from '@/actions/projects';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { z } from 'zod';
+import { Form } from './ui/form';
 
 export default function AppSidebarForm ({ id }: { id: string }) {
     const queryClient = useQueryClient();
-    const pathname = usePathname();
-    const projectId = pathname.split('/').pop() || '';
+    const router = useRouter();
     const [name, setName] = useState("");
     const [error, setError] = useState<string | null>(null);
     const [open, setOpen] = useState(false);
 
     const validateName = z.string().min(1, { message: "Name is required" });
 
-    function handleDelete () {  
+    async function handleDelete () {  
         console.log("Deleted");
-        deleteProject(projectId);
+
+       await deleteProject(id).then(() => { 
+            toast.success('Project deleted successfully');
+            queryClient.invalidateQueries({ queryKey: ['chat-history'] });
+        }).catch((err) => toast.error(err.message || 'Failed to delete project'));
     }
+       
 
     const { mutate, data, isError, isSuccess} = useMutation({ 
          mutationFn: async (name: string) => {
@@ -35,24 +40,29 @@ export default function AppSidebarForm ({ id }: { id: string }) {
                 throw new Error(parsedName.error.message);
             }
             setError(null);
-            return editProject(parsedName.data, projectId);
-         },
-         onSuccess: () => { 
-            toast.success('Project updated successfully');
-            queryClient.invalidateQueries({ queryKey: ['chat-history'] });
-            setName("");
-            setOpen(false);
+            return editProject(parsedName.data, id);
          },
          onError: (error) => { 
             toast.error(error.message || 'Failed to update project');
          }
     });
 
-    console.log(name);
+
 
     function handleSubmit () {
         console.log("Submitted", name);
-        mutate(name);
+        mutate(name, { 
+             onError: (error) => { 
+                toast.error(error.message || 'Failed to update project');
+             },
+             onSuccess: () => { 
+                toast.success('Project updated successfully');
+                queryClient.invalidateQueries({ queryKey: ['chat-history'] });
+                setName("");
+                setOpen(false);
+                router.refresh();
+             },
+        });
     };
 
 
@@ -68,9 +78,9 @@ export default function AppSidebarForm ({ id }: { id: string }) {
 
             <DropdownMenuContent
                 sideOffset={10}
-                align="start"
-                side="left"
-                className="bg-gray-400 relative rounded-lg px-4 py-2"
+                align="center"
+                side="bottom"
+                className="bg-black/60 relative rounded-lg px-4 py-2"
             >
                 <AlertDialog open={open} onOpenChange={setOpen}>
                     <AlertDialogTrigger asChild>
@@ -91,7 +101,7 @@ export default function AppSidebarForm ({ id }: { id: string }) {
                             </AlertDialogDescription>
                         </AlertDialogHeader>
 
-                        <form onSubmit={handleSubmit}>
+                        <div onSubmit={handleSubmit}>
                             <Input
                                 className="bg-transparent text-white border border-gray-400"
                                 placeholder="name"
@@ -110,17 +120,47 @@ export default function AppSidebarForm ({ id }: { id: string }) {
                                 className="bg-gray-700 text-white hover:bg-gray-600">
                                     Cancel
                                 </AlertDialogCancel>
-                                <AlertDialogAction type="button" onClick={handleSubmit} className="bg-[#8E61EC] cursor-pointer text-white hover:bg-[#7d4fd9]">
+                                <AlertDialogAction type='button' onClick={handleSubmit} className="bg-[#8E61EC] cursor-pointer text-white hover:bg-[#7d4fd9]">
                                     Save Changes
                                 </AlertDialogAction>
                             </AlertDialogFooter>
-                        </form>
+                        </div>
                     </AlertDialogContent>
                 </AlertDialog>
 
-                <DropdownMenuItem onClick={handleDelete} className="cursor-pointer">
-                    <span>Delete Project</span>
-                </DropdownMenuItem>
+
+
+                  <AlertDialog>
+                       <AlertDialogTrigger asChild>
+                          <DropdownMenuItem 
+                            onSelect={(e) => e.preventDefault()}
+                            className="cursor-pointer"
+                          >
+                            <span>Delete Project</span>
+                          </DropdownMenuItem>
+                       </AlertDialogTrigger>
+                       <AlertDialogContent className="bg-[#252031] text-white border border-gray-700">
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>
+                                Delete Project
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="text-gray-400">
+                                Are you sure you want to delete this project?
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel className="bg-gray-700 cursor-pointer text-white hover:bg-gray-600">
+                                Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction 
+                                onClick={handleDelete} 
+                                className="bg-red-600 cursor-pointer text-white hover:bg-red-700"
+                            >
+                                Delete
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                       </AlertDialogContent>
+                  </AlertDialog>
             </DropdownMenuContent>
         </DropdownMenu>
     );

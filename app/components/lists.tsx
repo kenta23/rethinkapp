@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { deleteProject } from '@/actions/projects';
+import { truncateString } from '@/lib/utils';
 
 
 
@@ -63,7 +64,7 @@ export default function Lists({ data }: { data: savedDataDbType}) {
     >
       {/**DOCUMENT INFO */}
       <div>
-        <p className="font-medium text-black dark:text-white">{data.name}</p>
+        <p className="font-medium text-black dark:text-white">{truncateString(data.name, 15)}</p>
         <p className="font-light text-[14px] text-gray-500">
           {formatDate(data.updated_at.toString())}
         </p>

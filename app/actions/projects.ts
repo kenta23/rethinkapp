@@ -6,6 +6,9 @@ import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
 import prisma from "@/lib/prisma";
 import { z } from "zod";
+import { dataTagSymbol } from "@tanstack/query-core";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 
 {/**GETTING ALL THE DOCUMENTS */}
@@ -96,46 +99,61 @@ export async function changeName(formdata: FormData) {
 {/**DELETING DOCUMENT */}
 export async function deleteProject (id: string) {
    const pinecone = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
-   const index = pinecone.Index("rethink");
+   const index = pinecone.index("rethink-new");
+   
    const session = await auth();
-
 
    if(!session?.user) {
       return {
         message: "User not authenticated"
       };
-    }
+   }
 
    try {
       const data = await prisma.documents.delete({
          where: { id }
       });
 
-      if(data) {
+      if (data) {
          //DELETE FILE FROM UPLOADTHING
-         await utapi.deleteFiles(data?.file_key as string);
- 
-         //DELETE EMBEDDINGS FROM PINECONE
-        if(index.namespace(data?.file_key as string)) { 
-           const namespaceVector =  index.namespace(data?.file_key as string).listPaginated();
-           const hasVectors = (await namespaceVector).vectors;
+         const deleted = await utapi.deleteFiles([data?.file_key as string]);
+       
+         if (deleted.success) { 
+            console.log('Deleted file', deleted);
 
+            //DELETE EMBEDDINGS FROM PINECONE
+            try {
+               if (id) {
+                  const namespace = index.namespace(id);
+                  const namespaceVector = await namespace.listPaginated();
+               
+                  if (namespaceVector.vectors && namespaceVector.vectors.length > 0) {
+                     await namespace.deleteAll();
+                     console.log('Successfully deleted embeddings from Pinecone');
+                  }
+               }
+            } catch (pineconeError) {
+               console.log('Error deleting from Pinecone:', pineconeError);
+               // Continue with the process even if Pinecone deletion fails
+            }
+         
+            //go to the next document 
+            const nextDocument = await prisma.documents.findFirst({ 
+               where: { 
+                  user_id: session?.user.id
+               },
+               orderBy: { 
+                  updated_at: 'desc'
+               }
+            });
 
-           if(hasVectors) {
-             await index.namespace(data?.file_key as string).deleteAll(); //delete all vectors associated in one namespace
-             console.log('DELETED EMBEDDINGS');
-           }
-       } 
+            if (nextDocument) { 
+               redirect(`/main/${nextDocument.id}`);
+            }
+         }
       }
-
-      return {
-        message: `Successfully deleted ${data?.name}`
-      }
-
-   } catch (error) {
-      console.log('Error rendering data', error);
-      return {
-        message: `Something went error ${error}`
-      }
+   } catch (error) { 
+      console.error('Error deleting project:', error);
+      throw error;
    }
 }

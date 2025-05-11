@@ -16,6 +16,7 @@ import Image from 'next/image'
 import ChatMobile from './chatMobile'
 import '@/styles/main.css'
 import { changeName } from '@/actions/projects'
+import { truncateString } from '@/lib/utils'
 
 const menuVariants = {
   clicked: { opacity: 1, x: -6, },
@@ -190,7 +191,7 @@ export default function Main({ data }: { data: savedDataDbType}) {
         {/**CHAT BOX */}
         <div className="border-[#A782F5] border-l grow-3 w-1/4 h-full">
           <div className='w-full px-4 py-3 mt-2'>
-            <p className='text-black text-center dark:text-white font-medium text-md'>{data.name}</p>
+            <p className='text-black text-center dark:text-white font-medium text-md'>{truncateString(data.name, 40)}</p>
          </div>
           {/**CHAT COMPLETION  */}
           <Chats fileKey={data?.file_key} id={data?.id} />

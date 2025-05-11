@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getXataClient } from "../../../src/xata";
 import { z } from 'zod';
 import { auth } from "../../../auth";
 import { saveVectorToPinecone } from "@/lib/pinecone";
 import prisma from '../../lib/prisma';
 
 
-// const xata = getXataClient();
 
 const documentData = z.object({
    userId: z.string(),
@@ -16,7 +14,7 @@ const documentData = z.object({
 })
 
 //storing document to the database
-export async function POST(req: Request, res: Response) {
+export async function POST(req: Request) {
     const session = await auth();
 
     if(!session?.user) {
@@ -24,13 +22,15 @@ export async function POST(req: Request, res: Response) {
     }
      try
       {
-          const { name, url, file_key } = await req.json();
+          const { url, file_key } = await req.json();
+
+     
         
           documentData.safeParse({
            userId: session.user.id as string,
-           name: name,
-           url: url,
-           file_key: file_key
+           name: file_key,
+           url,
+           file_key
          })
            
 
@@ -38,11 +38,13 @@ export async function POST(req: Request, res: Response) {
         const result = await prisma.documents.create({
           data: {
             user_id: session.user.id as string,
-            name,
+            name: file_key,
             file_link: url,
-            file_key: file_key
+            file_key
           }
-        })
+        });
+
+        console.log("Document created", result);
 
          if (result.file_key && result.file_link) {
               const embeddedDocument = await saveVectorToPinecone(file_key); 

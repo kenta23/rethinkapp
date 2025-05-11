@@ -12,6 +12,9 @@ import { useSession } from 'next-auth/react';
 import { getAnswer, getSuggestionContext } from '@/actions/aigenerationtext';
 import QuestionsMadeByAI from './questionsMadeByAI';
 
+// Allow streaming responses up to 30 seconds
+export const maxDuration = 30;
+
 
 export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: string | null}): JSX.Element  {
     const session = useSession();
@@ -68,76 +71,33 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
    }, [messages, status]);
    
 
-//   useEffect(() => {
-//     async function getData() {
-//        const { text } = await getSuggestionContext(fileKey);
-//        const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
-//        setAiquestions(dividedQuestions);  
-//     }
-//      if(!chatdata?.length && !loading && !isFetching) {
-//        getData();
-//      }
-// }, [chatdata, loading, isFetching, fileKey]) 
+  useEffect(() => {
+    //Questions made by AI
+    //This will get the questions made by AI from the document if theres no chat initially
+    async function getData() {
+       const { text } = await getSuggestionContext(fileKey);
+       const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
+       setAiquestions(dividedQuestions);  
+
+       console.log("AI QUESTIONS: ", Aiquestions);
+    }
+
+     if(!chatdata?.length && !loading && !isFetching) {
+       getData();
+     }
+}, [chatdata, loading, isFetching, fileKey]) 
 
     return (
       <div className="h-full max-h-screen">
-        <div className="w-full h-[90%] justify-content-between items-center">
+        <div className="w-full py-3 h-full min-h-screen flex flex-col justify-end items-center">
           <div
             ref={messageContainer}
-            className={`w-full p-3 h-full flex flex-col overflow-y-auto`}
+            className={`w-full p-3 h-auto flex flex-col overflow-y-auto`}
           > 
-            <div className="flex self-end flex-col gap-4 w-full">
-              {/** CHAT STREAMING HERE */}
-             {/* @ts-ignore */}
-              {messages.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).map((m) => (
-                <div
-                  key={m.id}
-                  className={cn(
-                    "flex items-start",
-                    m.role === "user" ? "self-end" : ""
-                  )}
-                >
-                  {/** CHAT BOX */}
-                  <div
-                    className={`text-wrap mx-2 whitespace-normal break-words text-white w-fit p-2 rounded-md ${
-                      m.role === "assistant" ? "bg-[#8768a5]" : "bg-[#3970b8]"
-                    }`}
-                  >
-                    <div>
-                      <p className="text-sm md:text-[16px]">{m.content}</p>
-                      {/* <p>{m?.parts[0]?.type === 'tool-invocation' && m?.parts[0]?.toolInvocation?.toolName}</p> */}
-                    </div>
-                  </div>
-                  {m.role === "user" && (
-                    <Image
-                      src={session.data?.user.image || "/empty user.jpg"}
-                      alt="user avatar"
-                      width={500}
-                      height={500}
-                      className="rounded-full size-8 object-cover"
-                    />
-                  )}
-                </div>
-              ))}
+          {/**If there is no chat data, loading, and clicked is false, then show the questions made by AI */}
 
-              {status === 'submitted' && (
-                <div className="self-end text-start mx-2 my-1 text-sm left-0 flex items-start text-gray-400 w-full">
-                  Waiting for response.....
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/** CHAT INPUTS AND SUGGESTIONS */}
-          <div
-            className={`w-full ${
-              !chatdata?.length
-                ? "h-auto max-h-full md:max-h-[370px]"
-                : "h-auto"
-            } py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}
-          >
-            {/*!chatdata?.length && !loading && !clicked && (
-              <div className="h-auto justify-end  mx-auto w-full flex flex-col items-center gap-2">
+            {!chatdata?.length && !loading && !clicked ? (
+              <div className="h-auto justify-end mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI
                   fileKey={fileKey as string}
                   id={id as string}
@@ -147,11 +107,54 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                   setClicked={setClicked}
                 />
               </div>
-            )*/}
-            {/** USER INPUTS HERE */}
-            <form
+            ) :             
+          <div className="flex self-end flex-col gap-4 w-full">
+            {/** CHAT STREAMING HERE */}
+            {/* @ts-ignore */}
+             {messages.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).map((m) => (
+               <div
+                 key={m.id}
+                 className={cn(
+                   "flex items-start",
+                   m.role === "user" ? "self-end" : ""
+                 )}
+               >
+                 {/** CHAT BOX */}
+                 <div
+                   className={`text-wrap mx-2 whitespace-normal break-words text-white w-fit p-2 rounded-md ${
+                     m.role === "assistant" ? "bg-[#8768a5]" : "bg-[#3970b8]"
+                   }`}
+                 >
+                   <div>
+                     <p className="text-sm md:text-[16px]">{m.content}</p>
+                     {/* <p>{m?.parts[0]?.type === 'tool-invocation' && m?.parts[0]?.toolInvocation?.toolName}</p> */}
+                   </div>
+                 </div>
+                 {m.role === "user" && (
+                   <Image
+                     src={session.data?.user.image || "/empty user.jpg"}
+                     alt="user avatar"
+                     width={500}
+                     height={500}
+                     className="rounded-full size-8 object-cover"
+                   />
+                 )}
+               </div>
+             ))}
+
+             {status === 'submitted' && (
+               <div className="text-start mx-1 my-1 text-sm left-0 flex items-start text-gray-400 w-full">
+                 Waiting for response.....
+               </div>
+             )}
+           </div>}
+        </div>
+
+
+          {/** USER INPUTS HERE */}
+          <form
               onSubmit={handleSubmit}
-              className="flex align-self-end items-center justify-center w-full gap-1 px-2"
+              className="flex items-center justify-center w-full gap-1 px-2"
             >
               <input
                 onChange={handleInputChange}
@@ -171,7 +174,29 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 <Send color="#ffff" size={32} className="" />
               </button>
             </form>
-          </div>
+
+          {/** CHAT INPUTS AND SUGGESTIONS */}
+          {/* <div
+            className={`w-full ${
+              !chatdata?.length
+                ? "h-auto max-h-full md:max-h-[370px]"
+                : "h-auto"
+            } py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}
+          >
+            {!chatdata?.length && !loading && !clicked && (
+              <div className="h-auto justify-end  mx-auto w-full flex flex-col items-center gap-2">
+                <QuestionsMadeByAI
+                  fileKey={fileKey as string}
+                  id={id as string}
+                  append={append}
+                  handleSubmit={handleSubmit}
+                  Aiquestions={Aiquestions}
+                  setClicked={setClicked}
+                />
+              </div>
+            )}
+            
+          </div> */}
         </div>
       </div>
     );

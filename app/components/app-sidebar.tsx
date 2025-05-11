@@ -22,25 +22,14 @@ import { User2 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import Link from "next/link";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import AppSidebarForm from "./app-sidebar-form";
-
+import { usePathname } from "next/navigation";
+import { truncateString } from "@/lib/utils";
 
 
 export function AppSidebar() {
     const session = useSession();
+    const pathname = usePathname();
 
     const { data: chatHistory, isSuccess, isFetching, isError } = useQuery({ 
          queryFn: async () => axios.get('/api/projects'),
@@ -77,15 +66,16 @@ export function AppSidebar() {
               chatHistory?.data.map((chat: any) => (
                 <SidebarMenuItem
                   key={chat.id}
-                  className="px-3 py-2 rounded-xl bg-white/10 backdrop-blur-sm w-full flex justify-between items-center"
+                  className={`px-3 py-2 rounded-xl bg-white/10 ${pathname === `/main/${chat.id}` && "bg-white/5"} backdrop-blur-sm w-full flex justify-between items-center`}
                 >
-                  <SidebarMenuButton asChild>
+                  <Link className="cursor-pointer w-full" href={`/main/${chat.id}`}>
+                    <SidebarMenuButton asChild>
                     <div className="flex flex-row gap-1 items-center">
                       <MessageCircleMore />
-                      <p className="text-sm">{chat.name}</p>
+                      <p className="text-sm">{truncateString(chat.name, 15)}</p>
                     </div>
-                  </SidebarMenuButton>
-
+                    </SidebarMenuButton>
+                  </Link>
                   <AppSidebarForm id={chat.id} />
                 </SidebarMenuItem>
               ))

@@ -23,25 +23,11 @@ export default function QuestionsMadeByAI({
   Aiquestions: string[];
   id: string;
 }) {
-
-  const router = useRouter();
-  const [questionPicked, setQuestionPicked] = useState<string>("");
-  const queryClient = new QueryClient();
-  const { mutateAsync, isPending, isError } = useMutation({
-    mutationFn: async (data: any) => await axios.post("/api/chat", data),
-  });
-
+  console.log('Aiquestions', Aiquestions);
 
   return (
     <div>
-      {isPending && (
-        <div className="self-end text-end text-sm flex items-end py-2 px-3 text-gray-400 w-full">
-          <span>Waiting for response.....</span>
-        </div>
-      )}
-      <p>{questionPicked}</p>
-
-        <ul className="text-start text-sm flex gap-3 flex-col w-fit px-4 py-3 mb-2">
+        <ul className="text-start text-sm flex gap-3 flex-col w-full px-4 py-3 mb-2">
           {Aiquestions.map(
             (question, index) =>
               index < 3 && (
@@ -62,7 +48,7 @@ export default function QuestionsMadeByAI({
 
                       setClicked(true);
                     }}
-                    className="flex gap-2 items-center w-auto"
+                    className="flex gap-2 cursor-pointer items-center w-auto"
                   >
                     <div className="size-5">
                       <SendHorizontal size={20} className="text-[#4181A2]" />

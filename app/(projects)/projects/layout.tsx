@@ -13,7 +13,7 @@ export default function DashboardLayout({
     children: React.ReactNode
   }) {
     return (
-      <section className='bg-white dark:bg-[#0e0c0f]'>
+      <section className='bg-white h-screen min-h-full dark:bg-[#0e0c0f]'>
         {/* Include shared UI here e.g. a header or sidebar */}
         {children}
       </section>
