@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { CreateMessage, } from 'ai/react'
-import { SendHorizontal } from 'lucide-react';
+import { Lightbulb, SendHorizontal } from 'lucide-react';
 import axios from 'axios';
 import { QueryClient, useMutation } from '@tanstack/react-query';
 import { Message } from 'ai/react';
@@ -34,7 +34,7 @@ export default function QuestionsMadeByAI({
                 <form
                   onSubmit={handleSubmit}
                   key={index}
-                  className="p-2 flex gap-2 items-center cursor-pointer shadow-sm text-[#40545e] 
+                  className="p-2 flex gap-2 items-center justify-center cursor-pointer shadow-sm text-[#40545e] 
                          rounded-lg bg-white hover:bg-gray-100 "
                 >
                   <button
@@ -48,12 +48,12 @@ export default function QuestionsMadeByAI({
 
                       setClicked(true);
                     }}
-                    className="flex gap-2 cursor-pointer items-center w-auto"
+                    className="flex gap- cursor-pointer items-center w-auto"
                   >
                     <div className="size-5">
-                      <SendHorizontal size={20} className="text-[#4181A2]" />
+                      <Lightbulb size={18} className="text-[#4181A2]" />
                     </div>
-                    <span className="text-wrap text-[12px] md:text-sm">{question}</span>
+                    <span className="text-wrap text-center text-xs md:text-sm">{question}</span>
                   </button>
                 </form>
               )

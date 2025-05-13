@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
 import {
@@ -11,15 +13,27 @@ import {
     AlertDialogTrigger,
   } from "./ui/alert-dialog";
 import Avatar from './Avatar';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { LogOut, Menu, Settings } from 'lucide-react';
 import { Button } from './ui/button';
 import { LinkButton } from './Navbar';
 import { Session } from 'next-auth';
+import { useQueryClient } from '@tanstack/react-query';
 
 
   
 export default function UserPopover({ data }: { data: Session | null}) {
+
+  const session = useSession();
+  const queryClient = useQueryClient();
+
+  async function handleLogout() { 
+     await signOut();
+
+     if (session.status === 'unauthenticated') { 
+        queryClient.invalidateQueries({ queryKey: ['projects'] });
+     }
+  }
   return (
     <Popover>
         <PopoverTrigger>
@@ -65,9 +79,7 @@ export default function UserPopover({ data }: { data: Session | null}) {
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction
-                    onClick={() => {
-                      signOut();
-                    }}
+                    onClick={handleLogout}
                   >
                     Continue
                   </AlertDialogAction>

@@ -37,7 +37,7 @@ Todolist to improve system ui and performance:
  Redesigned project:
  ✔ update packages @done(25-05-07 22:51)
  ✔ change database and embeddings @done(25-05-06 22:20)
- ☐ add new features to the project 
+ ✔ add new features to the project @done(25-05-11 22:01)
 
 
  Todo for tomorrow May 07, 2025:
@@ -46,10 +46,17 @@ Todolist to improve system ui and performance:
  May 08, 2025: 
   ✔ change ui of main page @done(25-05-10 21:30)
   ☐ create a feature that allows user to use chat for one time as guest without need to sign in.
-  ☐ saving chat history limited for the authenticated users.
+  ✔ saving chat history limited for the authenticated users. @done(25-05-13 21:53)
 
  May 10, 2025:
-  ☐ fix pinecone data deletion
+  ✔ fix pinecone data deletion @done(25-05-11 22:01)
+
+ May 12, 2025:
+  ☐ add cron jobs for deleting temporary data
+  ✔ use cookies for guest user @done(25-05-13 21:53)
+  ☐ Fix login page UI
+  
+
 
 
   

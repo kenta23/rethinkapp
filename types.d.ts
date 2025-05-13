@@ -11,7 +11,7 @@ export type savedDataDbType = {
   user_id: string;
   created_at: Date;
   updated_at: Date;
-}; 
+}[] | null; 
 
 
 declare module "next-auth" {

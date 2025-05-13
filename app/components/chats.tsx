@@ -11,15 +11,17 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { getAnswer, getSuggestionContext } from '@/actions/aigenerationtext';
 import QuestionsMadeByAI from './questionsMadeByAI';
+import { getUserGuestSession } from '@/lib/getSession';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 
-export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: string | null}): JSX.Element  {
+export default function Chats ({ fileKey, id }: { fileKey: string | null, id: string | null}) {
     const session = useSession();
     const [Aiquestions, setAiquestions] = useState<string[]>([]);
     const userId = session.data?.user.id;
+    
     const messageContainer = useRef<HTMLDivElement>(null);
     const [clicked, setClicked] = useState<boolean>(false);
 
@@ -54,10 +56,6 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
     })
     
 
-    // console.log('MESSAGE PARTS', messages.map(m => m.parts.map(p => p.type === 'tool-invocation')));
-    // console.log('tool result', messages.map(m => m.parts.map(p => p.type === 'tool-invocation' && p.toolInvocation?.state === 'result')));
-
-    console.log('MESSAGES', messages);
 
    useEffect(() => {
     if (messageContainer.current) {
@@ -79,7 +77,6 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
        const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
        setAiquestions(dividedQuestions);  
 
-       console.log("AI QUESTIONS: ", Aiquestions);
     }
 
      if(!chatdata?.length && !loading && !isFetching) {
@@ -136,6 +133,7 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                      alt="user avatar"
                      width={500}
                      height={500}
+                     priority
                      className="rounded-full size-8 object-cover"
                    />
                  )}
@@ -174,29 +172,6 @@ export default  function Chats ({ fileKey, id }: { fileKey: string | null, id: s
                 <Send color="#ffff" size={32} className="" />
               </button>
             </form>
-
-          {/** CHAT INPUTS AND SUGGESTIONS */}
-          {/* <div
-            className={`w-full ${
-              !chatdata?.length
-                ? "h-auto max-h-full md:max-h-[370px]"
-                : "h-auto"
-            } py-2 items-end mb-0 lg:mb-10 flex flex-col justify-end `}
-          >
-            {!chatdata?.length && !loading && !clicked && (
-              <div className="h-auto justify-end  mx-auto w-full flex flex-col items-center gap-2">
-                <QuestionsMadeByAI
-                  fileKey={fileKey as string}
-                  id={id as string}
-                  append={append}
-                  handleSubmit={handleSubmit}
-                  Aiquestions={Aiquestions}
-                  setClicked={setClicked}
-                />
-              </div>
-            )}
-            
-          </div> */}
         </div>
       </div>
     );

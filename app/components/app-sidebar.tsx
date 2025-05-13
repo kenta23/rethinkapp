@@ -59,7 +59,7 @@ export function AppSidebar() {
 
         <SidebarContent hidden={state === "collapsed"} className="px-4 py-2">
           {/**RENDER CHAT HISTORY HERE */}
-          <SidebarMenu className="flex overflow-x-hidden relative flex-col h-auto w-full gap-3 items-start">
+          <SidebarMenu className="flex overflow-x-hidden scroll relative flex-col h-auto w-full gap-3 items-start">
             {isFetching ? (
               <p>Loading...</p>
             ) : (
@@ -87,13 +87,13 @@ export function AppSidebar() {
           <div className="flex flex-row justify-start items-center gap-2">
             <Image
               className="border-[#8E61EC] border-2 rounded-full"
-              src={session.data?.user?.image || ""}
+              src={session.data?.user?.image || "/empty user.jpg"}
               alt="rethink logo"
               width={40}
               height={110}
               objectFit="cover"
             />
-            <p className="text-sm">{session.data?.user?.name}</p>
+            <p className="text-sm">{session.data?.user?.name || "Anonymous"}</p>
           </div>
 
           <Link href={"/projects"} className="">

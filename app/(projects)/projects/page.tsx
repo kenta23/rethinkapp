@@ -17,7 +17,7 @@ export default function Projects() {
 
  
   return (
-    <div className="px-5 md:px-[55px] w-full min-h-full py-4 md:py-[24px]">
+    <div className="px-5 md:px-[55px] w-full h-screen min-h-full max-h-auto py-4 md:py-[24px]">
       <nav className="flex justify-between px-2 md:px-8 items-center">
         <Link href={"/"}>
           <Image width={35} height={35} src={"/Logo.png"} alt={"Logo"} />
@@ -46,17 +46,17 @@ export default function Projects() {
 
       {/**ARCHIVES */}
       <div
-        className="border-gray-20 
-               max-w-3/4 shadow-lg border-[1px] rounded-md relative w-full mt-[30px] 
-               h-full min-h-[500px] max-h-auto md:mt-[50px] mx-auto"
+        className="border-gray-20
+               max-w-3/4 shadow-lg relative border-[1px] rounded-md  w-full mt-[30px] 
+               h-svh max-h-auto md:mt-[50px] mx-auto"
       >
         <div className="flex w-auto mt-[30px] mx-[10px] p-2 md:p-6 gap-4 items-start flex-col">
-          <h3 className="self-center text-xs sm:text-sm md:text-2xl text-[#4a4952] dark:text-gray-200">
+          <h2 className="self-center text-xs sm:text-sm md:text-2xl text-[#4a4952] dark:text-gray-200">
             Your Projects
-          </h3>
+          </h2>
 
           {/**ARCHIVES */}
-          <div className="w-full h-auto ">
+          <div className="w-full h-auto">
             <AddProjectDialog session={session.data} />
           </div>
         </div>

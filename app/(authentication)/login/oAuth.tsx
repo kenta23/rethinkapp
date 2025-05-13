@@ -2,19 +2,25 @@ import { Button } from '@/components/ui/button'
 import React from 'react'
 import Image from 'next/image'
 import { signIn } from '../../../auth';
-
+import Form from 'next/form';
+import { cookies } from 'next/headers';
+import prisma from '@/lib/prisma';
 
 export default function OAuth() {
+
+   async function handleSubmit(formdata: FormData) { 
+      "use server"
+     const provider = formdata.get('provider');
+     await signIn(provider as string);
+   }
      
   return (
     <div className='mt-[35px] space-y-4' >
-      <form action={async () => {
-         "use server"
-         await signIn("google")
-      }}>
+      <Form action={handleSubmit}>
         <Button
           id='google'
-          name='google'
+          name='provider'
+          value='google'
           className="w-full h-[45px] text-black bg-purple-50 hover:bg-gray-500 hover:text-white  border-gray-600 shadow-sm "
           type="submit"
           aria-placeholder="Log in"
@@ -27,16 +33,11 @@ export default function OAuth() {
           />
           <span className='ms-6 text-[15px] font-medium'>Continue with Google</span>
         </Button>  
-      </form>
 
-    {/* <form action={async () => {
-         "use server"
-         
-         await signIn("github");
-      }}>
         <Button
           id='github'
-          name='github'
+          name='provider'
+          value='github'
           className="w-full h-[45px] text-black bg-purple-50 hover:text-white hover:bg-gray-500  border-gray-600 shadow-sm "
           type="submit"
           aria-placeholder="Log in"
@@ -49,7 +50,7 @@ export default function OAuth() {
           />
           <span className='ms-6 text-[15px] font-medium'>Continue with Github</span>
         </Button> 
-    </form> */}
+      </Form>
     </div>
   );
 }

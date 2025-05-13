@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model Credentials
+ * Model GuestUser
  * 
  */
-export type Credentials = $Result.DefaultSelection<Prisma.$CredentialsPayload>
+export type GuestUser = $Result.DefaultSelection<Prisma.$GuestUserPayload>
 /**
  * Model chats
  * 
@@ -56,8 +56,8 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Credentials
- * const credentials = await prisma.credentials.findMany()
+ * // Fetch zero or more GuestUsers
+ * const guestUsers = await prisma.guestUser.findMany()
  * ```
  *
  *
@@ -77,8 +77,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Credentials
-   * const credentials = await prisma.credentials.findMany()
+   * // Fetch zero or more GuestUsers
+   * const guestUsers = await prisma.guestUser.findMany()
    * ```
    *
    *
@@ -175,14 +175,14 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.credentials`: Exposes CRUD operations for the **Credentials** model.
+   * `prisma.guestUser`: Exposes CRUD operations for the **GuestUser** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Credentials
-    * const credentials = await prisma.credentials.findMany()
+    * // Fetch zero or more GuestUsers
+    * const guestUsers = await prisma.guestUser.findMany()
     * ```
     */
-  get credentials(): Prisma.CredentialsDelegate<ExtArgs, ClientOptions>;
+  get guestUser(): Prisma.GuestUserDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.chats`: Exposes CRUD operations for the **chats** model.
@@ -683,7 +683,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    Credentials: 'Credentials',
+    GuestUser: 'GuestUser',
     chats: 'chats',
     documents: 'documents',
     Account: 'Account',
@@ -708,81 +708,81 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "credentials" | "chats" | "documents" | "account" | "session" | "user" | "verificationToken"
+      modelProps: "guestUser" | "chats" | "documents" | "account" | "session" | "user" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      Credentials: {
-        payload: Prisma.$CredentialsPayload<ExtArgs>
-        fields: Prisma.CredentialsFieldRefs
+      GuestUser: {
+        payload: Prisma.$GuestUserPayload<ExtArgs>
+        fields: Prisma.GuestUserFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.CredentialsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload> | null
+            args: Prisma.GuestUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.CredentialsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>
+            args: Prisma.GuestUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>
           }
           findFirst: {
-            args: Prisma.CredentialsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload> | null
+            args: Prisma.GuestUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.CredentialsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>
+            args: Prisma.GuestUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>
           }
           findMany: {
-            args: Prisma.CredentialsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>[]
+            args: Prisma.GuestUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>[]
           }
           create: {
-            args: Prisma.CredentialsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>
+            args: Prisma.GuestUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>
           }
           createMany: {
-            args: Prisma.CredentialsCreateManyArgs<ExtArgs>
+            args: Prisma.GuestUserCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.CredentialsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>[]
+            args: Prisma.GuestUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>[]
           }
           delete: {
-            args: Prisma.CredentialsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>
+            args: Prisma.GuestUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>
           }
           update: {
-            args: Prisma.CredentialsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>
+            args: Prisma.GuestUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>
           }
           deleteMany: {
-            args: Prisma.CredentialsDeleteManyArgs<ExtArgs>
+            args: Prisma.GuestUserDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.CredentialsUpdateManyArgs<ExtArgs>
+            args: Prisma.GuestUserUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.CredentialsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>[]
+            args: Prisma.GuestUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>[]
           }
           upsert: {
-            args: Prisma.CredentialsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$CredentialsPayload>
+            args: Prisma.GuestUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GuestUserPayload>
           }
           aggregate: {
-            args: Prisma.CredentialsAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateCredentials>
+            args: Prisma.GuestUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGuestUser>
           }
           groupBy: {
-            args: Prisma.CredentialsGroupByArgs<ExtArgs>
-            result: $Utils.Optional<CredentialsGroupByOutputType>[]
+            args: Prisma.GuestUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GuestUserGroupByOutputType>[]
           }
           count: {
-            args: Prisma.CredentialsCountArgs<ExtArgs>
-            result: $Utils.Optional<CredentialsCountAggregateOutputType> | number
+            args: Prisma.GuestUserCountArgs<ExtArgs>
+            result: $Utils.Optional<GuestUserCountAggregateOutputType> | number
           }
         }
       }
@@ -1314,7 +1314,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
-    credentials?: CredentialsOmit
+    guestUser?: GuestUserOmit
     chats?: chatsOmit
     documents?: documentsOmit
     account?: AccountOmit
@@ -1411,17 +1411,81 @@ export namespace Prisma {
 
 
   /**
+   * Count Type GuestUserCountOutputType
+   */
+
+  export type GuestUserCountOutputType = {
+    documents: number
+  }
+
+  export type GuestUserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | GuestUserCountOutputTypeCountDocumentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GuestUserCountOutputType without action
+   */
+  export type GuestUserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GuestUserCountOutputType
+     */
+    select?: GuestUserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GuestUserCountOutputType without action
+   */
+  export type GuestUserCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: documentsWhereInput
+  }
+
+
+  /**
+   * Count Type DocumentsCountOutputType
+   */
+
+  export type DocumentsCountOutputType = {
+    chats: number
+  }
+
+  export type DocumentsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chats?: boolean | DocumentsCountOutputTypeCountChatsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DocumentsCountOutputType without action
+   */
+  export type DocumentsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentsCountOutputType
+     */
+    select?: DocumentsCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DocumentsCountOutputType without action
+   */
+  export type DocumentsCountOutputTypeCountChatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: chatsWhereInput
+  }
+
+
+  /**
    * Count Type UserCountOutputType
    */
 
   export type UserCountOutputType = {
     accounts: number
     sessions: number
+    documents: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+    documents?: boolean | UserCountOutputTypeCountDocumentsArgs
   }
 
   // Custom InputTypes
@@ -1449,390 +1513,347 @@ export namespace Prisma {
     where?: SessionWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountDocumentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: documentsWhereInput
+  }
+
 
   /**
    * Models
    */
 
   /**
-   * Model Credentials
+   * Model GuestUser
    */
 
-  export type AggregateCredentials = {
-    _count: CredentialsCountAggregateOutputType | null
-    _min: CredentialsMinAggregateOutputType | null
-    _max: CredentialsMaxAggregateOutputType | null
+  export type AggregateGuestUser = {
+    _count: GuestUserCountAggregateOutputType | null
+    _min: GuestUserMinAggregateOutputType | null
+    _max: GuestUserMaxAggregateOutputType | null
   }
 
-  export type CredentialsMinAggregateOutputType = {
+  export type GuestUserMinAggregateOutputType = {
     id: string | null
-    password: string | null
-    username: string | null
-    secretcode: string | null
-    name: string | null
-    image: string | null
-    fileKey: string | null
-    created_at: Date | null
-    updated_at: Date | null
+    cookieId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type CredentialsMaxAggregateOutputType = {
+  export type GuestUserMaxAggregateOutputType = {
     id: string | null
-    password: string | null
-    username: string | null
-    secretcode: string | null
-    name: string | null
-    image: string | null
-    fileKey: string | null
-    created_at: Date | null
-    updated_at: Date | null
+    cookieId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
-  export type CredentialsCountAggregateOutputType = {
+  export type GuestUserCountAggregateOutputType = {
     id: number
-    password: number
-    username: number
-    secretcode: number
-    name: number
-    image: number
-    fileKey: number
-    created_at: number
-    updated_at: number
+    cookieId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type CredentialsMinAggregateInputType = {
+  export type GuestUserMinAggregateInputType = {
     id?: true
-    password?: true
-    username?: true
-    secretcode?: true
-    name?: true
-    image?: true
-    fileKey?: true
-    created_at?: true
-    updated_at?: true
+    cookieId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type CredentialsMaxAggregateInputType = {
+  export type GuestUserMaxAggregateInputType = {
     id?: true
-    password?: true
-    username?: true
-    secretcode?: true
-    name?: true
-    image?: true
-    fileKey?: true
-    created_at?: true
-    updated_at?: true
+    cookieId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
-  export type CredentialsCountAggregateInputType = {
+  export type GuestUserCountAggregateInputType = {
     id?: true
-    password?: true
-    username?: true
-    secretcode?: true
-    name?: true
-    image?: true
-    fileKey?: true
-    created_at?: true
-    updated_at?: true
+    cookieId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
-  export type CredentialsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Credentials to aggregate.
+     * Filter which GuestUser to aggregate.
      */
-    where?: CredentialsWhereInput
+    where?: GuestUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Credentials to fetch.
+     * Determine the order of GuestUsers to fetch.
      */
-    orderBy?: CredentialsOrderByWithRelationInput | CredentialsOrderByWithRelationInput[]
+    orderBy?: GuestUserOrderByWithRelationInput | GuestUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: CredentialsWhereUniqueInput
+    cursor?: GuestUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Credentials from the position of the cursor.
+     * Take `±n` GuestUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Credentials.
+     * Skip the first `n` GuestUsers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Credentials
+     * Count returned GuestUsers
     **/
-    _count?: true | CredentialsCountAggregateInputType
+    _count?: true | GuestUserCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: CredentialsMinAggregateInputType
+    _min?: GuestUserMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: CredentialsMaxAggregateInputType
+    _max?: GuestUserMaxAggregateInputType
   }
 
-  export type GetCredentialsAggregateType<T extends CredentialsAggregateArgs> = {
-        [P in keyof T & keyof AggregateCredentials]: P extends '_count' | 'count'
+  export type GetGuestUserAggregateType<T extends GuestUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateGuestUser]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateCredentials[P]>
-      : GetScalarType<T[P], AggregateCredentials[P]>
+        : GetScalarType<T[P], AggregateGuestUser[P]>
+      : GetScalarType<T[P], AggregateGuestUser[P]>
   }
 
 
 
 
-  export type CredentialsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CredentialsWhereInput
-    orderBy?: CredentialsOrderByWithAggregationInput | CredentialsOrderByWithAggregationInput[]
-    by: CredentialsScalarFieldEnum[] | CredentialsScalarFieldEnum
-    having?: CredentialsScalarWhereWithAggregatesInput
+  export type GuestUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GuestUserWhereInput
+    orderBy?: GuestUserOrderByWithAggregationInput | GuestUserOrderByWithAggregationInput[]
+    by: GuestUserScalarFieldEnum[] | GuestUserScalarFieldEnum
+    having?: GuestUserScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: CredentialsCountAggregateInputType | true
-    _min?: CredentialsMinAggregateInputType
-    _max?: CredentialsMaxAggregateInputType
+    _count?: GuestUserCountAggregateInputType | true
+    _min?: GuestUserMinAggregateInputType
+    _max?: GuestUserMaxAggregateInputType
   }
 
-  export type CredentialsGroupByOutputType = {
+  export type GuestUserGroupByOutputType = {
     id: string
-    password: string | null
-    username: string | null
-    secretcode: string | null
-    name: string | null
-    image: string | null
-    fileKey: string | null
-    created_at: Date
-    updated_at: Date
-    _count: CredentialsCountAggregateOutputType | null
-    _min: CredentialsMinAggregateOutputType | null
-    _max: CredentialsMaxAggregateOutputType | null
+    cookieId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: GuestUserCountAggregateOutputType | null
+    _min: GuestUserMinAggregateOutputType | null
+    _max: GuestUserMaxAggregateOutputType | null
   }
 
-  type GetCredentialsGroupByPayload<T extends CredentialsGroupByArgs> = Prisma.PrismaPromise<
+  type GetGuestUserGroupByPayload<T extends GuestUserGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<CredentialsGroupByOutputType, T['by']> &
+      PickEnumerable<GuestUserGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof CredentialsGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof GuestUserGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], CredentialsGroupByOutputType[P]>
-            : GetScalarType<T[P], CredentialsGroupByOutputType[P]>
+              : GetScalarType<T[P], GuestUserGroupByOutputType[P]>
+            : GetScalarType<T[P], GuestUserGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type CredentialsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GuestUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    password?: boolean
-    username?: boolean
-    secretcode?: boolean
-    name?: boolean
-    image?: boolean
-    fileKey?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["credentials"]>
+    cookieId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    documents?: boolean | GuestUser$documentsArgs<ExtArgs>
+    _count?: boolean | GuestUserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["guestUser"]>
 
-  export type CredentialsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GuestUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    password?: boolean
-    username?: boolean
-    secretcode?: boolean
-    name?: boolean
-    image?: boolean
-    fileKey?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["credentials"]>
+    cookieId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["guestUser"]>
 
-  export type CredentialsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GuestUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    password?: boolean
-    username?: boolean
-    secretcode?: boolean
-    name?: boolean
-    image?: boolean
-    fileKey?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["credentials"]>
+    cookieId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["guestUser"]>
 
-  export type CredentialsSelectScalar = {
+  export type GuestUserSelectScalar = {
     id?: boolean
-    password?: boolean
-    username?: boolean
-    secretcode?: boolean
-    name?: boolean
-    image?: boolean
-    fileKey?: boolean
-    created_at?: boolean
-    updated_at?: boolean
+    cookieId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CredentialsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "password" | "username" | "secretcode" | "name" | "image" | "fileKey" | "created_at" | "updated_at", ExtArgs["result"]["credentials"]>
+  export type GuestUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cookieId" | "createdAt" | "updatedAt", ExtArgs["result"]["guestUser"]>
+  export type GuestUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documents?: boolean | GuestUser$documentsArgs<ExtArgs>
+    _count?: boolean | GuestUserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GuestUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GuestUserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $CredentialsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Credentials"
-    objects: {}
+  export type $GuestUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GuestUser"
+    objects: {
+      documents: Prisma.$documentsPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      password: string | null
-      username: string | null
-      secretcode: string | null
-      name: string | null
-      image: string | null
-      fileKey: string | null
-      created_at: Date
-      updated_at: Date
-    }, ExtArgs["result"]["credentials"]>
+      cookieId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["guestUser"]>
     composites: {}
   }
 
-  type CredentialsGetPayload<S extends boolean | null | undefined | CredentialsDefaultArgs> = $Result.GetResult<Prisma.$CredentialsPayload, S>
+  type GuestUserGetPayload<S extends boolean | null | undefined | GuestUserDefaultArgs> = $Result.GetResult<Prisma.$GuestUserPayload, S>
 
-  type CredentialsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<CredentialsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: CredentialsCountAggregateInputType | true
+  type GuestUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GuestUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GuestUserCountAggregateInputType | true
     }
 
-  export interface CredentialsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Credentials'], meta: { name: 'Credentials' } }
+  export interface GuestUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GuestUser'], meta: { name: 'GuestUser' } }
     /**
-     * Find zero or one Credentials that matches the filter.
-     * @param {CredentialsFindUniqueArgs} args - Arguments to find a Credentials
+     * Find zero or one GuestUser that matches the filter.
+     * @param {GuestUserFindUniqueArgs} args - Arguments to find a GuestUser
      * @example
-     * // Get one Credentials
-     * const credentials = await prisma.credentials.findUnique({
+     * // Get one GuestUser
+     * const guestUser = await prisma.guestUser.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends CredentialsFindUniqueArgs>(args: SelectSubset<T, CredentialsFindUniqueArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends GuestUserFindUniqueArgs>(args: SelectSubset<T, GuestUserFindUniqueArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one Credentials that matches the filter or throw an error with `error.code='P2025'`
+     * Find one GuestUser that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {CredentialsFindUniqueOrThrowArgs} args - Arguments to find a Credentials
+     * @param {GuestUserFindUniqueOrThrowArgs} args - Arguments to find a GuestUser
      * @example
-     * // Get one Credentials
-     * const credentials = await prisma.credentials.findUniqueOrThrow({
+     * // Get one GuestUser
+     * const guestUser = await prisma.guestUser.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CredentialsFindUniqueOrThrowArgs>(args: SelectSubset<T, CredentialsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends GuestUserFindUniqueOrThrowArgs>(args: SelectSubset<T, GuestUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Credentials that matches the filter.
+     * Find the first GuestUser that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsFindFirstArgs} args - Arguments to find a Credentials
+     * @param {GuestUserFindFirstArgs} args - Arguments to find a GuestUser
      * @example
-     * // Get one Credentials
-     * const credentials = await prisma.credentials.findFirst({
+     * // Get one GuestUser
+     * const guestUser = await prisma.guestUser.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends CredentialsFindFirstArgs>(args?: SelectSubset<T, CredentialsFindFirstArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends GuestUserFindFirstArgs>(args?: SelectSubset<T, GuestUserFindFirstArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first Credentials that matches the filter or
+     * Find the first GuestUser that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsFindFirstOrThrowArgs} args - Arguments to find a Credentials
+     * @param {GuestUserFindFirstOrThrowArgs} args - Arguments to find a GuestUser
      * @example
-     * // Get one Credentials
-     * const credentials = await prisma.credentials.findFirstOrThrow({
+     * // Get one GuestUser
+     * const guestUser = await prisma.guestUser.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends CredentialsFindFirstOrThrowArgs>(args?: SelectSubset<T, CredentialsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends GuestUserFindFirstOrThrowArgs>(args?: SelectSubset<T, GuestUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more Credentials that matches the filter.
+     * Find zero or more GuestUsers that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {GuestUserFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Credentials
-     * const credentials = await prisma.credentials.findMany()
+     * // Get all GuestUsers
+     * const guestUsers = await prisma.guestUser.findMany()
      * 
-     * // Get first 10 Credentials
-     * const credentials = await prisma.credentials.findMany({ take: 10 })
+     * // Get first 10 GuestUsers
+     * const guestUsers = await prisma.guestUser.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const credentialsWithIdOnly = await prisma.credentials.findMany({ select: { id: true } })
+     * const guestUserWithIdOnly = await prisma.guestUser.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CredentialsFindManyArgs>(args?: SelectSubset<T, CredentialsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends GuestUserFindManyArgs>(args?: SelectSubset<T, GuestUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a Credentials.
-     * @param {CredentialsCreateArgs} args - Arguments to create a Credentials.
+     * Create a GuestUser.
+     * @param {GuestUserCreateArgs} args - Arguments to create a GuestUser.
      * @example
-     * // Create one Credentials
-     * const Credentials = await prisma.credentials.create({
+     * // Create one GuestUser
+     * const GuestUser = await prisma.guestUser.create({
      *   data: {
-     *     // ... data to create a Credentials
+     *     // ... data to create a GuestUser
      *   }
      * })
      * 
      */
-    create<T extends CredentialsCreateArgs>(args: SelectSubset<T, CredentialsCreateArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends GuestUserCreateArgs>(args: SelectSubset<T, GuestUserCreateArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many Credentials.
-     * @param {CredentialsCreateManyArgs} args - Arguments to create many Credentials.
+     * Create many GuestUsers.
+     * @param {GuestUserCreateManyArgs} args - Arguments to create many GuestUsers.
      * @example
-     * // Create many Credentials
-     * const credentials = await prisma.credentials.createMany({
+     * // Create many GuestUsers
+     * const guestUser = await prisma.guestUser.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends CredentialsCreateManyArgs>(args?: SelectSubset<T, CredentialsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends GuestUserCreateManyArgs>(args?: SelectSubset<T, GuestUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Credentials and returns the data saved in the database.
-     * @param {CredentialsCreateManyAndReturnArgs} args - Arguments to create many Credentials.
+     * Create many GuestUsers and returns the data saved in the database.
+     * @param {GuestUserCreateManyAndReturnArgs} args - Arguments to create many GuestUsers.
      * @example
-     * // Create many Credentials
-     * const credentials = await prisma.credentials.createManyAndReturn({
+     * // Create many GuestUsers
+     * const guestUser = await prisma.guestUser.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many Credentials and only return the `id`
-     * const credentialsWithIdOnly = await prisma.credentials.createManyAndReturn({
+     * // Create many GuestUsers and only return the `id`
+     * const guestUserWithIdOnly = await prisma.guestUser.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -1842,28 +1863,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CredentialsCreateManyAndReturnArgs>(args?: SelectSubset<T, CredentialsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends GuestUserCreateManyAndReturnArgs>(args?: SelectSubset<T, GuestUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a Credentials.
-     * @param {CredentialsDeleteArgs} args - Arguments to delete one Credentials.
+     * Delete a GuestUser.
+     * @param {GuestUserDeleteArgs} args - Arguments to delete one GuestUser.
      * @example
-     * // Delete one Credentials
-     * const Credentials = await prisma.credentials.delete({
+     * // Delete one GuestUser
+     * const GuestUser = await prisma.guestUser.delete({
      *   where: {
-     *     // ... filter to delete one Credentials
+     *     // ... filter to delete one GuestUser
      *   }
      * })
      * 
      */
-    delete<T extends CredentialsDeleteArgs>(args: SelectSubset<T, CredentialsDeleteArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends GuestUserDeleteArgs>(args: SelectSubset<T, GuestUserDeleteArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one Credentials.
-     * @param {CredentialsUpdateArgs} args - Arguments to update one Credentials.
+     * Update one GuestUser.
+     * @param {GuestUserUpdateArgs} args - Arguments to update one GuestUser.
      * @example
-     * // Update one Credentials
-     * const credentials = await prisma.credentials.update({
+     * // Update one GuestUser
+     * const guestUser = await prisma.guestUser.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1873,30 +1894,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CredentialsUpdateArgs>(args: SelectSubset<T, CredentialsUpdateArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends GuestUserUpdateArgs>(args: SelectSubset<T, GuestUserUpdateArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more Credentials.
-     * @param {CredentialsDeleteManyArgs} args - Arguments to filter Credentials to delete.
+     * Delete zero or more GuestUsers.
+     * @param {GuestUserDeleteManyArgs} args - Arguments to filter GuestUsers to delete.
      * @example
-     * // Delete a few Credentials
-     * const { count } = await prisma.credentials.deleteMany({
+     * // Delete a few GuestUsers
+     * const { count } = await prisma.guestUser.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends CredentialsDeleteManyArgs>(args?: SelectSubset<T, CredentialsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends GuestUserDeleteManyArgs>(args?: SelectSubset<T, GuestUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Credentials.
+     * Update zero or more GuestUsers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {GuestUserUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Credentials
-     * const credentials = await prisma.credentials.updateMany({
+     * // Update many GuestUsers
+     * const guestUser = await prisma.guestUser.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1906,14 +1927,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends CredentialsUpdateManyArgs>(args: SelectSubset<T, CredentialsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends GuestUserUpdateManyArgs>(args: SelectSubset<T, GuestUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Credentials and returns the data updated in the database.
-     * @param {CredentialsUpdateManyAndReturnArgs} args - Arguments to update many Credentials.
+     * Update zero or more GuestUsers and returns the data updated in the database.
+     * @param {GuestUserUpdateManyAndReturnArgs} args - Arguments to update many GuestUsers.
      * @example
-     * // Update many Credentials
-     * const credentials = await prisma.credentials.updateManyAndReturn({
+     * // Update many GuestUsers
+     * const guestUser = await prisma.guestUser.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1922,8 +1943,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Credentials and only return the `id`
-     * const credentialsWithIdOnly = await prisma.credentials.updateManyAndReturn({
+     * // Update zero or more GuestUsers and only return the `id`
+     * const guestUserWithIdOnly = await prisma.guestUser.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -1936,56 +1957,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CredentialsUpdateManyAndReturnArgs>(args: SelectSubset<T, CredentialsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends GuestUserUpdateManyAndReturnArgs>(args: SelectSubset<T, GuestUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one Credentials.
-     * @param {CredentialsUpsertArgs} args - Arguments to update or create a Credentials.
+     * Create or update one GuestUser.
+     * @param {GuestUserUpsertArgs} args - Arguments to update or create a GuestUser.
      * @example
-     * // Update or create a Credentials
-     * const credentials = await prisma.credentials.upsert({
+     * // Update or create a GuestUser
+     * const guestUser = await prisma.guestUser.upsert({
      *   create: {
-     *     // ... data to create a Credentials
+     *     // ... data to create a GuestUser
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Credentials we want to update
+     *     // ... the filter for the GuestUser we want to update
      *   }
      * })
      */
-    upsert<T extends CredentialsUpsertArgs>(args: SelectSubset<T, CredentialsUpsertArgs<ExtArgs>>): Prisma__CredentialsClient<$Result.GetResult<Prisma.$CredentialsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends GuestUserUpsertArgs>(args: SelectSubset<T, GuestUserUpsertArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of Credentials.
+     * Count the number of GuestUsers.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsCountArgs} args - Arguments to filter Credentials to count.
+     * @param {GuestUserCountArgs} args - Arguments to filter GuestUsers to count.
      * @example
-     * // Count the number of Credentials
-     * const count = await prisma.credentials.count({
+     * // Count the number of GuestUsers
+     * const count = await prisma.guestUser.count({
      *   where: {
-     *     // ... the filter for the Credentials we want to count
+     *     // ... the filter for the GuestUsers we want to count
      *   }
      * })
     **/
-    count<T extends CredentialsCountArgs>(
-      args?: Subset<T, CredentialsCountArgs>,
+    count<T extends GuestUserCountArgs>(
+      args?: Subset<T, GuestUserCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], CredentialsCountAggregateOutputType>
+          : GetScalarType<T['select'], GuestUserCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Credentials.
+     * Allows you to perform aggregations operations on a GuestUser.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {GuestUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -2005,13 +2026,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends CredentialsAggregateArgs>(args: Subset<T, CredentialsAggregateArgs>): Prisma.PrismaPromise<GetCredentialsAggregateType<T>>
+    aggregate<T extends GuestUserAggregateArgs>(args: Subset<T, GuestUserAggregateArgs>): Prisma.PrismaPromise<GetGuestUserAggregateType<T>>
 
     /**
-     * Group by Credentials.
+     * Group by GuestUser.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {CredentialsGroupByArgs} args - Group by arguments.
+     * @param {GuestUserGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2026,14 +2047,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends CredentialsGroupByArgs,
+      T extends GuestUserGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: CredentialsGroupByArgs['orderBy'] }
-        : { orderBy?: CredentialsGroupByArgs['orderBy'] },
+        ? { orderBy: GuestUserGroupByArgs['orderBy'] }
+        : { orderBy?: GuestUserGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2082,21 +2103,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, CredentialsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCredentialsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, GuestUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGuestUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Credentials model
+   * Fields of the GuestUser model
    */
-  readonly fields: CredentialsFieldRefs;
+  readonly fields: GuestUserFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Credentials.
+   * The delegate class that acts as a "Promise-like" for GuestUser.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CredentialsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__GuestUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    documents<T extends GuestUser$documentsArgs<ExtArgs> = {}>(args?: Subset<T, GuestUser$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$documentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2123,381 +2145,440 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Credentials model
+   * Fields of the GuestUser model
    */
-  interface CredentialsFieldRefs {
-    readonly id: FieldRef<"Credentials", 'String'>
-    readonly password: FieldRef<"Credentials", 'String'>
-    readonly username: FieldRef<"Credentials", 'String'>
-    readonly secretcode: FieldRef<"Credentials", 'String'>
-    readonly name: FieldRef<"Credentials", 'String'>
-    readonly image: FieldRef<"Credentials", 'String'>
-    readonly fileKey: FieldRef<"Credentials", 'String'>
-    readonly created_at: FieldRef<"Credentials", 'DateTime'>
-    readonly updated_at: FieldRef<"Credentials", 'DateTime'>
+  interface GuestUserFieldRefs {
+    readonly id: FieldRef<"GuestUser", 'String'>
+    readonly cookieId: FieldRef<"GuestUser", 'String'>
+    readonly createdAt: FieldRef<"GuestUser", 'DateTime'>
+    readonly updatedAt: FieldRef<"GuestUser", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * Credentials findUnique
+   * GuestUser findUnique
    */
-  export type CredentialsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * Filter, which Credentials to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: CredentialsWhereUniqueInput
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * Filter, which GuestUser to fetch.
+     */
+    where: GuestUserWhereUniqueInput
   }
 
   /**
-   * Credentials findUniqueOrThrow
+   * GuestUser findUniqueOrThrow
    */
-  export type CredentialsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * Filter, which Credentials to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: CredentialsWhereUniqueInput
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * Filter, which GuestUser to fetch.
+     */
+    where: GuestUserWhereUniqueInput
   }
 
   /**
-   * Credentials findFirst
+   * GuestUser findFirst
    */
-  export type CredentialsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * Filter, which Credentials to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: CredentialsWhereInput
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * Filter, which GuestUser to fetch.
+     */
+    where?: GuestUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Credentials to fetch.
+     * Determine the order of GuestUsers to fetch.
      */
-    orderBy?: CredentialsOrderByWithRelationInput | CredentialsOrderByWithRelationInput[]
+    orderBy?: GuestUserOrderByWithRelationInput | GuestUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Credentials.
+     * Sets the position for searching for GuestUsers.
      */
-    cursor?: CredentialsWhereUniqueInput
+    cursor?: GuestUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Credentials from the position of the cursor.
+     * Take `±n` GuestUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Credentials.
+     * Skip the first `n` GuestUsers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Credentials.
+     * Filter by unique combinations of GuestUsers.
      */
-    distinct?: CredentialsScalarFieldEnum | CredentialsScalarFieldEnum[]
+    distinct?: GuestUserScalarFieldEnum | GuestUserScalarFieldEnum[]
   }
 
   /**
-   * Credentials findFirstOrThrow
+   * GuestUser findFirstOrThrow
    */
-  export type CredentialsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * Filter, which Credentials to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: CredentialsWhereInput
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * Filter, which GuestUser to fetch.
+     */
+    where?: GuestUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Credentials to fetch.
+     * Determine the order of GuestUsers to fetch.
      */
-    orderBy?: CredentialsOrderByWithRelationInput | CredentialsOrderByWithRelationInput[]
+    orderBy?: GuestUserOrderByWithRelationInput | GuestUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Credentials.
+     * Sets the position for searching for GuestUsers.
      */
-    cursor?: CredentialsWhereUniqueInput
+    cursor?: GuestUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Credentials from the position of the cursor.
+     * Take `±n` GuestUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Credentials.
+     * Skip the first `n` GuestUsers.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Credentials.
+     * Filter by unique combinations of GuestUsers.
      */
-    distinct?: CredentialsScalarFieldEnum | CredentialsScalarFieldEnum[]
+    distinct?: GuestUserScalarFieldEnum | GuestUserScalarFieldEnum[]
   }
 
   /**
-   * Credentials findMany
+   * GuestUser findMany
    */
-  export type CredentialsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * Filter, which Credentials to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: CredentialsWhereInput
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * Filter, which GuestUsers to fetch.
+     */
+    where?: GuestUserWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Credentials to fetch.
+     * Determine the order of GuestUsers to fetch.
      */
-    orderBy?: CredentialsOrderByWithRelationInput | CredentialsOrderByWithRelationInput[]
+    orderBy?: GuestUserOrderByWithRelationInput | GuestUserOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Credentials.
+     * Sets the position for listing GuestUsers.
      */
-    cursor?: CredentialsWhereUniqueInput
+    cursor?: GuestUserWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Credentials from the position of the cursor.
+     * Take `±n` GuestUsers from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Credentials.
+     * Skip the first `n` GuestUsers.
      */
     skip?: number
-    distinct?: CredentialsScalarFieldEnum | CredentialsScalarFieldEnum[]
+    distinct?: GuestUserScalarFieldEnum | GuestUserScalarFieldEnum[]
   }
 
   /**
-   * Credentials create
+   * GuestUser create
    */
-  export type CredentialsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * The data needed to create a Credentials.
+     * Choose, which related nodes to fetch as well
      */
-    data?: XOR<CredentialsCreateInput, CredentialsUncheckedCreateInput>
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GuestUser.
+     */
+    data: XOR<GuestUserCreateInput, GuestUserUncheckedCreateInput>
   }
 
   /**
-   * Credentials createMany
+   * GuestUser createMany
    */
-  export type CredentialsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Credentials.
+     * The data used to create many GuestUsers.
      */
-    data: CredentialsCreateManyInput | CredentialsCreateManyInput[]
+    data: GuestUserCreateManyInput | GuestUserCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Credentials createManyAndReturn
+   * GuestUser createManyAndReturn
    */
-  export type CredentialsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: GuestUserSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * The data used to create many Credentials.
+     * The data used to create many GuestUsers.
      */
-    data: CredentialsCreateManyInput | CredentialsCreateManyInput[]
+    data: GuestUserCreateManyInput | GuestUserCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * Credentials update
+   * GuestUser update
    */
-  export type CredentialsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * The data needed to update a Credentials.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<CredentialsUpdateInput, CredentialsUncheckedUpdateInput>
+    include?: GuestUserInclude<ExtArgs> | null
     /**
-     * Choose, which Credentials to update.
+     * The data needed to update a GuestUser.
      */
-    where: CredentialsWhereUniqueInput
+    data: XOR<GuestUserUpdateInput, GuestUserUncheckedUpdateInput>
+    /**
+     * Choose, which GuestUser to update.
+     */
+    where: GuestUserWhereUniqueInput
   }
 
   /**
-   * Credentials updateMany
+   * GuestUser updateMany
    */
-  export type CredentialsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Credentials.
+     * The data used to update GuestUsers.
      */
-    data: XOR<CredentialsUpdateManyMutationInput, CredentialsUncheckedUpdateManyInput>
+    data: XOR<GuestUserUpdateManyMutationInput, GuestUserUncheckedUpdateManyInput>
     /**
-     * Filter which Credentials to update
+     * Filter which GuestUsers to update
      */
-    where?: CredentialsWhereInput
+    where?: GuestUserWhereInput
     /**
-     * Limit how many Credentials to update.
+     * Limit how many GuestUsers to update.
      */
     limit?: number
   }
 
   /**
-   * Credentials updateManyAndReturn
+   * GuestUser updateManyAndReturn
    */
-  export type CredentialsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: GuestUserSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * The data used to update Credentials.
+     * The data used to update GuestUsers.
      */
-    data: XOR<CredentialsUpdateManyMutationInput, CredentialsUncheckedUpdateManyInput>
+    data: XOR<GuestUserUpdateManyMutationInput, GuestUserUncheckedUpdateManyInput>
     /**
-     * Filter which Credentials to update
+     * Filter which GuestUsers to update
      */
-    where?: CredentialsWhereInput
+    where?: GuestUserWhereInput
     /**
-     * Limit how many Credentials to update.
+     * Limit how many GuestUsers to update.
      */
     limit?: number
   }
 
   /**
-   * Credentials upsert
+   * GuestUser upsert
    */
-  export type CredentialsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * The filter to search for the Credentials to update in case it exists.
+     * Choose, which related nodes to fetch as well
      */
-    where: CredentialsWhereUniqueInput
+    include?: GuestUserInclude<ExtArgs> | null
     /**
-     * In case the Credentials found by the `where` argument doesn't exist, create a new Credentials with this data.
+     * The filter to search for the GuestUser to update in case it exists.
      */
-    create: XOR<CredentialsCreateInput, CredentialsUncheckedCreateInput>
+    where: GuestUserWhereUniqueInput
     /**
-     * In case the Credentials was found with the provided `where` argument, update it with this data.
+     * In case the GuestUser found by the `where` argument doesn't exist, create a new GuestUser with this data.
      */
-    update: XOR<CredentialsUpdateInput, CredentialsUncheckedUpdateInput>
+    create: XOR<GuestUserCreateInput, GuestUserUncheckedCreateInput>
+    /**
+     * In case the GuestUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GuestUserUpdateInput, GuestUserUncheckedUpdateInput>
   }
 
   /**
-   * Credentials delete
+   * GuestUser delete
    */
-  export type CredentialsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the GuestUser
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: GuestUserSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the GuestUser
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: GuestUserOmit<ExtArgs> | null
     /**
-     * Filter which Credentials to delete.
+     * Choose, which related nodes to fetch as well
      */
-    where: CredentialsWhereUniqueInput
+    include?: GuestUserInclude<ExtArgs> | null
+    /**
+     * Filter which GuestUser to delete.
+     */
+    where: GuestUserWhereUniqueInput
   }
 
   /**
-   * Credentials deleteMany
+   * GuestUser deleteMany
    */
-  export type CredentialsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Credentials to delete
+     * Filter which GuestUsers to delete
      */
-    where?: CredentialsWhereInput
+    where?: GuestUserWhereInput
     /**
-     * Limit how many Credentials to delete.
+     * Limit how many GuestUsers to delete.
      */
     limit?: number
   }
 
   /**
-   * Credentials without action
+   * GuestUser.documents
    */
-  export type CredentialsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GuestUser$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Credentials
+     * Select specific fields to fetch from the documents
      */
-    select?: CredentialsSelect<ExtArgs> | null
+    select?: documentsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the Credentials
+     * Omit specific fields from the documents
      */
-    omit?: CredentialsOmit<ExtArgs> | null
+    omit?: documentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    where?: documentsWhereInput
+    orderBy?: documentsOrderByWithRelationInput | documentsOrderByWithRelationInput[]
+    cursor?: documentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentsScalarFieldEnum | DocumentsScalarFieldEnum[]
+  }
+
+  /**
+   * GuestUser without action
+   */
+  export type GuestUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GuestUser
+     */
+    select?: GuestUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GuestUser
+     */
+    omit?: GuestUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GuestUserInclude<ExtArgs> | null
   }
 
 
@@ -2651,7 +2732,7 @@ export namespace Prisma {
     role: string | null
     user_id: string | null
     content: string | null
-    document_id: string | null
+    document_id: string
     created_at: Date
     updated_at: Date
     _count: ChatsCountAggregateOutputType | null
@@ -2681,6 +2762,7 @@ export namespace Prisma {
     document_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    document?: boolean | documentsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chats"]>
 
   export type chatsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2691,6 +2773,7 @@ export namespace Prisma {
     document_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    document?: boolean | documentsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chats"]>
 
   export type chatsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2701,6 +2784,7 @@ export namespace Prisma {
     document_id?: boolean
     created_at?: boolean
     updated_at?: boolean
+    document?: boolean | documentsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chats"]>
 
   export type chatsSelectScalar = {
@@ -2714,16 +2798,27 @@ export namespace Prisma {
   }
 
   export type chatsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "role" | "user_id" | "content" | "document_id" | "created_at" | "updated_at", ExtArgs["result"]["chats"]>
+  export type chatsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    document?: boolean | documentsDefaultArgs<ExtArgs>
+  }
+  export type chatsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    document?: boolean | documentsDefaultArgs<ExtArgs>
+  }
+  export type chatsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    document?: boolean | documentsDefaultArgs<ExtArgs>
+  }
 
   export type $chatsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "chats"
-    objects: {}
+    objects: {
+      document: Prisma.$documentsPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       role: string | null
       user_id: string | null
       content: string | null
-      document_id: string | null
+      document_id: string
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["chats"]>
@@ -3120,6 +3215,7 @@ export namespace Prisma {
    */
   export interface Prisma__chatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    document<T extends documentsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, documentsDefaultArgs<ExtArgs>>): Prisma__documentsClient<$Result.GetResult<Prisma.$documentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3173,6 +3269,10 @@ export namespace Prisma {
      */
     omit?: chatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
+    /**
      * Filter, which chats to fetch.
      */
     where: chatsWhereUniqueInput
@@ -3191,6 +3291,10 @@ export namespace Prisma {
      */
     omit?: chatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
+    /**
      * Filter, which chats to fetch.
      */
     where: chatsWhereUniqueInput
@@ -3208,6 +3312,10 @@ export namespace Prisma {
      * Omit specific fields from the chats
      */
     omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
     /**
      * Filter, which chats to fetch.
      */
@@ -3257,6 +3365,10 @@ export namespace Prisma {
      */
     omit?: chatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
+    /**
      * Filter, which chats to fetch.
      */
     where?: chatsWhereInput
@@ -3305,6 +3417,10 @@ export namespace Prisma {
      */
     omit?: chatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
+    /**
      * Filter, which chats to fetch.
      */
     where?: chatsWhereInput
@@ -3348,9 +3464,13 @@ export namespace Prisma {
      */
     omit?: chatsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
+    /**
      * The data needed to create a chats.
      */
-    data?: XOR<chatsCreateInput, chatsUncheckedCreateInput>
+    data: XOR<chatsCreateInput, chatsUncheckedCreateInput>
   }
 
   /**
@@ -3381,6 +3501,10 @@ export namespace Prisma {
      */
     data: chatsCreateManyInput | chatsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3395,6 +3519,10 @@ export namespace Prisma {
      * Omit specific fields from the chats
      */
     omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
     /**
      * The data needed to update a chats.
      */
@@ -3447,6 +3575,10 @@ export namespace Prisma {
      * Limit how many chats to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3461,6 +3593,10 @@ export namespace Prisma {
      * Omit specific fields from the chats
      */
     omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
     /**
      * The filter to search for the chats to update in case it exists.
      */
@@ -3487,6 +3623,10 @@ export namespace Prisma {
      * Omit specific fields from the chats
      */
     omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
     /**
      * Filter which chats to delete.
      */
@@ -3519,6 +3659,10 @@ export namespace Prisma {
      * Omit specific fields from the chats
      */
     omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
   }
 
 
@@ -3536,6 +3680,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     user_id: string | null
+    guest_user_id: string | null
     file_link: string | null
     file_key: string | null
     created_at: Date | null
@@ -3546,6 +3691,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     user_id: string | null
+    guest_user_id: string | null
     file_link: string | null
     file_key: string | null
     created_at: Date | null
@@ -3556,6 +3702,7 @@ export namespace Prisma {
     id: number
     name: number
     user_id: number
+    guest_user_id: number
     file_link: number
     file_key: number
     created_at: number
@@ -3568,6 +3715,7 @@ export namespace Prisma {
     id?: true
     name?: true
     user_id?: true
+    guest_user_id?: true
     file_link?: true
     file_key?: true
     created_at?: true
@@ -3578,6 +3726,7 @@ export namespace Prisma {
     id?: true
     name?: true
     user_id?: true
+    guest_user_id?: true
     file_link?: true
     file_key?: true
     created_at?: true
@@ -3588,6 +3737,7 @@ export namespace Prisma {
     id?: true
     name?: true
     user_id?: true
+    guest_user_id?: true
     file_link?: true
     file_key?: true
     created_at?: true
@@ -3670,7 +3820,8 @@ export namespace Prisma {
   export type DocumentsGroupByOutputType = {
     id: string
     name: string | null
-    user_id: string | null
+    user_id: string
+    guest_user_id: string | null
     file_link: string | null
     file_key: string | null
     created_at: Date
@@ -3698,51 +3849,82 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     user_id?: boolean
+    guest_user_id?: boolean
     file_link?: boolean
     file_key?: boolean
     created_at?: boolean
     updated_at?: boolean
+    chats?: boolean | documents$chatsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    guestUser?: boolean | documents$guestUserArgs<ExtArgs>
+    _count?: boolean | DocumentsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["documents"]>
 
   export type documentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     user_id?: boolean
+    guest_user_id?: boolean
     file_link?: boolean
     file_key?: boolean
     created_at?: boolean
     updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    guestUser?: boolean | documents$guestUserArgs<ExtArgs>
   }, ExtArgs["result"]["documents"]>
 
   export type documentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     user_id?: boolean
+    guest_user_id?: boolean
     file_link?: boolean
     file_key?: boolean
     created_at?: boolean
     updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    guestUser?: boolean | documents$guestUserArgs<ExtArgs>
   }, ExtArgs["result"]["documents"]>
 
   export type documentsSelectScalar = {
     id?: boolean
     name?: boolean
     user_id?: boolean
+    guest_user_id?: boolean
     file_link?: boolean
     file_key?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type documentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "user_id" | "file_link" | "file_key" | "created_at" | "updated_at", ExtArgs["result"]["documents"]>
+  export type documentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "user_id" | "guest_user_id" | "file_link" | "file_key" | "created_at" | "updated_at", ExtArgs["result"]["documents"]>
+  export type documentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chats?: boolean | documents$chatsArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    guestUser?: boolean | documents$guestUserArgs<ExtArgs>
+    _count?: boolean | DocumentsCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type documentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    guestUser?: boolean | documents$guestUserArgs<ExtArgs>
+  }
+  export type documentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    guestUser?: boolean | documents$guestUserArgs<ExtArgs>
+  }
 
   export type $documentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "documents"
-    objects: {}
+    objects: {
+      chats: Prisma.$chatsPayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
+      guestUser: Prisma.$GuestUserPayload<ExtArgs> | null
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string | null
-      user_id: string | null
+      user_id: string
+      guest_user_id: string | null
       file_link: string | null
       file_key: string | null
       created_at: Date
@@ -4141,6 +4323,9 @@ export namespace Prisma {
    */
   export interface Prisma__documentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    chats<T extends documents$chatsArgs<ExtArgs> = {}>(args?: Subset<T, documents$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    guestUser<T extends documents$guestUserArgs<ExtArgs> = {}>(args?: Subset<T, documents$guestUserArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4173,6 +4358,7 @@ export namespace Prisma {
     readonly id: FieldRef<"documents", 'String'>
     readonly name: FieldRef<"documents", 'String'>
     readonly user_id: FieldRef<"documents", 'String'>
+    readonly guest_user_id: FieldRef<"documents", 'String'>
     readonly file_link: FieldRef<"documents", 'String'>
     readonly file_key: FieldRef<"documents", 'String'>
     readonly created_at: FieldRef<"documents", 'DateTime'>
@@ -4194,6 +4380,10 @@ export namespace Prisma {
      */
     omit?: documentsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    /**
      * Filter, which documents to fetch.
      */
     where: documentsWhereUniqueInput
@@ -4212,6 +4402,10 @@ export namespace Prisma {
      */
     omit?: documentsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    /**
      * Filter, which documents to fetch.
      */
     where: documentsWhereUniqueInput
@@ -4229,6 +4423,10 @@ export namespace Prisma {
      * Omit specific fields from the documents
      */
     omit?: documentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
     /**
      * Filter, which documents to fetch.
      */
@@ -4278,6 +4476,10 @@ export namespace Prisma {
      */
     omit?: documentsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    /**
      * Filter, which documents to fetch.
      */
     where?: documentsWhereInput
@@ -4326,6 +4528,10 @@ export namespace Prisma {
      */
     omit?: documentsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    /**
      * Filter, which documents to fetch.
      */
     where?: documentsWhereInput
@@ -4369,9 +4575,13 @@ export namespace Prisma {
      */
     omit?: documentsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    /**
      * The data needed to create a documents.
      */
-    data?: XOR<documentsCreateInput, documentsUncheckedCreateInput>
+    data: XOR<documentsCreateInput, documentsUncheckedCreateInput>
   }
 
   /**
@@ -4402,6 +4612,10 @@ export namespace Prisma {
      */
     data: documentsCreateManyInput | documentsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4416,6 +4630,10 @@ export namespace Prisma {
      * Omit specific fields from the documents
      */
     omit?: documentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
     /**
      * The data needed to update a documents.
      */
@@ -4468,6 +4686,10 @@ export namespace Prisma {
      * Limit how many documents to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4482,6 +4704,10 @@ export namespace Prisma {
      * Omit specific fields from the documents
      */
     omit?: documentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
     /**
      * The filter to search for the documents to update in case it exists.
      */
@@ -4509,6 +4735,10 @@ export namespace Prisma {
      */
     omit?: documentsOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    /**
      * Filter which documents to delete.
      */
     where: documentsWhereUniqueInput
@@ -4529,6 +4759,49 @@ export namespace Prisma {
   }
 
   /**
+   * documents.chats
+   */
+  export type documents$chatsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the chats
+     */
+    select?: chatsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the chats
+     */
+    omit?: chatsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: chatsInclude<ExtArgs> | null
+    where?: chatsWhereInput
+    orderBy?: chatsOrderByWithRelationInput | chatsOrderByWithRelationInput[]
+    cursor?: chatsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatsScalarFieldEnum | ChatsScalarFieldEnum[]
+  }
+
+  /**
+   * documents.guestUser
+   */
+  export type documents$guestUserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GuestUser
+     */
+    select?: GuestUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GuestUser
+     */
+    omit?: GuestUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GuestUserInclude<ExtArgs> | null
+    where?: GuestUserWhereInput
+  }
+
+  /**
    * documents without action
    */
   export type documentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4540,6 +4813,10 @@ export namespace Prisma {
      * Omit specific fields from the documents
      */
     omit?: documentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
   }
 
 
@@ -6937,6 +7214,7 @@ export namespace Prisma {
     image?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    documents?: boolean | User$documentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -6968,6 +7246,7 @@ export namespace Prisma {
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
+    documents?: boolean | User$documentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -6978,6 +7257,7 @@ export namespace Prisma {
     objects: {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
+      documents: Prisma.$documentsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7381,6 +7661,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    documents<T extends User$documentsArgs<ExtArgs> = {}>(args?: Subset<T, User$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$documentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7848,6 +8129,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * User.documents
+   */
+  export type User$documentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the documents
+     */
+    select?: documentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the documents
+     */
+    omit?: documentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: documentsInclude<ExtArgs> | null
+    where?: documentsWhereInput
+    orderBy?: documentsOrderByWithRelationInput | documentsOrderByWithRelationInput[]
+    cursor?: documentsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DocumentsScalarFieldEnum | DocumentsScalarFieldEnum[]
   }
 
   /**
@@ -8852,19 +9157,14 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const CredentialsScalarFieldEnum: {
+  export const GuestUserScalarFieldEnum: {
     id: 'id',
-    password: 'password',
-    username: 'username',
-    secretcode: 'secretcode',
-    name: 'name',
-    image: 'image',
-    fileKey: 'fileKey',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
+    cookieId: 'cookieId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
-  export type CredentialsScalarFieldEnum = (typeof CredentialsScalarFieldEnum)[keyof typeof CredentialsScalarFieldEnum]
+  export type GuestUserScalarFieldEnum = (typeof GuestUserScalarFieldEnum)[keyof typeof GuestUserScalarFieldEnum]
 
 
   export const ChatsScalarFieldEnum: {
@@ -8884,6 +9184,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     user_id: 'user_id',
+    guest_user_id: 'guest_user_id',
     file_link: 'file_link',
     file_key: 'file_key',
     created_at: 'created_at',
@@ -9029,76 +9330,54 @@ export namespace Prisma {
    */
 
 
-  export type CredentialsWhereInput = {
-    AND?: CredentialsWhereInput | CredentialsWhereInput[]
-    OR?: CredentialsWhereInput[]
-    NOT?: CredentialsWhereInput | CredentialsWhereInput[]
-    id?: StringFilter<"Credentials"> | string
-    password?: StringNullableFilter<"Credentials"> | string | null
-    username?: StringNullableFilter<"Credentials"> | string | null
-    secretcode?: StringNullableFilter<"Credentials"> | string | null
-    name?: StringNullableFilter<"Credentials"> | string | null
-    image?: StringNullableFilter<"Credentials"> | string | null
-    fileKey?: StringNullableFilter<"Credentials"> | string | null
-    created_at?: DateTimeFilter<"Credentials"> | Date | string
-    updated_at?: DateTimeFilter<"Credentials"> | Date | string
+  export type GuestUserWhereInput = {
+    AND?: GuestUserWhereInput | GuestUserWhereInput[]
+    OR?: GuestUserWhereInput[]
+    NOT?: GuestUserWhereInput | GuestUserWhereInput[]
+    id?: StringFilter<"GuestUser"> | string
+    cookieId?: StringFilter<"GuestUser"> | string
+    createdAt?: DateTimeFilter<"GuestUser"> | Date | string
+    updatedAt?: DateTimeFilter<"GuestUser"> | Date | string
+    documents?: DocumentsListRelationFilter
   }
 
-  export type CredentialsOrderByWithRelationInput = {
+  export type GuestUserOrderByWithRelationInput = {
     id?: SortOrder
-    password?: SortOrderInput | SortOrder
-    username?: SortOrderInput | SortOrder
-    secretcode?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
-    image?: SortOrderInput | SortOrder
-    fileKey?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    cookieId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    documents?: documentsOrderByRelationAggregateInput
   }
 
-  export type CredentialsWhereUniqueInput = Prisma.AtLeast<{
+  export type GuestUserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    AND?: CredentialsWhereInput | CredentialsWhereInput[]
-    OR?: CredentialsWhereInput[]
-    NOT?: CredentialsWhereInput | CredentialsWhereInput[]
-    password?: StringNullableFilter<"Credentials"> | string | null
-    username?: StringNullableFilter<"Credentials"> | string | null
-    secretcode?: StringNullableFilter<"Credentials"> | string | null
-    name?: StringNullableFilter<"Credentials"> | string | null
-    image?: StringNullableFilter<"Credentials"> | string | null
-    fileKey?: StringNullableFilter<"Credentials"> | string | null
-    created_at?: DateTimeFilter<"Credentials"> | Date | string
-    updated_at?: DateTimeFilter<"Credentials"> | Date | string
-  }, "id">
+    cookieId?: string
+    AND?: GuestUserWhereInput | GuestUserWhereInput[]
+    OR?: GuestUserWhereInput[]
+    NOT?: GuestUserWhereInput | GuestUserWhereInput[]
+    createdAt?: DateTimeFilter<"GuestUser"> | Date | string
+    updatedAt?: DateTimeFilter<"GuestUser"> | Date | string
+    documents?: DocumentsListRelationFilter
+  }, "id" | "cookieId">
 
-  export type CredentialsOrderByWithAggregationInput = {
+  export type GuestUserOrderByWithAggregationInput = {
     id?: SortOrder
-    password?: SortOrderInput | SortOrder
-    username?: SortOrderInput | SortOrder
-    secretcode?: SortOrderInput | SortOrder
-    name?: SortOrderInput | SortOrder
-    image?: SortOrderInput | SortOrder
-    fileKey?: SortOrderInput | SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-    _count?: CredentialsCountOrderByAggregateInput
-    _max?: CredentialsMaxOrderByAggregateInput
-    _min?: CredentialsMinOrderByAggregateInput
+    cookieId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: GuestUserCountOrderByAggregateInput
+    _max?: GuestUserMaxOrderByAggregateInput
+    _min?: GuestUserMinOrderByAggregateInput
   }
 
-  export type CredentialsScalarWhereWithAggregatesInput = {
-    AND?: CredentialsScalarWhereWithAggregatesInput | CredentialsScalarWhereWithAggregatesInput[]
-    OR?: CredentialsScalarWhereWithAggregatesInput[]
-    NOT?: CredentialsScalarWhereWithAggregatesInput | CredentialsScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Credentials"> | string
-    password?: StringNullableWithAggregatesFilter<"Credentials"> | string | null
-    username?: StringNullableWithAggregatesFilter<"Credentials"> | string | null
-    secretcode?: StringNullableWithAggregatesFilter<"Credentials"> | string | null
-    name?: StringNullableWithAggregatesFilter<"Credentials"> | string | null
-    image?: StringNullableWithAggregatesFilter<"Credentials"> | string | null
-    fileKey?: StringNullableWithAggregatesFilter<"Credentials"> | string | null
-    created_at?: DateTimeWithAggregatesFilter<"Credentials"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"Credentials"> | Date | string
+  export type GuestUserScalarWhereWithAggregatesInput = {
+    AND?: GuestUserScalarWhereWithAggregatesInput | GuestUserScalarWhereWithAggregatesInput[]
+    OR?: GuestUserScalarWhereWithAggregatesInput[]
+    NOT?: GuestUserScalarWhereWithAggregatesInput | GuestUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"GuestUser"> | string
+    cookieId?: StringWithAggregatesFilter<"GuestUser"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"GuestUser"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"GuestUser"> | Date | string
   }
 
   export type chatsWhereInput = {
@@ -9109,9 +9388,10 @@ export namespace Prisma {
     role?: StringNullableFilter<"chats"> | string | null
     user_id?: StringNullableFilter<"chats"> | string | null
     content?: StringNullableFilter<"chats"> | string | null
-    document_id?: StringNullableFilter<"chats"> | string | null
+    document_id?: StringFilter<"chats"> | string
     created_at?: DateTimeFilter<"chats"> | Date | string
     updated_at?: DateTimeFilter<"chats"> | Date | string
+    document?: XOR<DocumentsScalarRelationFilter, documentsWhereInput>
   }
 
   export type chatsOrderByWithRelationInput = {
@@ -9119,9 +9399,10 @@ export namespace Prisma {
     role?: SortOrderInput | SortOrder
     user_id?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
-    document_id?: SortOrderInput | SortOrder
+    document_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    document?: documentsOrderByWithRelationInput
   }
 
   export type chatsWhereUniqueInput = Prisma.AtLeast<{
@@ -9132,9 +9413,10 @@ export namespace Prisma {
     role?: StringNullableFilter<"chats"> | string | null
     user_id?: StringNullableFilter<"chats"> | string | null
     content?: StringNullableFilter<"chats"> | string | null
-    document_id?: StringNullableFilter<"chats"> | string | null
+    document_id?: StringFilter<"chats"> | string
     created_at?: DateTimeFilter<"chats"> | Date | string
     updated_at?: DateTimeFilter<"chats"> | Date | string
+    document?: XOR<DocumentsScalarRelationFilter, documentsWhereInput>
   }, "id">
 
   export type chatsOrderByWithAggregationInput = {
@@ -9142,7 +9424,7 @@ export namespace Prisma {
     role?: SortOrderInput | SortOrder
     user_id?: SortOrderInput | SortOrder
     content?: SortOrderInput | SortOrder
-    document_id?: SortOrderInput | SortOrder
+    document_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: chatsCountOrderByAggregateInput
@@ -9158,7 +9440,7 @@ export namespace Prisma {
     role?: StringNullableWithAggregatesFilter<"chats"> | string | null
     user_id?: StringNullableWithAggregatesFilter<"chats"> | string | null
     content?: StringNullableWithAggregatesFilter<"chats"> | string | null
-    document_id?: StringNullableWithAggregatesFilter<"chats"> | string | null
+    document_id?: StringWithAggregatesFilter<"chats"> | string
     created_at?: DateTimeWithAggregatesFilter<"chats"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"chats"> | Date | string
   }
@@ -9169,21 +9451,29 @@ export namespace Prisma {
     NOT?: documentsWhereInput | documentsWhereInput[]
     id?: StringFilter<"documents"> | string
     name?: StringNullableFilter<"documents"> | string | null
-    user_id?: StringNullableFilter<"documents"> | string | null
+    user_id?: StringFilter<"documents"> | string
+    guest_user_id?: StringNullableFilter<"documents"> | string | null
     file_link?: StringNullableFilter<"documents"> | string | null
     file_key?: StringNullableFilter<"documents"> | string | null
     created_at?: DateTimeFilter<"documents"> | Date | string
     updated_at?: DateTimeFilter<"documents"> | Date | string
+    chats?: ChatsListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    guestUser?: XOR<GuestUserNullableScalarRelationFilter, GuestUserWhereInput> | null
   }
 
   export type documentsOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
-    user_id?: SortOrderInput | SortOrder
+    user_id?: SortOrder
+    guest_user_id?: SortOrderInput | SortOrder
     file_link?: SortOrderInput | SortOrder
     file_key?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
+    chats?: chatsOrderByRelationAggregateInput
+    user?: UserOrderByWithRelationInput
+    guestUser?: GuestUserOrderByWithRelationInput
   }
 
   export type documentsWhereUniqueInput = Prisma.AtLeast<{
@@ -9192,17 +9482,22 @@ export namespace Prisma {
     OR?: documentsWhereInput[]
     NOT?: documentsWhereInput | documentsWhereInput[]
     name?: StringNullableFilter<"documents"> | string | null
-    user_id?: StringNullableFilter<"documents"> | string | null
+    user_id?: StringFilter<"documents"> | string
+    guest_user_id?: StringNullableFilter<"documents"> | string | null
     file_link?: StringNullableFilter<"documents"> | string | null
     file_key?: StringNullableFilter<"documents"> | string | null
     created_at?: DateTimeFilter<"documents"> | Date | string
     updated_at?: DateTimeFilter<"documents"> | Date | string
+    chats?: ChatsListRelationFilter
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    guestUser?: XOR<GuestUserNullableScalarRelationFilter, GuestUserWhereInput> | null
   }, "id">
 
   export type documentsOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
-    user_id?: SortOrderInput | SortOrder
+    user_id?: SortOrder
+    guest_user_id?: SortOrderInput | SortOrder
     file_link?: SortOrderInput | SortOrder
     file_key?: SortOrderInput | SortOrder
     created_at?: SortOrder
@@ -9218,7 +9513,8 @@ export namespace Prisma {
     NOT?: documentsScalarWhereWithAggregatesInput | documentsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"documents"> | string
     name?: StringNullableWithAggregatesFilter<"documents"> | string | null
-    user_id?: StringNullableWithAggregatesFilter<"documents"> | string | null
+    user_id?: StringWithAggregatesFilter<"documents"> | string
+    guest_user_id?: StringNullableWithAggregatesFilter<"documents"> | string | null
     file_link?: StringNullableWithAggregatesFilter<"documents"> | string | null
     file_key?: StringNullableWithAggregatesFilter<"documents"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"documents"> | Date | string
@@ -9379,6 +9675,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
+    documents?: DocumentsListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -9389,6 +9686,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
+    documents?: documentsOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -9402,6 +9700,7 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
+    documents?: DocumentsListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -9469,88 +9768,57 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
-  export type CredentialsCreateInput = {
+  export type GuestUserCreateInput = {
     id?: string
-    password?: string | null
-    username?: string | null
-    secretcode?: string | null
-    name?: string | null
-    image?: string | null
-    fileKey?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
+    cookieId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: documentsCreateNestedManyWithoutGuestUserInput
   }
 
-  export type CredentialsUncheckedCreateInput = {
+  export type GuestUserUncheckedCreateInput = {
     id?: string
-    password?: string | null
-    username?: string | null
-    secretcode?: string | null
-    name?: string | null
-    image?: string | null
-    fileKey?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
+    cookieId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    documents?: documentsUncheckedCreateNestedManyWithoutGuestUserInput
   }
 
-  export type CredentialsUpdateInput = {
+  export type GuestUserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    secretcode?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    fileKey?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cookieId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: documentsUpdateManyWithoutGuestUserNestedInput
   }
 
-  export type CredentialsUncheckedUpdateInput = {
+  export type GuestUserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    secretcode?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    fileKey?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cookieId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documents?: documentsUncheckedUpdateManyWithoutGuestUserNestedInput
   }
 
-  export type CredentialsCreateManyInput = {
+  export type GuestUserCreateManyInput = {
     id?: string
-    password?: string | null
-    username?: string | null
-    secretcode?: string | null
-    name?: string | null
-    image?: string | null
-    fileKey?: string | null
-    created_at?: Date | string
-    updated_at?: Date | string
+    cookieId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type CredentialsUpdateManyMutationInput = {
+  export type GuestUserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    secretcode?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    fileKey?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cookieId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CredentialsUncheckedUpdateManyInput = {
+  export type GuestUserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    password?: NullableStringFieldUpdateOperationsInput | string | null
-    username?: NullableStringFieldUpdateOperationsInput | string | null
-    secretcode?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    fileKey?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    cookieId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type chatsCreateInput = {
@@ -9558,9 +9826,9 @@ export namespace Prisma {
     role?: string | null
     user_id?: string | null
     content?: string | null
-    document_id?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    document: documentsCreateNestedOneWithoutChatsInput
   }
 
   export type chatsUncheckedCreateInput = {
@@ -9568,7 +9836,7 @@ export namespace Prisma {
     role?: string | null
     user_id?: string | null
     content?: string | null
-    document_id?: string | null
+    document_id: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -9578,9 +9846,9 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    document_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    document?: documentsUpdateOneRequiredWithoutChatsNestedInput
   }
 
   export type chatsUncheckedUpdateInput = {
@@ -9588,7 +9856,7 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    document_id?: NullableStringFieldUpdateOperationsInput | string | null
+    document_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9598,7 +9866,7 @@ export namespace Prisma {
     role?: string | null
     user_id?: string | null
     content?: string | null
-    document_id?: string | null
+    document_id: string
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -9608,7 +9876,6 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    document_id?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9618,7 +9885,7 @@ export namespace Prisma {
     role?: NullableStringFieldUpdateOperationsInput | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     content?: NullableStringFieldUpdateOperationsInput | string | null
-    document_id?: NullableStringFieldUpdateOperationsInput | string | null
+    document_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9626,47 +9893,56 @@ export namespace Prisma {
   export type documentsCreateInput = {
     id?: string
     name?: string | null
-    user_id?: string | null
     file_link?: string | null
     file_key?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    chats?: chatsCreateNestedManyWithoutDocumentInput
+    user: UserCreateNestedOneWithoutDocumentsInput
+    guestUser?: GuestUserCreateNestedOneWithoutDocumentsInput
   }
 
   export type documentsUncheckedCreateInput = {
     id?: string
     name?: string | null
-    user_id?: string | null
+    user_id: string
+    guest_user_id?: string | null
     file_link?: string | null
     file_key?: string | null
     created_at?: Date | string
     updated_at?: Date | string
+    chats?: chatsUncheckedCreateNestedManyWithoutDocumentInput
   }
 
   export type documentsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: chatsUpdateManyWithoutDocumentNestedInput
+    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+    guestUser?: GuestUserUpdateOneWithoutDocumentsNestedInput
   }
 
   export type documentsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: chatsUncheckedUpdateManyWithoutDocumentNestedInput
   }
 
   export type documentsCreateManyInput = {
     id?: string
     name?: string | null
-    user_id?: string | null
+    user_id: string
+    guest_user_id?: string | null
     file_link?: string | null
     file_key?: string | null
     created_at?: Date | string
@@ -9676,7 +9952,6 @@ export namespace Prisma {
   export type documentsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9686,7 +9961,8 @@ export namespace Prisma {
   export type documentsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9853,6 +10129,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    documents?: documentsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -9863,6 +10140,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    documents?: documentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -9873,6 +10151,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    documents?: documentsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -9883,6 +10162,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    documents?: documentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -9966,21 +10246,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9992,45 +10257,35 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
+  export type DocumentsListRelationFilter = {
+    every?: documentsWhereInput
+    some?: documentsWhereInput
+    none?: documentsWhereInput
   }
 
-  export type CredentialsCountOrderByAggregateInput = {
-    id?: SortOrder
-    password?: SortOrder
-    username?: SortOrder
-    secretcode?: SortOrder
-    name?: SortOrder
-    image?: SortOrder
-    fileKey?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+  export type documentsOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
-  export type CredentialsMaxOrderByAggregateInput = {
+  export type GuestUserCountOrderByAggregateInput = {
     id?: SortOrder
-    password?: SortOrder
-    username?: SortOrder
-    secretcode?: SortOrder
-    name?: SortOrder
-    image?: SortOrder
-    fileKey?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    cookieId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type CredentialsMinOrderByAggregateInput = {
+  export type GuestUserMaxOrderByAggregateInput = {
     id?: SortOrder
-    password?: SortOrder
-    username?: SortOrder
-    secretcode?: SortOrder
-    name?: SortOrder
-    image?: SortOrder
-    fileKey?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
+    cookieId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type GuestUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    cookieId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -10051,24 +10306,6 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10081,6 +10318,31 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DocumentsScalarRelationFilter = {
+    is?: documentsWhereInput
+    isNot?: documentsWhereInput
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type chatsCountOrderByAggregateInput = {
@@ -10113,10 +10375,49 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type ChatsListRelationFilter = {
+    every?: chatsWhereInput
+    some?: chatsWhereInput
+    none?: chatsWhereInput
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type GuestUserNullableScalarRelationFilter = {
+    is?: GuestUserWhereInput | null
+    isNot?: GuestUserWhereInput | null
+  }
+
+  export type chatsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type documentsCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     user_id?: SortOrder
+    guest_user_id?: SortOrder
     file_link?: SortOrder
     file_key?: SortOrder
     created_at?: SortOrder
@@ -10127,6 +10428,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     user_id?: SortOrder
+    guest_user_id?: SortOrder
     file_link?: SortOrder
     file_key?: SortOrder
     created_at?: SortOrder
@@ -10137,6 +10439,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     user_id?: SortOrder
+    guest_user_id?: SortOrder
     file_link?: SortOrder
     file_key?: SortOrder
     created_at?: SortOrder
@@ -10152,11 +10455,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
@@ -10346,16 +10644,144 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type documentsCreateNestedManyWithoutGuestUserInput = {
+    create?: XOR<documentsCreateWithoutGuestUserInput, documentsUncheckedCreateWithoutGuestUserInput> | documentsCreateWithoutGuestUserInput[] | documentsUncheckedCreateWithoutGuestUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutGuestUserInput | documentsCreateOrConnectWithoutGuestUserInput[]
+    createMany?: documentsCreateManyGuestUserInputEnvelope
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+  }
+
+  export type documentsUncheckedCreateNestedManyWithoutGuestUserInput = {
+    create?: XOR<documentsCreateWithoutGuestUserInput, documentsUncheckedCreateWithoutGuestUserInput> | documentsCreateWithoutGuestUserInput[] | documentsUncheckedCreateWithoutGuestUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutGuestUserInput | documentsCreateOrConnectWithoutGuestUserInput[]
+    createMany?: documentsCreateManyGuestUserInputEnvelope
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type documentsUpdateManyWithoutGuestUserNestedInput = {
+    create?: XOR<documentsCreateWithoutGuestUserInput, documentsUncheckedCreateWithoutGuestUserInput> | documentsCreateWithoutGuestUserInput[] | documentsUncheckedCreateWithoutGuestUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutGuestUserInput | documentsCreateOrConnectWithoutGuestUserInput[]
+    upsert?: documentsUpsertWithWhereUniqueWithoutGuestUserInput | documentsUpsertWithWhereUniqueWithoutGuestUserInput[]
+    createMany?: documentsCreateManyGuestUserInputEnvelope
+    set?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    disconnect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    delete?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    update?: documentsUpdateWithWhereUniqueWithoutGuestUserInput | documentsUpdateWithWhereUniqueWithoutGuestUserInput[]
+    updateMany?: documentsUpdateManyWithWhereWithoutGuestUserInput | documentsUpdateManyWithWhereWithoutGuestUserInput[]
+    deleteMany?: documentsScalarWhereInput | documentsScalarWhereInput[]
+  }
+
+  export type documentsUncheckedUpdateManyWithoutGuestUserNestedInput = {
+    create?: XOR<documentsCreateWithoutGuestUserInput, documentsUncheckedCreateWithoutGuestUserInput> | documentsCreateWithoutGuestUserInput[] | documentsUncheckedCreateWithoutGuestUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutGuestUserInput | documentsCreateOrConnectWithoutGuestUserInput[]
+    upsert?: documentsUpsertWithWhereUniqueWithoutGuestUserInput | documentsUpsertWithWhereUniqueWithoutGuestUserInput[]
+    createMany?: documentsCreateManyGuestUserInputEnvelope
+    set?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    disconnect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    delete?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    update?: documentsUpdateWithWhereUniqueWithoutGuestUserInput | documentsUpdateWithWhereUniqueWithoutGuestUserInput[]
+    updateMany?: documentsUpdateManyWithWhereWithoutGuestUserInput | documentsUpdateManyWithWhereWithoutGuestUserInput[]
+    deleteMany?: documentsScalarWhereInput | documentsScalarWhereInput[]
+  }
+
+  export type documentsCreateNestedOneWithoutChatsInput = {
+    create?: XOR<documentsCreateWithoutChatsInput, documentsUncheckedCreateWithoutChatsInput>
+    connectOrCreate?: documentsCreateOrConnectWithoutChatsInput
+    connect?: documentsWhereUniqueInput
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
+  export type documentsUpdateOneRequiredWithoutChatsNestedInput = {
+    create?: XOR<documentsCreateWithoutChatsInput, documentsUncheckedCreateWithoutChatsInput>
+    connectOrCreate?: documentsCreateOrConnectWithoutChatsInput
+    upsert?: documentsUpsertWithoutChatsInput
+    connect?: documentsWhereUniqueInput
+    update?: XOR<XOR<documentsUpdateToOneWithWhereWithoutChatsInput, documentsUpdateWithoutChatsInput>, documentsUncheckedUpdateWithoutChatsInput>
+  }
+
+  export type chatsCreateNestedManyWithoutDocumentInput = {
+    create?: XOR<chatsCreateWithoutDocumentInput, chatsUncheckedCreateWithoutDocumentInput> | chatsCreateWithoutDocumentInput[] | chatsUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: chatsCreateOrConnectWithoutDocumentInput | chatsCreateOrConnectWithoutDocumentInput[]
+    createMany?: chatsCreateManyDocumentInputEnvelope
+    connect?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutDocumentsInput = {
+    create?: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDocumentsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type GuestUserCreateNestedOneWithoutDocumentsInput = {
+    create?: XOR<GuestUserCreateWithoutDocumentsInput, GuestUserUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: GuestUserCreateOrConnectWithoutDocumentsInput
+    connect?: GuestUserWhereUniqueInput
+  }
+
+  export type chatsUncheckedCreateNestedManyWithoutDocumentInput = {
+    create?: XOR<chatsCreateWithoutDocumentInput, chatsUncheckedCreateWithoutDocumentInput> | chatsCreateWithoutDocumentInput[] | chatsUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: chatsCreateOrConnectWithoutDocumentInput | chatsCreateOrConnectWithoutDocumentInput[]
+    createMany?: chatsCreateManyDocumentInputEnvelope
+    connect?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+  }
+
+  export type chatsUpdateManyWithoutDocumentNestedInput = {
+    create?: XOR<chatsCreateWithoutDocumentInput, chatsUncheckedCreateWithoutDocumentInput> | chatsCreateWithoutDocumentInput[] | chatsUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: chatsCreateOrConnectWithoutDocumentInput | chatsCreateOrConnectWithoutDocumentInput[]
+    upsert?: chatsUpsertWithWhereUniqueWithoutDocumentInput | chatsUpsertWithWhereUniqueWithoutDocumentInput[]
+    createMany?: chatsCreateManyDocumentInputEnvelope
+    set?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    disconnect?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    delete?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    connect?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    update?: chatsUpdateWithWhereUniqueWithoutDocumentInput | chatsUpdateWithWhereUniqueWithoutDocumentInput[]
+    updateMany?: chatsUpdateManyWithWhereWithoutDocumentInput | chatsUpdateManyWithWhereWithoutDocumentInput[]
+    deleteMany?: chatsScalarWhereInput | chatsScalarWhereInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutDocumentsNestedInput = {
+    create?: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutDocumentsInput
+    upsert?: UserUpsertWithoutDocumentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDocumentsInput, UserUpdateWithoutDocumentsInput>, UserUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type GuestUserUpdateOneWithoutDocumentsNestedInput = {
+    create?: XOR<GuestUserCreateWithoutDocumentsInput, GuestUserUncheckedCreateWithoutDocumentsInput>
+    connectOrCreate?: GuestUserCreateOrConnectWithoutDocumentsInput
+    upsert?: GuestUserUpsertWithoutDocumentsInput
+    disconnect?: GuestUserWhereInput | boolean
+    delete?: GuestUserWhereInput | boolean
+    connect?: GuestUserWhereUniqueInput
+    update?: XOR<XOR<GuestUserUpdateToOneWithWhereWithoutDocumentsInput, GuestUserUpdateWithoutDocumentsInput>, GuestUserUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type chatsUncheckedUpdateManyWithoutDocumentNestedInput = {
+    create?: XOR<chatsCreateWithoutDocumentInput, chatsUncheckedCreateWithoutDocumentInput> | chatsCreateWithoutDocumentInput[] | chatsUncheckedCreateWithoutDocumentInput[]
+    connectOrCreate?: chatsCreateOrConnectWithoutDocumentInput | chatsCreateOrConnectWithoutDocumentInput[]
+    upsert?: chatsUpsertWithWhereUniqueWithoutDocumentInput | chatsUpsertWithWhereUniqueWithoutDocumentInput[]
+    createMany?: chatsCreateManyDocumentInputEnvelope
+    set?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    disconnect?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    delete?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    connect?: chatsWhereUniqueInput | chatsWhereUniqueInput[]
+    update?: chatsUpdateWithWhereUniqueWithoutDocumentInput | chatsUpdateWithWhereUniqueWithoutDocumentInput[]
+    updateMany?: chatsUpdateManyWithWhereWithoutDocumentInput | chatsUpdateManyWithWhereWithoutDocumentInput[]
+    deleteMany?: chatsScalarWhereInput | chatsScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -10408,6 +10834,13 @@ export namespace Prisma {
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
   }
 
+  export type documentsCreateNestedManyWithoutUserInput = {
+    create?: XOR<documentsCreateWithoutUserInput, documentsUncheckedCreateWithoutUserInput> | documentsCreateWithoutUserInput[] | documentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutUserInput | documentsCreateOrConnectWithoutUserInput[]
+    createMany?: documentsCreateManyUserInputEnvelope
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -10420,6 +10853,13 @@ export namespace Prisma {
     connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
     createMany?: SessionCreateManyUserInputEnvelope
     connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type documentsUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<documentsCreateWithoutUserInput, documentsUncheckedCreateWithoutUserInput> | documentsCreateWithoutUserInput[] | documentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutUserInput | documentsCreateOrConnectWithoutUserInput[]
+    createMany?: documentsCreateManyUserInputEnvelope
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -10454,6 +10894,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type documentsUpdateManyWithoutUserNestedInput = {
+    create?: XOR<documentsCreateWithoutUserInput, documentsUncheckedCreateWithoutUserInput> | documentsCreateWithoutUserInput[] | documentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutUserInput | documentsCreateOrConnectWithoutUserInput[]
+    upsert?: documentsUpsertWithWhereUniqueWithoutUserInput | documentsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: documentsCreateManyUserInputEnvelope
+    set?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    disconnect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    delete?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    update?: documentsUpdateWithWhereUniqueWithoutUserInput | documentsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: documentsUpdateManyWithWhereWithoutUserInput | documentsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: documentsScalarWhereInput | documentsScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -10482,6 +10936,20 @@ export namespace Prisma {
     deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
   }
 
+  export type documentsUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<documentsCreateWithoutUserInput, documentsUncheckedCreateWithoutUserInput> | documentsCreateWithoutUserInput[] | documentsUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: documentsCreateOrConnectWithoutUserInput | documentsCreateOrConnectWithoutUserInput[]
+    upsert?: documentsUpsertWithWhereUniqueWithoutUserInput | documentsUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: documentsCreateManyUserInputEnvelope
+    set?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    disconnect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    delete?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    connect?: documentsWhereUniqueInput | documentsWhereUniqueInput[]
+    update?: documentsUpdateWithWhereUniqueWithoutUserInput | documentsUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: documentsUpdateManyWithWhereWithoutUserInput | documentsUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: documentsScalarWhereInput | documentsScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -10494,20 +10962,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -10549,6 +11003,34 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -10575,20 +11057,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10643,6 +11111,285 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type documentsCreateWithoutGuestUserInput = {
+    id?: string
+    name?: string | null
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    chats?: chatsCreateNestedManyWithoutDocumentInput
+    user: UserCreateNestedOneWithoutDocumentsInput
+  }
+
+  export type documentsUncheckedCreateWithoutGuestUserInput = {
+    id?: string
+    name?: string | null
+    user_id: string
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    chats?: chatsUncheckedCreateNestedManyWithoutDocumentInput
+  }
+
+  export type documentsCreateOrConnectWithoutGuestUserInput = {
+    where: documentsWhereUniqueInput
+    create: XOR<documentsCreateWithoutGuestUserInput, documentsUncheckedCreateWithoutGuestUserInput>
+  }
+
+  export type documentsCreateManyGuestUserInputEnvelope = {
+    data: documentsCreateManyGuestUserInput | documentsCreateManyGuestUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type documentsUpsertWithWhereUniqueWithoutGuestUserInput = {
+    where: documentsWhereUniqueInput
+    update: XOR<documentsUpdateWithoutGuestUserInput, documentsUncheckedUpdateWithoutGuestUserInput>
+    create: XOR<documentsCreateWithoutGuestUserInput, documentsUncheckedCreateWithoutGuestUserInput>
+  }
+
+  export type documentsUpdateWithWhereUniqueWithoutGuestUserInput = {
+    where: documentsWhereUniqueInput
+    data: XOR<documentsUpdateWithoutGuestUserInput, documentsUncheckedUpdateWithoutGuestUserInput>
+  }
+
+  export type documentsUpdateManyWithWhereWithoutGuestUserInput = {
+    where: documentsScalarWhereInput
+    data: XOR<documentsUpdateManyMutationInput, documentsUncheckedUpdateManyWithoutGuestUserInput>
+  }
+
+  export type documentsScalarWhereInput = {
+    AND?: documentsScalarWhereInput | documentsScalarWhereInput[]
+    OR?: documentsScalarWhereInput[]
+    NOT?: documentsScalarWhereInput | documentsScalarWhereInput[]
+    id?: StringFilter<"documents"> | string
+    name?: StringNullableFilter<"documents"> | string | null
+    user_id?: StringFilter<"documents"> | string
+    guest_user_id?: StringNullableFilter<"documents"> | string | null
+    file_link?: StringNullableFilter<"documents"> | string | null
+    file_key?: StringNullableFilter<"documents"> | string | null
+    created_at?: DateTimeFilter<"documents"> | Date | string
+    updated_at?: DateTimeFilter<"documents"> | Date | string
+  }
+
+  export type documentsCreateWithoutChatsInput = {
+    id?: string
+    name?: string | null
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    user: UserCreateNestedOneWithoutDocumentsInput
+    guestUser?: GuestUserCreateNestedOneWithoutDocumentsInput
+  }
+
+  export type documentsUncheckedCreateWithoutChatsInput = {
+    id?: string
+    name?: string | null
+    user_id: string
+    guest_user_id?: string | null
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type documentsCreateOrConnectWithoutChatsInput = {
+    where: documentsWhereUniqueInput
+    create: XOR<documentsCreateWithoutChatsInput, documentsUncheckedCreateWithoutChatsInput>
+  }
+
+  export type documentsUpsertWithoutChatsInput = {
+    update: XOR<documentsUpdateWithoutChatsInput, documentsUncheckedUpdateWithoutChatsInput>
+    create: XOR<documentsCreateWithoutChatsInput, documentsUncheckedCreateWithoutChatsInput>
+    where?: documentsWhereInput
+  }
+
+  export type documentsUpdateToOneWithWhereWithoutChatsInput = {
+    where?: documentsWhereInput
+    data: XOR<documentsUpdateWithoutChatsInput, documentsUncheckedUpdateWithoutChatsInput>
+  }
+
+  export type documentsUpdateWithoutChatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+    guestUser?: GuestUserUpdateOneWithoutDocumentsNestedInput
+  }
+
+  export type documentsUncheckedUpdateWithoutChatsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsCreateWithoutDocumentInput = {
+    id?: string
+    role?: string | null
+    user_id?: string | null
+    content?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type chatsUncheckedCreateWithoutDocumentInput = {
+    id?: string
+    role?: string | null
+    user_id?: string | null
+    content?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type chatsCreateOrConnectWithoutDocumentInput = {
+    where: chatsWhereUniqueInput
+    create: XOR<chatsCreateWithoutDocumentInput, chatsUncheckedCreateWithoutDocumentInput>
+  }
+
+  export type chatsCreateManyDocumentInputEnvelope = {
+    data: chatsCreateManyDocumentInput | chatsCreateManyDocumentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutDocumentsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutDocumentsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutDocumentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
+  }
+
+  export type GuestUserCreateWithoutDocumentsInput = {
+    id?: string
+    cookieId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GuestUserUncheckedCreateWithoutDocumentsInput = {
+    id?: string
+    cookieId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type GuestUserCreateOrConnectWithoutDocumentsInput = {
+    where: GuestUserWhereUniqueInput
+    create: XOR<GuestUserCreateWithoutDocumentsInput, GuestUserUncheckedCreateWithoutDocumentsInput>
+  }
+
+  export type chatsUpsertWithWhereUniqueWithoutDocumentInput = {
+    where: chatsWhereUniqueInput
+    update: XOR<chatsUpdateWithoutDocumentInput, chatsUncheckedUpdateWithoutDocumentInput>
+    create: XOR<chatsCreateWithoutDocumentInput, chatsUncheckedCreateWithoutDocumentInput>
+  }
+
+  export type chatsUpdateWithWhereUniqueWithoutDocumentInput = {
+    where: chatsWhereUniqueInput
+    data: XOR<chatsUpdateWithoutDocumentInput, chatsUncheckedUpdateWithoutDocumentInput>
+  }
+
+  export type chatsUpdateManyWithWhereWithoutDocumentInput = {
+    where: chatsScalarWhereInput
+    data: XOR<chatsUpdateManyMutationInput, chatsUncheckedUpdateManyWithoutDocumentInput>
+  }
+
+  export type chatsScalarWhereInput = {
+    AND?: chatsScalarWhereInput | chatsScalarWhereInput[]
+    OR?: chatsScalarWhereInput[]
+    NOT?: chatsScalarWhereInput | chatsScalarWhereInput[]
+    id?: StringFilter<"chats"> | string
+    role?: StringNullableFilter<"chats"> | string | null
+    user_id?: StringNullableFilter<"chats"> | string | null
+    content?: StringNullableFilter<"chats"> | string | null
+    document_id?: StringFilter<"chats"> | string
+    created_at?: DateTimeFilter<"chats"> | Date | string
+    updated_at?: DateTimeFilter<"chats"> | Date | string
+  }
+
+  export type UserUpsertWithoutDocumentsInput = {
+    update: XOR<UserUpdateWithoutDocumentsInput, UserUncheckedUpdateWithoutDocumentsInput>
+    create: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutDocumentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutDocumentsInput, UserUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type UserUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type GuestUserUpsertWithoutDocumentsInput = {
+    update: XOR<GuestUserUpdateWithoutDocumentsInput, GuestUserUncheckedUpdateWithoutDocumentsInput>
+    create: XOR<GuestUserCreateWithoutDocumentsInput, GuestUserUncheckedCreateWithoutDocumentsInput>
+    where?: GuestUserWhereInput
+  }
+
+  export type GuestUserUpdateToOneWithWhereWithoutDocumentsInput = {
+    where?: GuestUserWhereInput
+    data: XOR<GuestUserUpdateWithoutDocumentsInput, GuestUserUncheckedUpdateWithoutDocumentsInput>
+  }
+
+  export type GuestUserUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cookieId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GuestUserUncheckedUpdateWithoutDocumentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cookieId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -10650,6 +11397,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
+    documents?: documentsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -10659,6 +11407,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    documents?: documentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -10684,6 +11433,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    documents?: documentsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -10693,6 +11443,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    documents?: documentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -10702,6 +11453,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
+    documents?: documentsCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -10711,6 +11463,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    documents?: documentsUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -10736,6 +11489,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
+    documents?: documentsUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -10745,6 +11499,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    documents?: documentsUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -10804,6 +11559,38 @@ export namespace Prisma {
 
   export type SessionCreateManyUserInputEnvelope = {
     data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type documentsCreateWithoutUserInput = {
+    id?: string
+    name?: string | null
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    chats?: chatsCreateNestedManyWithoutDocumentInput
+    guestUser?: GuestUserCreateNestedOneWithoutDocumentsInput
+  }
+
+  export type documentsUncheckedCreateWithoutUserInput = {
+    id?: string
+    name?: string | null
+    guest_user_id?: string | null
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+    chats?: chatsUncheckedCreateNestedManyWithoutDocumentInput
+  }
+
+  export type documentsCreateOrConnectWithoutUserInput = {
+    where: documentsWhereUniqueInput
+    create: XOR<documentsCreateWithoutUserInput, documentsUncheckedCreateWithoutUserInput>
+  }
+
+  export type documentsCreateManyUserInputEnvelope = {
+    data: documentsCreateManyUserInput | documentsCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -10867,6 +11654,100 @@ export namespace Prisma {
     expires?: DateTimeFilter<"Session"> | Date | string
   }
 
+  export type documentsUpsertWithWhereUniqueWithoutUserInput = {
+    where: documentsWhereUniqueInput
+    update: XOR<documentsUpdateWithoutUserInput, documentsUncheckedUpdateWithoutUserInput>
+    create: XOR<documentsCreateWithoutUserInput, documentsUncheckedCreateWithoutUserInput>
+  }
+
+  export type documentsUpdateWithWhereUniqueWithoutUserInput = {
+    where: documentsWhereUniqueInput
+    data: XOR<documentsUpdateWithoutUserInput, documentsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type documentsUpdateManyWithWhereWithoutUserInput = {
+    where: documentsScalarWhereInput
+    data: XOR<documentsUpdateManyMutationInput, documentsUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type documentsCreateManyGuestUserInput = {
+    id?: string
+    name?: string | null
+    user_id: string
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type documentsUpdateWithoutGuestUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: chatsUpdateManyWithoutDocumentNestedInput
+    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+  }
+
+  export type documentsUncheckedUpdateWithoutGuestUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: chatsUncheckedUpdateManyWithoutDocumentNestedInput
+  }
+
+  export type documentsUncheckedUpdateManyWithoutGuestUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: StringFieldUpdateOperationsInput | string
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsCreateManyDocumentInput = {
+    id?: string
+    role?: string | null
+    user_id?: string | null
+    content?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type chatsUpdateWithoutDocumentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsUncheckedUpdateWithoutDocumentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type chatsUncheckedUpdateManyWithoutDocumentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    content?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -10885,6 +11766,16 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+  }
+
+  export type documentsCreateManyUserInput = {
+    id?: string
+    name?: string | null
+    guest_user_id?: string | null
+    file_link?: string | null
+    file_key?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -10945,6 +11836,38 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type documentsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: chatsUpdateManyWithoutDocumentNestedInput
+    guestUser?: GuestUserUpdateOneWithoutDocumentsNestedInput
+  }
+
+  export type documentsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    chats?: chatsUncheckedUpdateManyWithoutDocumentNestedInput
+  }
+
+  export type documentsUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    file_link?: NullableStringFieldUpdateOperationsInput | string | null
+    file_key?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

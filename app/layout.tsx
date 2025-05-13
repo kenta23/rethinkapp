@@ -1,6 +1,7 @@
 import NextThemeProvider from "@/components/next-theme-provider"
 import { Rubik } from "next/font/google"
 import '@/styles/globals.css'
+import '@/styles/main.css'
 import '@/styles/typography.css'
 import ReactQueryProvider from "../providers/QueryProvider"
 import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin'
@@ -33,12 +34,12 @@ export default function RootLayout({
                      />
                         <SessionProvider>
                             {children}
-                            <Footer />
                         </SessionProvider>
                           <Toaster 
                             position="top-center"
                             closeButton={true}
                           />
+                          <Footer />
                  </NextThemeProvider>
                </ReactQueryProvider> 
             </body> 

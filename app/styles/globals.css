@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "uploadthing/tw/v4";
+@plugin 'tailwind-scrollbar';
 
 /*---break--- */
 @custom-variant dark (&:is(.dark *));
@@ -13,5 +14,6 @@
   body {
     @apply bg-background text-foreground;
   }
+  
 }
 

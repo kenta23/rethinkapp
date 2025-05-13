@@ -41,3 +41,13 @@
         width: 200px;
     }
 }
+
+.scroll {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+  .scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+  

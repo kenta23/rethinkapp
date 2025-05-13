@@ -3,6 +3,7 @@ import Lists, { DeleteDialog } from './lists';
 import { useQuery } from '@tanstack/react-query';
 import { Loader, Loader2 } from 'lucide-react';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
 
 
 const dummyData = Array.from({ length: 30 }, (_, index) => ({
@@ -18,22 +19,24 @@ const dummyData = Array.from({ length: 30 }, (_, index) => ({
 
 
 export default function Archive() {
+  const session = useSession();
   const { isPending, error, data } = useQuery({
     queryKey: ['projects'],
     queryFn: () => axios.get('/api/projects').then((res) => res.data),
     staleTime: 1000 * 60, //1 minute staletime
   })
 
+
   return (
-    <div className="p-4 gap-5 w-3/4 mx-auto h-full max-h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="p-4 gap-5 w-3/4 mx-auto max-h-[calc(100vh-400px)] overflow-y-auto scroll grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
       {isPending ? (
         <Loader2 className="size-8 text-violet-600 text-center animate-spin" />
       ) : error ? (
         <p className="text-gray-600">Something went wrong.</p>
-      ) : !data ?  (
+      ) : data && data.length === 0 ? (
         <p className="text-gray-600">No projects yet.</p>
       ) : (
-        data.map((item: any) => <Lists data={item} key={item.id} />) 
+        data.map((item: any) => <Lists data={item} key={item.id} />)
       )}
     </div>
   ); 
