@@ -10,6 +10,7 @@ import Archive from '@/components/archive';
 import { UploadDropzone } from '@/lib/uploadthing';
 import { Session } from 'next-auth';
 import prisma from '@/lib/prisma';
+import { UploadThingError } from 'uploadthing/server';
 
 
 
@@ -33,13 +34,6 @@ export default function AddProjectDialog() {
       }
    })
 
-   useEffect(() => { 
-    if (data) { 
-         toast.message(JSON.stringify(data.data.message));
-     }
-   }, [data]);
-
-
 
     return (
       <div className="mt-8 flex items-center justify-center gap-6 flex-col">
@@ -50,13 +44,14 @@ export default function AddProjectDialog() {
           appendOnPaste: true,
           mode: "auto"
         }}
+        
         content={{
           allowedContent: "Maximum file size is 32mb",
         }}
         className="py-4"
         appearance={{
           button:
-            "ut-ready:bg-yellow-500 rounded-lg ut-uploading:cursor-not-allowed ut-uploading:opacity-50 px-3 py-2 bg-violet-500 cursor-pointer text-sm after:bg-green-400",
+            "ut-ready:bg-yellow-500 w-45 rounded-lg ut-uploading:cursor-not-allowed ut-uploading:opacity-50 px-3 py-2 bg-violet-500 cursor-pointer text-sm after:bg-green-400",
           uploadIcon: "text-gray-400",
           container: "border-dashed border-[#998CEE]",
           label: "text-lg dark:text-white",
@@ -73,6 +68,7 @@ export default function AddProjectDialog() {
               url: res[0].ufsUrl,
               file_key: res[0].key,
             },
+            
             {
               onSuccess: (result) => {
                 //result from the Response api
@@ -81,13 +77,13 @@ export default function AddProjectDialog() {
                 console.log("result: ", result);
               },
               onError: (err) => {
-                toast.error("Error " + err.message);
+                toast.error(err.message);
               },
             }
           );
         }}
         onUploadError={(error: Error) => {
-          toast.error(`ERROR! ${error.message}`);
+          toast.error(error.message);
         }}
       />
       {/**ARCHIVES LISTS */}

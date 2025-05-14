@@ -45,14 +45,14 @@ Todolist to improve system ui and performance:
 
  May 08, 2025: 
   ✔ change ui of main page @done(25-05-10 21:30)
-  ☐ create a feature that allows user to use chat for one time as guest without need to sign in.
+  ✔ create a feature that allows user to use chat for one time as guest without need to sign in. @done(25-05-14 20:20)
   ✔ saving chat history limited for the authenticated users. @done(25-05-13 21:53)
 
  May 10, 2025:
   ✔ fix pinecone data deletion @done(25-05-11 22:01)
 
  May 12, 2025:
-  ☐ add cron jobs for deleting temporary data
+  ✘ add cron jobs for deleting temporary data @cancelled(25-05-14 20:21)
   ✔ use cookies for guest user @done(25-05-13 21:53)
   ✔ Fix login page UI @done(25-05-14 13:36)
   

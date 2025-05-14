@@ -17,7 +17,6 @@ export default function Lists({ data }: { data: savedDataDbType }) {
    const queryClient = useQueryClient();
    const router = useRouter();
 
-   console.log('data',data);
 
    const { mutate, error, isPending, data: message } = useMutation({
        mutationFn: async (i: string) => await deleteProject(i),
@@ -47,7 +46,7 @@ export default function Lists({ data }: { data: savedDataDbType }) {
        mutate(id, {
          onSuccess: async () => {
            console.log('Done deleted!');
-           toast.success(`${data?.name} Deleted successfully!`);
+           toast.success(`${data?.name} Successfully deleted!`);
            await queryClient.invalidateQueries({ queryKey: ['projects'] });
            router.refresh();
          }
@@ -72,7 +71,7 @@ export default function Lists({ data }: { data: savedDataDbType }) {
         </p>
       </div>
 
-      <button className='cursor-pointer hover:scale-110' onClick={(e) => deleteFile(data?.id ?? '', e)}>
+      <button className='cursor-pointer hover:scale-110' onClick={(e) => deleteFile(data?.id as string, e)}>
         <X className='text-red-400 dark:text-red-500' size={20} cursor={"pointer"} />
       </button>
 

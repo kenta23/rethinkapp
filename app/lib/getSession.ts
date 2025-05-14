@@ -9,10 +9,17 @@ export async function getUserGuestSession () {
     const guestUser = cookieStore.get('guest_user')?.value;
 
     //fetch the guest user from the db
-    const guestUserFromDB = await prisma.guestUser.findFirst({ 
+    return await prisma.guestUser.findFirst({ 
         where: { 
             cookieId: guestUser
-        }
+        },
+        include: { 
+            documents: { 
+                 orderBy: {
+                    updated_at: 'desc'
+                 }
+            }
+        },
     });
-    return guestUserFromDB;
+    ;
 }

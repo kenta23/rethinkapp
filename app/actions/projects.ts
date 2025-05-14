@@ -113,10 +113,16 @@ export async function deleteProject (id: string) {
 
    try {
       const data = await prisma.documents.delete({
-         where: { id },
-         include: { 
-            chats: true
-         }
+        where: {
+          id,
+          OR: [
+            { user_id: session?.user.id },
+            { guest_user_id: checkGuestUser?.id },
+          ],
+        },
+        include: {
+          chats: true,
+        },
       });
 
       if (data) {

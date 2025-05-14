@@ -19,7 +19,6 @@ const dummyData = Array.from({ length: 30 }, (_, index) => ({
 
 
 export default function Archive() {
-  const session = useSession();
   const { isPending, error, data } = useQuery({
     queryKey: ['projects'],
     queryFn: () => axios.get('/api/projects').then((res) => res.data),

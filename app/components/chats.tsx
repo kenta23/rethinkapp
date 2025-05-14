@@ -2,7 +2,7 @@
 
 import { Message, useChat } from '@ai-sdk/react';
 import { Send } from 'lucide-react';
-import React, { ChangeEvent, useEffect, useMemo, useRef, useState, type JSX } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState, type JSX } from 'react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
@@ -23,6 +23,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
     
     const messageContainer = useRef<HTMLDivElement>(null);
     const [clicked, setClicked] = useState<boolean>(false);
+   
 
     const { data: chatdata, isLoading: loading, error, isFetching } = useQuery({  
       queryKey: ['chats', data?.id], 
@@ -69,14 +70,14 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
    }, [messages, status]);
    
 
+
   useEffect(() => {
     //Questions made by AI
     //This will get the questions made by AI from the document if theres no chat initially
     async function getData() {
-       const { text } = await getSuggestionContext(data?.file_key || '');
+       const { text } = await getSuggestionContext(data?.file_key as string);
        const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
-       setAiquestions(dividedQuestions);  
-
+       setAiquestions(dividedQuestions); 
     }
      if(!chatdata?.length && !loading && !isFetching) {
        getData();
@@ -91,7 +92,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
             className={`w-full p-3 h-auto flex flex-col overflow-y-auto`}
           > 
           {/**If there is no chat data, loading, and clicked is false, then show the questions made by AI */}
-            {!chatdata?.length && !loading && !clicked ? (
+            {!chatdata?.length && !loading ? (
               <div className="h-auto justify-end mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI
                   fileKey={data?.file_key as string}

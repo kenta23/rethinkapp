@@ -2,43 +2,32 @@ import { auth } from "../../../auth";
 import { NextResponse } from "next/server";
 import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
-import { revalidatePath } from "next/cache";
 import prisma from '../../lib/prisma';
 import { getUserGuestSession } from "@/lib/getSession";
 
 
 export async function GET() {
         const session = await auth();
-        const checkGuestUser = await getUserGuestSession();
+        const guestUserData = await getUserGuestSession();
 
-      if (!session?.user && !checkGuestUser) { 
-        return NextResponse.json([], { status: 200 });
+      if (!session?.user && !guestUserData) { 
+          return NextResponse.json([], { status: 200 });
       }
-
+ 
       try {
-          if (checkGuestUser && !session?.user) {
-            const data = await prisma.documents.findMany({ 
-               where: {  
-                  guest_user_id: checkGuestUser?.id
-               },
-                 orderBy: { 
-                    updated_at: 'desc'
-                 },
-                 
-             })
-
-             return NextResponse.json(data, { status: 200});
+          if (guestUserData && !session?.user) {
+             return NextResponse.json(guestUserData.documents, { status: 200});
            }
        if (session?.user) { 
-         const data = await prisma.documents.findMany({ 
+         const data = await prisma.user.findFirst({ 
             where: { 
-               user_id: session?.user.id
+               id: session?.user.id
             },
-              orderBy: { 
-                 updated_at: 'desc'
-              }
+             include: {
+               documents: true
+             }
           })
-         return NextResponse.json(data, { status: 200 });
+         return NextResponse.json(data?.documents, { status: 200 });
        }
 
       } catch (error) {

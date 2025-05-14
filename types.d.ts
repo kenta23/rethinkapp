@@ -1,4 +1,3 @@
-import { XataArrayFile } from "@xata.io/client"
 import NextAuth, { DefaultSession, DefaultJWT } from "next-auth";
 import { JWT } from "next-auth/jwt";
 
@@ -12,7 +11,7 @@ export type savedDataDbType = {
   file_key: string | null;
   created_at: Date;
   updated_at: Date;
-} | null; 
+} | undefined; 
 
 
 declare module "next-auth" {

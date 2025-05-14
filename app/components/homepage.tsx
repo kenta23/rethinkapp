@@ -8,7 +8,8 @@ import { motion, useScroll, m, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer';
 import Hero from "@/components/Hero";
 import StickyNavbar from "./StickyNavbar";
-
+import { auth } from "../../auth";
+import { useSession } from "next-auth/react";
 
 
 const purpose = [
@@ -103,6 +104,10 @@ const Home = () => {
     target: scrollRef,
     offset: ["0 1", "1.33 1"]
   });
+
+  const session = useSession();
+
+  console.log(session);
 
   const [ref, inView] = useInView({
     threshold: 0,
