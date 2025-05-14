@@ -17,13 +17,13 @@ const f = createUploadthing(
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   pdfUploader: f({ pdf: { maxFileSize: "8MB", maxFileCount: 1 } })
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete(async ({ metadata, file }: { metadata: any, file: any }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userid);
+      console.log("Upload complete for userId:", metadata?.userid);
       console.log("file url", file.ufsUrl);
       console.log("file key", file.key);
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.userid };
+      return { uploadedBy: metadata?.userid };
     }),
 } satisfies FileRouter;
  

@@ -181,7 +181,7 @@ export default function Footer() {
         </div>
 
         <div className="mx-auto md:mx-0">
-          <span className="text-sm">Copyright © 2024 ReThink</span>
+          <span className="text-sm">{`Copyright © ${new Date().getFullYear()} ReThink`}</span>
         </div>
       </div>
     </main>

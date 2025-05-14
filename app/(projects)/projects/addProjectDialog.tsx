@@ -19,16 +19,11 @@ type documentType = {
 }
 
 
-export default function AddProjectDialog({ session }: { session: Session | null }) {
+export default function AddProjectDialog() {
     const router = useRouter(); 
-    const [data, setData] = useState<documentType>({
-      url: '',
-      file_key: ''
-   })
-   const [enableUpload, setEnableUpload] = useState<boolean>(true);
 
   
-    const { mutate, isPending, isSuccess } = useMutation({
+    const { mutate,  data } = useMutation({
       mutationFn: async (items: documentType) => axios.post('/api/store-data', items),
       onError: (err) => {
         console.log(err.message);
@@ -38,13 +33,19 @@ export default function AddProjectDialog({ session }: { session: Session | null 
       }
    })
 
-   
-  return (
-    <div className="mt-8 flex items-center justify-center gap-6 flex-col">
-      {/**CREATE BUTTON HERE */}
-      <UploadDropzone
-        endpoint="pdfUploader"
-        disabled={!enableUpload}
+   useEffect(() => { 
+    if (data) { 
+         toast.message(JSON.stringify(data.data.message));
+     }
+   }, [data]);
+
+
+
+    return (
+      <div className="mt-8 flex items-center justify-center gap-6 flex-col">
+        {/**CREATE BUTTON HERE */}
+        <UploadDropzone
+          endpoint="pdfUploader"
         config={{ 
           appendOnPaste: true,
           mode: "auto"
@@ -75,7 +76,7 @@ export default function AddProjectDialog({ session }: { session: Session | null 
             {
               onSuccess: (result) => {
                 //result from the Response api
-                toast.success("Successful");
+                toast.success("Redirecting you to the next page please wait...");
                 router.push(`/main/${result.data}`);
                 console.log("result: ", result);
               },
@@ -91,13 +92,6 @@ export default function AddProjectDialog({ session }: { session: Session | null 
       />
       {/**ARCHIVES LISTS */}
         <Archive />
-      {/* {session?.user ? (
-        <Archive />
-      ) : (
-        <p className="self-center mx-auto mt-[70px] text-[18px] font-normal text-[#A09EA8]">
-          Log in to continue
-        </p>
-      )} */}
     </div>
   );
 }

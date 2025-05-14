@@ -16,7 +16,8 @@ const aiModel = createOpenAI({
 })
 
 export async function POST(req: Request) {
-  const { messages, fileKey, userId, id } = await req.json();
+  const { messages, fileKey, userId, guestUserId, id } = await req.json();
+  const user = userId ?? guestUserId;
 
   if(!fileKey) return NextResponse.json({ error: "missing file key"}, { status: 404 });
   
@@ -38,7 +39,7 @@ export async function POST(req: Request) {
           data: [
             {
               id: lastMessage.id,
-              user_id: userId,
+              user_id: user,
               role: "user",
               content: lastMessage.content as string,
               document_id: id,
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
             },
             {
               id: response.id,
-              user_id: userId,
+              user_id: user,
               role: response.messages[0].role,
               content: response.messages
                 .flatMap((msg) => {

@@ -19,7 +19,7 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
     })
 
     return {
-      title: data?.file_key,
+      title: data?.name,
       description: data?.id
     }
 }
@@ -30,6 +30,6 @@ export default async function page(props: { params: Promise<{ slug: string }> })
     const { slug } = params;
 
     const data = await getData(slug);
-    
-    return <Mainchat data={data as savedDataDbType} />;
+   
+    return <Mainchat data={data as any} />;
 }

@@ -13,9 +13,11 @@ import { truncateString } from '@/lib/utils';
 
 
 
-export default function Lists({ data }: { data: savedDataDbType}) {
+export default function Lists({ data }: { data: savedDataDbType }) {
    const queryClient = useQueryClient();
    const router = useRouter();
+
+   console.log('data',data);
 
    const { mutate, error, isPending, data: message } = useMutation({
        mutationFn: async (i: string) => await deleteProject(i),
@@ -39,13 +41,13 @@ export default function Lists({ data }: { data: savedDataDbType}) {
      e.stopPropagation();
      e.preventDefault();
 
-      if(isPending) {
+      if (isPending) {
          toast.loading('Deleting file.....');
       }
        mutate(id, {
          onSuccess: async () => {
            console.log('Done deleted!');
-           toast.success(`${data.name} Deleted successfully!`);
+           toast.success(`${data?.name} Deleted successfully!`);
            await queryClient.invalidateQueries({ queryKey: ['projects'] });
            router.refresh();
          }
@@ -54,7 +56,7 @@ export default function Lists({ data }: { data: savedDataDbType}) {
 
   return (
     <Link
-      href={`/main/${data.id}`}
+      href={`/main/${data?.id }`}
       className="border flex items-center gap-4
       border-[#8A7BE8] px-4 py-2 
       w-full
@@ -64,13 +66,13 @@ export default function Lists({ data }: { data: savedDataDbType}) {
     >
       {/**DOCUMENT INFO */}
       <div>
-        <p className="font-medium text-black dark:text-white">{truncateString(data.name, 15)}</p>
+        <p className="font-medium text-black dark:text-white">{truncateString(data?.name ?? '', 15)}</p>
         <p className="font-light text-[14px] text-gray-500">
-          {formatDate(data.updated_at.toString())}
+          {formatDate(data?.updated_at?.toString() ?? '')} 
         </p>
       </div>
 
-      <button className='cursor-pointer hover:scale-110' onClick={(e) =>    deleteFile(data.id!, e)}>
+      <button className='cursor-pointer hover:scale-110' onClick={(e) => deleteFile(data?.id ?? '', e)}>
         <X className='text-red-400 dark:text-red-500' size={20} cursor={"pointer"} />
       </button>
 

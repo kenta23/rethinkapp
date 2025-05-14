@@ -18,6 +18,7 @@ export default function Projects() {
  
   return (
     <div className="px-5 md:px-[55px] w-full h-screen min-h-full max-h-auto py-4 md:py-[24px]">
+      {/**NAV BAR */}
       <nav className="flex justify-between px-2 md:px-8 items-center">
         <Link href={"/"}>
           <Image width={35} height={35} src={"/Logo.png"} alt={"Logo"} />
@@ -57,7 +58,7 @@ export default function Projects() {
 
           {/**ARCHIVES */}
           <div className="w-full h-auto">
-            <AddProjectDialog session={session.data} />
+            <AddProjectDialog/>
           </div>
         </div>
 

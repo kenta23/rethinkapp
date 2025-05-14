@@ -1,9 +1,4 @@
 import NextAuth from 'next-auth'
-import Github from 'next-auth/providers/github'
-import Google from 'next-auth/providers/google'
-import Credentials from 'next-auth/providers/credentials'
-import { ZodError } from 'zod'
-import { compare } from 'bcryptjs';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import prisma from './app/lib/prisma'
 import authconfig from './auth.config';
@@ -24,11 +19,14 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
       const cookieStore = await cookies();
 
       if (cookieStore.get('guest_user')?.value) { 
-         await prisma.guestUser.delete({ 
+        const guestUserDeleted = await prisma.guestUser.delete({ 
            where: { 
             cookieId: cookieStore.get('guest_user')?.value
            }
-        })
+        }) 
+        if (guestUserDeleted) {
+           return NextResponse.json("Guest user deleted", { status: 200 });
+        }
       }
       if (isLoggedIn) {
         // Redirecting authenticated users to the projects if they attempt to access authentication-related pages like login/signup
@@ -37,10 +35,11 @@ export const { auth, handlers, signOut, signIn } = NextAuth({
           nextUrl.pathname === "/register" ||
           nextUrl.pathname === "/forgot-password" ||
           nextUrl.pathname === "/change-password";
-        if (alreadyAuthenticated)
+
+        if (alreadyAuthenticated){ 
           return NextResponse.redirect(new URL("/projects", nextUrl));
-        return true;
-      }
+        }     
+       }
     },
   
     async jwt({ token, account, user, profile, trigger, session }) {

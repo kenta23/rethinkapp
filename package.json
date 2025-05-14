@@ -1,9 +1,8 @@
 {
   "name": "rethink",
   "version": "2.0",
-  "description": "Nextjs boilerplate with Tailwindcss, ShadcnUI, Framer Motion, Lucide, and Next Themes",
+  "description": "AI Document analysis and summarization",
   "author": "Rusty Ramos",
-  "bin": "./bin/cli.js",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

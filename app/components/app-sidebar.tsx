@@ -25,6 +25,7 @@ import Link from "next/link";
 import AppSidebarForm from "./app-sidebar-form";
 import { usePathname } from "next/navigation";
 import { truncateString } from "@/lib/utils";
+import { Skeleton } from "./ui/skeleton";
 
 
 export function AppSidebar() {
@@ -61,7 +62,12 @@ export function AppSidebar() {
           {/**RENDER CHAT HISTORY HERE */}
           <SidebarMenu className="flex overflow-x-hidden scroll relative flex-col h-auto w-full gap-3 items-start">
             {isFetching ? (
-              <p>Loading...</p>
+               Array.from({length: 4}).map((__, index) => { 
+                   return (
+                      <Skeleton key={index} className={`px-3 py-2 h-10 rounded-xl bg-white/10 backdrop-blur-sm  w-full flex justify-between items-center`}>                         
+                      </Skeleton>
+                   )
+               })
             ) : (
               chatHistory?.data.map((chat: any) => (
                 <SidebarMenuItem

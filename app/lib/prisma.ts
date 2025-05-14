@@ -1,4 +1,4 @@
-import { PrismaClient } from '../../src/generated/prisma'
+import { PrismaClient } from '../../src/generated/prisma';
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { withOptimize } from '@prisma/extension-optimize';
 

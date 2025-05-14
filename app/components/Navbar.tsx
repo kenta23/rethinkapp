@@ -30,26 +30,23 @@ import UserPopover from "./UserPopover";
 
 export const LinkButton = ({
   href,
-  variant,
   text,
   className,
   icon
 }: {
   icon: JSX.Element;
   href: string;
-  variant: string | any;
   text: string;
   className?: string;
 }) => {
   return (
-    <Link href={href} className="flex items-center">
+    <Link href={href} className="flex hover:text-gray-300 transition-all duration-200 items-center gap-3 cursor-pointer ">
       {icon}
-      <Button
-        variant={variant}
-        className={`text-black font-medium sm:text-[16px] md:text-[20px] ${className}`}
+      <span
+        className={`font-normal text-md ${className}`}
       >
         {text}
-      </Button>
+      </span>
     </Link>
   );
 };
@@ -107,45 +104,15 @@ const Navbar = () => {
                   <Avatar user={data?.user.image as string} />
                 </div>
               </div>
+
               <div>
                 <LinkButton
                   href={"/profile"}
-                  icon={<Settings size={24} className="text-black" />}
+                  icon={<Settings size={20} className="text-black" />}
                   text="Profile Setings"
-                  variant={"link"}
                 />
 
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <div className="flex  items-center">
-                      <LogOut />
-                      <Button
-                        variant={"link"}
-                        className={`text-black font-medium sm:text-[16px] md:text-[20px]`}
-                      >
-                        Logout
-                      </Button>
-                    </div>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Are you absolutely sure you want to logout?
-                      </AlertDialogTitle>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={() => {
-                          signOut();
-                        }}
-                      >
-                        Continue
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>{" "}
+              </div>
             </>
           ) : (
             <Link

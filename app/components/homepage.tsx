@@ -1,7 +1,6 @@
 'use client'
 
 import Navbar from "@/components/Navbar";
-import Link from "next/link";
 import Image from 'next/image'
 import React, { useEffect, useRef } from "react";
 import { CheckCircle2 } from 'lucide-react';
@@ -9,9 +8,7 @@ import { motion, useScroll, m, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer';
 import Hero from "@/components/Hero";
 import StickyNavbar from "./StickyNavbar";
-import { getVideoFile } from "@/actions/videosrc";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 
 
 const purpose = [

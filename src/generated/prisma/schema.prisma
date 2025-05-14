@@ -35,7 +35,7 @@ model chats {
 model documents {
   id            String   @id @default(cuid())
   name          String?
-  user_id       String
+  user_id       String?
   guest_user_id String?
   file_link     String?
   file_key      String?
@@ -43,7 +43,7 @@ model documents {
   updated_at    DateTime @default(now()) @db.Timestamptz(6)
   chats         chats[]
 
-  user      User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  user      User?      @relation(fields: [user_id], references: [id], onDelete: Cascade)
   guestUser GuestUser? @relation(fields: [guest_user_id], references: [id], onDelete: Cascade)
 }
 

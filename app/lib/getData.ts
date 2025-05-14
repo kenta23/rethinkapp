@@ -1,36 +1,45 @@
 'use server';
 
-import { redirect } from 'next/navigation';
+import { Turret_Road } from 'next/font/google';
 import { auth } from '../../auth';
 import prisma from './prisma';
 import { cookies } from "next/headers";
 
+
 export async function getData(id: string) {
-   //check if the user is a guest 
+   // Check if the user is a guest 
    const session = await auth();
    const cookieStore = await cookies();
    const guestUser = cookieStore.get("guest_user")?.value;
    
-   // fetch the guest user from the db
+   // Fetch the guest user from the db
    const guestUserFromDB = await prisma.guestUser.findFirst({ 
        where: { 
          cookieId: guestUser
        }
    });
 
-     if (!session?.user && !guestUserFromDB?.cookieId) {
-         return null;
-     }
-       const data = await prisma.documents.findMany({ 
-         where: { 
-             id,
-             OR: [
-                {user_id: session?.user?.id},
-                {user_id: guestUserFromDB?.cookieId}
-             ]
-         }
-       });
+   if (!session?.user && !guestUserFromDB?.id) {
+       return null;
+   } else {
+      const data = await prisma.documents.findFirst({ 
+        where: { 
+            id,
+            OR: [
+               { user_id: session?.user?.id },
+               { guest_user_id: guestUserFromDB?.id }
+            ]
+        },
+        include: { 
+         chats: true,
+         user: true,
+         guestUser: true
+        }
+      });
 
-       console.log('DATA',data);
-       return data;
-}
+      console.log('DATA', data);
+
+      return data;
+   } 
+}  
+

@@ -5,13 +5,14 @@ import { JWT } from "next-auth/jwt";
 
 export type savedDataDbType = {
   id: string;
-  name: string;
-  file_link: string | null | undefined;
+  name: string | null;
+  user_id: string | null;
+  guest_user_id: string | null;
+  file_link: string | null;
   file_key: string | null;
-  user_id: string;
   created_at: Date;
   updated_at: Date;
-}[] | null; 
+} | null; 
 
 
 declare module "next-auth" {

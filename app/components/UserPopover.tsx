@@ -36,13 +36,13 @@ export default function UserPopover({ data }: { data: Session | null}) {
   }
   return (
     <Popover>
-        <PopoverTrigger>
-        <Avatar user={data?.user.image as string} />
+        <PopoverTrigger className='cursor-pointer'>
+           <Avatar user={data?.user.image as string} />
         </PopoverTrigger>
 
-        <PopoverContent className="bg-[#e1e0e9] text-black flex flex-col gap-2 w-[200px] h-auto py-2  ">
+        <PopoverContent className="bg-white/25 text-white flex flex-col gap-2 w-[200px] h-auto py-2  ">
           <div className="w-full pb-2 border-b-2 border-gray-300 flex items-center flex-row-reverse justify-end gap-3">
-            <p className="text-gray-600 font-medium text-sm">
+            <p className="text-gray-200 font-medium text-sm">
               {data?.user.name ? data?.user.name : data?.user.email}
             </p>
             <div className="h-[30px] w-[30px]">
@@ -50,35 +50,33 @@ export default function UserPopover({ data }: { data: Session | null}) {
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col gap-2">
             <LinkButton
               href={"/profile"}
-              icon={<Settings size={24} className="text-black" />}
+              icon={<Settings size={20} />}
               text="Profile Setings"
-              variant={"link"}
             />
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <div className="flex items-center">
-                  <LogOut />
-                  <Button
-                    variant={"link"}
-                    className={`text-black font-medium sm:text-[16px] md:text-[20px]`}
+                <div className="flex items-center hover:text-gray-300 transition-all duration-200 gap-3 cursor-pointer">
+                  <LogOut size={20}/>
+                  <span
+                    className={`font-normal text-md`}
                   >
                     Logout
-                  </Button>
+                  </span>
                 </div>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className='bg-black/80'>
                 <AlertDialogHeader>
                   <AlertDialogTitle>
                     Are you absolutely sure you want to logout?
                   </AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction
+                  <AlertDialogCancel className='cursor-pointer hover:bg-black/20 transition-all duration-200'>Cancel</AlertDialogCancel>
+                  <AlertDialogAction className='cursor-pointer bg-red-500 hover:bg-red-600 transition-all duration-200'
                     onClick={handleLogout}
                   >
                     Continue

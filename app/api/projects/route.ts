@@ -18,12 +18,13 @@ export async function GET() {
       try {
           if (checkGuestUser && !session?.user) {
             const data = await prisma.documents.findMany({ 
-               where: { 
-                  user_id: checkGuestUser?.cookieId
+               where: {  
+                  guest_user_id: checkGuestUser?.id
                },
                  orderBy: { 
                     updated_at: 'desc'
-                 }
+                 },
+                 
              })
 
              return NextResponse.json(data, { status: 200});

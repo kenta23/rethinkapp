@@ -3820,7 +3820,7 @@ export namespace Prisma {
   export type DocumentsGroupByOutputType = {
     id: string
     name: string | null
-    user_id: string
+    user_id: string | null
     guest_user_id: string | null
     file_link: string | null
     file_key: string | null
@@ -3855,7 +3855,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     chats?: boolean | documents$chatsArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | documents$userArgs<ExtArgs>
     guestUser?: boolean | documents$guestUserArgs<ExtArgs>
     _count?: boolean | DocumentsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["documents"]>
@@ -3869,7 +3869,7 @@ export namespace Prisma {
     file_key?: boolean
     created_at?: boolean
     updated_at?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | documents$userArgs<ExtArgs>
     guestUser?: boolean | documents$guestUserArgs<ExtArgs>
   }, ExtArgs["result"]["documents"]>
 
@@ -3882,7 +3882,7 @@ export namespace Prisma {
     file_key?: boolean
     created_at?: boolean
     updated_at?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | documents$userArgs<ExtArgs>
     guestUser?: boolean | documents$guestUserArgs<ExtArgs>
   }, ExtArgs["result"]["documents"]>
 
@@ -3900,16 +3900,16 @@ export namespace Prisma {
   export type documentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "user_id" | "guest_user_id" | "file_link" | "file_key" | "created_at" | "updated_at", ExtArgs["result"]["documents"]>
   export type documentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chats?: boolean | documents$chatsArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | documents$userArgs<ExtArgs>
     guestUser?: boolean | documents$guestUserArgs<ExtArgs>
     _count?: boolean | DocumentsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type documentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | documents$userArgs<ExtArgs>
     guestUser?: boolean | documents$guestUserArgs<ExtArgs>
   }
   export type documentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | documents$userArgs<ExtArgs>
     guestUser?: boolean | documents$guestUserArgs<ExtArgs>
   }
 
@@ -3917,13 +3917,13 @@ export namespace Prisma {
     name: "documents"
     objects: {
       chats: Prisma.$chatsPayload<ExtArgs>[]
-      user: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
       guestUser: Prisma.$GuestUserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string | null
-      user_id: string
+      user_id: string | null
       guest_user_id: string | null
       file_link: string | null
       file_key: string | null
@@ -4324,7 +4324,7 @@ export namespace Prisma {
   export interface Prisma__documentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     chats<T extends documents$chatsArgs<ExtArgs> = {}>(args?: Subset<T, documents$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$chatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends documents$userArgs<ExtArgs> = {}>(args?: Subset<T, documents$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     guestUser<T extends documents$guestUserArgs<ExtArgs> = {}>(args?: Subset<T, documents$guestUserArgs<ExtArgs>>): Prisma__GuestUserClient<$Result.GetResult<Prisma.$GuestUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4581,7 +4581,7 @@ export namespace Prisma {
     /**
      * The data needed to create a documents.
      */
-    data: XOR<documentsCreateInput, documentsUncheckedCreateInput>
+    data?: XOR<documentsCreateInput, documentsUncheckedCreateInput>
   }
 
   /**
@@ -4780,6 +4780,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ChatsScalarFieldEnum | ChatsScalarFieldEnum[]
+  }
+
+  /**
+   * documents.user
+   */
+  export type documents$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -9451,21 +9470,21 @@ export namespace Prisma {
     NOT?: documentsWhereInput | documentsWhereInput[]
     id?: StringFilter<"documents"> | string
     name?: StringNullableFilter<"documents"> | string | null
-    user_id?: StringFilter<"documents"> | string
+    user_id?: StringNullableFilter<"documents"> | string | null
     guest_user_id?: StringNullableFilter<"documents"> | string | null
     file_link?: StringNullableFilter<"documents"> | string | null
     file_key?: StringNullableFilter<"documents"> | string | null
     created_at?: DateTimeFilter<"documents"> | Date | string
     updated_at?: DateTimeFilter<"documents"> | Date | string
     chats?: ChatsListRelationFilter
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     guestUser?: XOR<GuestUserNullableScalarRelationFilter, GuestUserWhereInput> | null
   }
 
   export type documentsOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
-    user_id?: SortOrder
+    user_id?: SortOrderInput | SortOrder
     guest_user_id?: SortOrderInput | SortOrder
     file_link?: SortOrderInput | SortOrder
     file_key?: SortOrderInput | SortOrder
@@ -9482,21 +9501,21 @@ export namespace Prisma {
     OR?: documentsWhereInput[]
     NOT?: documentsWhereInput | documentsWhereInput[]
     name?: StringNullableFilter<"documents"> | string | null
-    user_id?: StringFilter<"documents"> | string
+    user_id?: StringNullableFilter<"documents"> | string | null
     guest_user_id?: StringNullableFilter<"documents"> | string | null
     file_link?: StringNullableFilter<"documents"> | string | null
     file_key?: StringNullableFilter<"documents"> | string | null
     created_at?: DateTimeFilter<"documents"> | Date | string
     updated_at?: DateTimeFilter<"documents"> | Date | string
     chats?: ChatsListRelationFilter
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     guestUser?: XOR<GuestUserNullableScalarRelationFilter, GuestUserWhereInput> | null
   }, "id">
 
   export type documentsOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrderInput | SortOrder
-    user_id?: SortOrder
+    user_id?: SortOrderInput | SortOrder
     guest_user_id?: SortOrderInput | SortOrder
     file_link?: SortOrderInput | SortOrder
     file_key?: SortOrderInput | SortOrder
@@ -9513,7 +9532,7 @@ export namespace Prisma {
     NOT?: documentsScalarWhereWithAggregatesInput | documentsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"documents"> | string
     name?: StringNullableWithAggregatesFilter<"documents"> | string | null
-    user_id?: StringWithAggregatesFilter<"documents"> | string
+    user_id?: StringNullableWithAggregatesFilter<"documents"> | string | null
     guest_user_id?: StringNullableWithAggregatesFilter<"documents"> | string | null
     file_link?: StringNullableWithAggregatesFilter<"documents"> | string | null
     file_key?: StringNullableWithAggregatesFilter<"documents"> | string | null
@@ -9898,14 +9917,14 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     chats?: chatsCreateNestedManyWithoutDocumentInput
-    user: UserCreateNestedOneWithoutDocumentsInput
+    user?: UserCreateNestedOneWithoutDocumentsInput
     guestUser?: GuestUserCreateNestedOneWithoutDocumentsInput
   }
 
   export type documentsUncheckedCreateInput = {
     id?: string
     name?: string | null
-    user_id: string
+    user_id?: string | null
     guest_user_id?: string | null
     file_link?: string | null
     file_key?: string | null
@@ -9922,14 +9941,14 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     chats?: chatsUpdateManyWithoutDocumentNestedInput
-    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+    user?: UserUpdateOneWithoutDocumentsNestedInput
     guestUser?: GuestUserUpdateOneWithoutDocumentsNestedInput
   }
 
   export type documentsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9941,7 +9960,7 @@ export namespace Prisma {
   export type documentsCreateManyInput = {
     id?: string
     name?: string | null
-    user_id: string
+    user_id?: string | null
     guest_user_id?: string | null
     file_link?: string | null
     file_key?: string | null
@@ -9961,7 +9980,7 @@ export namespace Prisma {
   export type documentsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
@@ -10399,9 +10418,9 @@ export namespace Prisma {
     none?: chatsWhereInput
   }
 
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type GuestUserNullableScalarRelationFilter = {
@@ -10455,6 +10474,11 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
@@ -10752,10 +10776,12 @@ export namespace Prisma {
     deleteMany?: chatsScalarWhereInput | chatsScalarWhereInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutDocumentsNestedInput = {
+  export type UserUpdateOneWithoutDocumentsNestedInput = {
     create?: XOR<UserCreateWithoutDocumentsInput, UserUncheckedCreateWithoutDocumentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutDocumentsInput
     upsert?: UserUpsertWithoutDocumentsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutDocumentsInput, UserUpdateWithoutDocumentsInput>, UserUncheckedUpdateWithoutDocumentsInput>
   }
@@ -11119,13 +11145,13 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     chats?: chatsCreateNestedManyWithoutDocumentInput
-    user: UserCreateNestedOneWithoutDocumentsInput
+    user?: UserCreateNestedOneWithoutDocumentsInput
   }
 
   export type documentsUncheckedCreateWithoutGuestUserInput = {
     id?: string
     name?: string | null
-    user_id: string
+    user_id?: string | null
     file_link?: string | null
     file_key?: string | null
     created_at?: Date | string
@@ -11165,7 +11191,7 @@ export namespace Prisma {
     NOT?: documentsScalarWhereInput | documentsScalarWhereInput[]
     id?: StringFilter<"documents"> | string
     name?: StringNullableFilter<"documents"> | string | null
-    user_id?: StringFilter<"documents"> | string
+    user_id?: StringNullableFilter<"documents"> | string | null
     guest_user_id?: StringNullableFilter<"documents"> | string | null
     file_link?: StringNullableFilter<"documents"> | string | null
     file_key?: StringNullableFilter<"documents"> | string | null
@@ -11180,14 +11206,14 @@ export namespace Prisma {
     file_key?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    user: UserCreateNestedOneWithoutDocumentsInput
+    user?: UserCreateNestedOneWithoutDocumentsInput
     guestUser?: GuestUserCreateNestedOneWithoutDocumentsInput
   }
 
   export type documentsUncheckedCreateWithoutChatsInput = {
     id?: string
     name?: string | null
-    user_id: string
+    user_id?: string | null
     guest_user_id?: string | null
     file_link?: string | null
     file_key?: string | null
@@ -11218,14 +11244,14 @@ export namespace Prisma {
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+    user?: UserUpdateOneWithoutDocumentsNestedInput
     guestUser?: GuestUserUpdateOneWithoutDocumentsNestedInput
   }
 
   export type documentsUncheckedUpdateWithoutChatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     guest_user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11673,7 +11699,7 @@ export namespace Prisma {
   export type documentsCreateManyGuestUserInput = {
     id?: string
     name?: string | null
-    user_id: string
+    user_id?: string | null
     file_link?: string | null
     file_key?: string | null
     created_at?: Date | string
@@ -11688,13 +11714,13 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     chats?: chatsUpdateManyWithoutDocumentNestedInput
-    user?: UserUpdateOneRequiredWithoutDocumentsNestedInput
+    user?: UserUpdateOneWithoutDocumentsNestedInput
   }
 
   export type documentsUncheckedUpdateWithoutGuestUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11705,7 +11731,7 @@ export namespace Prisma {
   export type documentsUncheckedUpdateManyWithoutGuestUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
-    user_id?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
     file_link?: NullableStringFieldUpdateOperationsInput | string | null
     file_key?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string

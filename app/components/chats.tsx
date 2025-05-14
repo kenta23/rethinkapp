@@ -1,36 +1,34 @@
 'use client'
 
-import { Message, useChat, useCompletion } from '@ai-sdk/react';
-import { Send, SendHorizontal, X } from 'lucide-react';
+import { Message, useChat } from '@ai-sdk/react';
+import { Send } from 'lucide-react';
 import React, { ChangeEvent, useEffect, useMemo, useRef, useState, type JSX } from 'react';
-import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
-import { getAnswer, getSuggestionContext } from '@/actions/aigenerationtext';
+import { getSuggestionContext } from '@/actions/aigenerationtext';
 import QuestionsMadeByAI from './questionsMadeByAI';
-import { getUserGuestSession } from '@/lib/getSession';
+import { Skeleton } from './ui/skeleton';
+import { DocumentType } from './mainchat';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 
 
-export default function Chats ({ fileKey, id }: { fileKey: string | null, id: string | null}) {
+export default function Chats ({ data }: { data: DocumentType | null }) {
     const session = useSession();
     const [Aiquestions, setAiquestions] = useState<string[]>([]);
-    const userId = session.data?.user.id;
     
     const messageContainer = useRef<HTMLDivElement>(null);
     const [clicked, setClicked] = useState<boolean>(false);
 
     const { data: chatdata, isLoading: loading, error, isFetching } = useQuery({  
-      queryKey: ['chats', id],
+      queryKey: ['chats', data?.id], 
       queryFn: async () => {
         const response = await axios.post<Message[]>("/api/getMessages", {
-          userId,
-          id
+            id: data?.id 
         });
         return response.data;
       },
@@ -44,9 +42,10 @@ export default function Chats ({ fileKey, id }: { fileKey: string | null, id: st
             console.log('tool call', toolCall);
         },
         body: {
-          fileKey,
-          userId,
-          id
+          fileKey: data?.file_key, 
+          userId: data?.user?.id,
+          guestUserId: data?.guestUser?.id,
+          id: data?.id
         },
         sendExtraMessageFields: true,
         onFinish: (res) => {
@@ -56,6 +55,7 @@ export default function Chats ({ fileKey, id }: { fileKey: string | null, id: st
     })
     
 
+   
 
    useEffect(() => {
     if (messageContainer.current) {
@@ -73,16 +73,15 @@ export default function Chats ({ fileKey, id }: { fileKey: string | null, id: st
     //Questions made by AI
     //This will get the questions made by AI from the document if theres no chat initially
     async function getData() {
-       const { text } = await getSuggestionContext(fileKey);
+       const { text } = await getSuggestionContext(data?.file_key || '');
        const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
        setAiquestions(dividedQuestions);  
 
     }
-
      if(!chatdata?.length && !loading && !isFetching) {
        getData();
      }
-}, [chatdata, loading, isFetching, fileKey]) 
+}, [chatdata, loading, isFetching, data?.file_key]) 
 
     return (
       <div className="h-full max-h-screen">
@@ -92,12 +91,11 @@ export default function Chats ({ fileKey, id }: { fileKey: string | null, id: st
             className={`w-full p-3 h-auto flex flex-col overflow-y-auto`}
           > 
           {/**If there is no chat data, loading, and clicked is false, then show the questions made by AI */}
-
             {!chatdata?.length && !loading && !clicked ? (
               <div className="h-auto justify-end mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI
-                  fileKey={fileKey as string}
-                  id={id as string}
+                  fileKey={data?.file_key as string}
+                  id={data?.id as string}
                   append={append}
                   handleSubmit={handleSubmit}
                   Aiquestions={Aiquestions}
@@ -107,8 +105,21 @@ export default function Chats ({ fileKey, id }: { fileKey: string | null, id: st
             ) :             
           <div className="flex self-end flex-col gap-4 w-full">
             {/** CHAT STREAMING HERE */}
-            {/* @ts-ignore */}
-             {messages.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()).map((m) => (
+             {isFetching ? (
+              Array.from({length: 2}).map((__, index) => { 
+                return (
+                   <div key={index} className='flex flex-row gap-3 mb-3'> 
+                        <Skeleton key={index} className={`px-3 py-2 h-10 rounded-xl bg-white/15 backdrop-blur-sm w-full flex-1`}>                         
+                       </Skeleton>    
+
+                       <Skeleton className='size-10 rounded-full bg-white/15 backdrop-blur-sm'/>               
+                   </div>
+                )
+              })
+             ) :
+               messages
+               .sort((a, b) => new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime())
+               .map((m) => (
                <div
                  key={m.id}
                  className={cn(

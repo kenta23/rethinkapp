@@ -15,66 +15,102 @@ const documentData = z.object({
 })
 
 //storing document to the database
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     const session = await auth();
     const cookieStore = await cookies();
 
     const { url, file_key } = await req.json();
 
-    if (!session?.user) {
+   async function createDocumentForGuest() {   
       try {
+        const generateToken = randomUUID();
+        const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
-          const generateToken = randomUUID();
-          const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+        const token = await new SignJWT({ 
+           jti: generateToken,
+           aud: 'guest_user',
+        })
+          .setProtectedHeader({ alg: 'HS256' })
+          .setIssuedAt()
+          .setExpirationTime('30d')
+          .sign(secret);
 
-          const token = await new SignJWT({ 
-             jti: generateToken,
-             aud: 'guest_user',
-          })
-            .setProtectedHeader({ alg: 'HS256' })
-            .setIssuedAt()
-            .setExpirationTime('30d')
-            .sign(secret);
+      const guestUser = await prisma.guestUser.create({   //1. create guest user and store cookie id
+           data: { 
+             cookieId: token,
+           },
+        })
 
-        const guestUser = await prisma.guestUser.create({   //1. create guest user and store cookie id
-             data: { 
-               cookieId: token,
-               documents: { 
-                 create: { 
-                  user_id: token,
-                  name: file_key,
-                  file_link: url,
-                  file_key,
-                 }
-               }
-             },
-             include: { 
-               documents: true
-             }
-          })
+      const documentResult = await prisma.documents.create({
+        data: {
+          guest_user_id: guestUser.id,
+          name: file_key,
+          file_link: url,
+          file_key, 
+        }
+      });
 
-      if (guestUser) { 
-        const documentResult = guestUser.documents[0];
-         if (documentResult.file_key && documentResult.file_link) {  //3. embed the document to pinecone
-              const embeddedDocument = await saveVectorToPinecone(file_key); 
-              console.log("Successfully created data to the database", embeddedDocument);  
+    if (guestUser && documentResult) { 
+       if (documentResult.file_key && documentResult.file_link) {  //3. embed the document to pinecone
+        const embeddedDocument = await saveVectorToPinecone(file_key); 
+        console.log("Successfully created data to the database", embeddedDocument);  
 
-                         //store a cookie to the browser
-          cookieStore.set('guest_user', guestUser.cookieId, { 
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 24 * 30, // 30 days
-          });
 
-              return NextResponse.json(documentResult.id, { status: 200 });
-           }    
-       }
+        //store a cookie to the browser
+        cookieStore.set('guest_user', guestUser.cookieId, { 
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          maxAge: 60 * 60 * 24 * 30, // 30 days
+        });
 
-      } catch (error) {
-        console.error('Error generating token:', error);
-      }
+          return NextResponse.json({ message: "Document created successfully", id: documentResult.id }, { status: 200 });
+        }    
+
+        else { 
+          return NextResponse.json({ message: "Failed to create document" }, { status: 500 });
+        }
+     }
+
+    } catch (error) {
+      console.error('Error generating token:', error);
+      return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    }
+   }
+
+    if (!session?.user && !cookieStore.get('guest_user')?.value) { //if the user is not logged in and the cookie is not set
+       return await createDocumentForGuest();
     }
 
+    else if (cookieStore.get('guest_user')?.value) { //check if the guest user is already set
+      try {
+        const guestUser = await prisma.guestUser.findFirst({
+           where: { 
+            cookieId: cookieStore.get('guest_user')?.value as string,
+          },
+          include: { 
+            documents: true
+          }          
+        })
+
+          if (!guestUser) { 
+            return NextResponse.json({ message: "Guest user not found" }, { status: 404 }) //guest user cookie not matched with the database
+          }
+
+         else if (guestUser.documents.length > 1) { 
+              return NextResponse.json({ message: "You can only upload one document as a guest" } , { status: 400 })
+         }
+         else { 
+             return await createDocumentForGuest();
+         }
+  
+       }
+
+      catch(err) {
+        console.log(err)
+        return NextResponse.json(err, { status: 500 })
+      }
+    }
+     
     else { 
       try
       {        
@@ -102,11 +138,14 @@ export async function POST(req: Request) {
 
              console.log("Successfully created data to the database", embeddedDocument);  
              return NextResponse.json(result.id, {status: 200})
+          } else {
+             return NextResponse.json({ message: "Failed to create document" }, { status: 500 });
           }    
         }
+
      catch(err) {
        console.log(err)
-       return NextResponse.json(err)
+       return NextResponse.json({ message: "Internal server error" }, { status: 500 })
     }
-    }
+   }
 }

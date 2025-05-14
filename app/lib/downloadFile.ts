@@ -1,4 +1,3 @@
-import { utapi } from "@/server/uploadthing"
 import axios from "axios";
 import fs from 'fs'
 import path from 'path';
@@ -19,7 +18,7 @@ export async function downloadFile(file_key: string | string[]) {
         await mkdirp(folderPath);
 
         // Construct full file path
-        const filePath = path.join(folderPath, file_key); 
+        const filePath = path.join(folderPath, file_key as string); 
 
         const response = await axios.get(getFile, { responseType: 'arraybuffer' });
 

@@ -1,5 +1,4 @@
-import { HfInference } from "@huggingface/inference";
-import { OpenAIApi, Configuration } from "openai-edge";
+import { Configuration } from "openai-edge";
 import { EmbeddingsList, Pinecone } from '@pinecone-database/pinecone';
 
 export const runtime = 'edge';

@@ -9,9 +9,7 @@ import { ChatRequestOptions } from 'ai';
 
 
 export default function QuestionsMadeByAI({
-  fileKey,
   Aiquestions,
-  id,
   append,
   handleSubmit,
   setClicked

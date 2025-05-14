@@ -26,7 +26,6 @@ export async function POST(req: Request) {
       orderBy: { created_at: 'asc' },
     })
 
-    console.log('RESULTS', res)
 
     return NextResponse.json(res, { status: 200 }); 
 

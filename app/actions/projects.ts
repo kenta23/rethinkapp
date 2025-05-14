@@ -9,6 +9,7 @@ import { z } from "zod";
 import { dataTagSymbol } from "@tanstack/query-core";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getUserGuestSession } from "@/lib/getSession";
 
 
 {/**GETTING ALL THE DOCUMENTS */}
@@ -102,8 +103,9 @@ export async function deleteProject (id: string) {
    const index = pinecone.index("rethink-new");
    
    const session = await auth();
+   const checkGuestUser = await getUserGuestSession();
 
-   if(!session?.user) {
+   if(!session?.user && !checkGuestUser) {
       return {
         message: "User not authenticated"
       };
@@ -111,13 +113,15 @@ export async function deleteProject (id: string) {
 
    try {
       const data = await prisma.documents.delete({
-         where: { id }
+         where: { id },
+         include: { 
+            chats: true
+         }
       });
 
       if (data) {
          //DELETE FILE FROM UPLOADTHING
          const deleted = await utapi.deleteFiles([data?.file_key as string]);
-       
          if (deleted.success) { 
             console.log('Deleted file', deleted);
 
@@ -134,7 +138,6 @@ export async function deleteProject (id: string) {
                }
             } catch (pineconeError) {
                console.log('Error deleting from Pinecone:', pineconeError);
-               // Continue with the process even if Pinecone deletion fails
             }
          
             //go to the next document 
@@ -146,14 +149,11 @@ export async function deleteProject (id: string) {
                   updated_at: 'desc'
                }
             });
-
-            if (nextDocument) { 
-               redirect(`/main/${nextDocument.id}`);
-            }
+            nextDocument ? redirect(`/main/${nextDocument.id}`) : redirect("/projects");
          }
       }
    } catch (error) { 
       console.error('Error deleting project:', error);
-      throw error;
+      return error;
    }
 }
