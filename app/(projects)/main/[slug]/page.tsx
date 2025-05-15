@@ -4,7 +4,6 @@ import Mainchat from '@/components/mainchat';
 import { getData } from '@/lib/getData';
 import { Metadata } from 'next';
 import prisma from '../../../lib/prisma';
-import { savedDataDbType } from '../../../../types';
 
 
 export async function generateMetadata(props: { params: Promise<{ id: string }> }): Promise<Metadata> {

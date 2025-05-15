@@ -220,17 +220,18 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "prisma+postgres://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNDlhMmVkZDktNWExNi00ZWMxLTljYWQtNjg0MjBiOGRkODdjIiwidGVuYW50X2lkIjoiZDkyZDc0MWQ5NmQ1NjI0MmU0ZGYwOGFmNDVkNmQxZDhiNDJiODQ2YTlmMTU4MWUzNjZkODIyOWVjNTQ5MzBlZSIsImludGVybmFsX3NlY3JldCI6ImE2ZTA3Nzg0LWQ5NmQtNGY4Yi04NDZiLTE5N2NhMmEwY2Y3ZCJ9.k9WW8qCMch3UIaZFMRNVVkObxtP439AAPApImhuKrB0"
+        "value": null
       }
     }
   },
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider          = \"postgresql\"\n  url               = env(\"DATABASE_URL\")\n  shadowDatabaseUrl = env(\"SHADOW_DATABASE_URL\")\n}\n\nmodel GuestUser {\n  id        String   @id @default(cuid())\n  cookieId  String   @unique\n  createdAt DateTime @default(now()) @db.Timestamptz(6)\n  updatedAt DateTime @updatedAt @db.Timestamptz(6)\n\n  documents documents[]\n\n  @@map(\"guest_users\")\n}\n\nmodel chats {\n  id          String   @id @default(cuid())\n  role        String?\n  user_id     String?\n  content     String?\n  document_id String\n  created_at  DateTime @default(now()) @db.Timestamptz(6)\n  updated_at  DateTime @default(now()) @db.Timestamptz(6)\n\n  document documents @relation(fields: [document_id], references: [id], onDelete: Cascade)\n}\n\nmodel documents {\n  id            String   @id @default(cuid())\n  name          String?\n  user_id       String?\n  guest_user_id String?\n  file_link     String?\n  file_key      String?\n  created_at    DateTime @default(now()) @db.Timestamptz(6)\n  updated_at    DateTime @default(now()) @db.Timestamptz(6)\n  chats         chats[]\n\n  user      User?      @relation(fields: [user_id], references: [id], onDelete: Cascade)\n  guestUser GuestUser? @relation(fields: [guest_user_id], references: [id], onDelete: Cascade)\n}\n\nmodel Account {\n  id                String  @id @default(cuid())\n  userId            String  @map(\"user_id\")\n  type              String\n  provider          String\n  providerAccountId String  @map(\"provider_account_id\")\n  refresh_token     String? @db.Text\n  access_token      String? @db.Text\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String? @db.Text\n  session_state     String?\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([provider, providerAccountId])\n  @@map(\"accounts\")\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique @map(\"session_token\")\n  userId       String   @map(\"user_id\")\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"sessions\")\n}\n\nmodel User {\n  id            String      @id @default(cuid())\n  name          String?\n  email         String?     @unique\n  emailVerified DateTime?   @map(\"email_verified\")\n  image         String?\n  accounts      Account[]\n  sessions      Session[]\n  documents     documents[]\n\n  @@map(\"users\")\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@unique([identifier, token])\n  @@map(\"verification_tokens\")\n}\n",
   "inlineSchemaHash": "83dccdc2334998cacd1ed91a85c49b3b24d392a0b45893769c5349518ab7e7f7",
-  "copyEngine": false
+  "copyEngine": true
 }
 config.dirname = '/'
 
