@@ -124,7 +124,7 @@ const Home = () => {
     >
       <StickyNavbar inView={inView} />
 
-      <main className="w-full bg-white dark:bg-[#0e0c0f]  z-10 px-2 sm:px-8 md:px-[80px] py-4 lg:px-[90px] min-w-full h-auto min-h-full relative">
+      <main className="w-full bg-white dark:bg-[#0e0c0f] z-10 px-2 sm:px-8 md:px-[80px] py-4 lg:px-[90px] min-w-full h-auto min-h-full relative">
         <div className="">
           <div ref={ref}>
             <Navbar />
@@ -191,7 +191,7 @@ const Home = () => {
             />
 
             <div className="h-auto w-[45%]">
-              <p className="text-center sm:text-[25px] md:text-[30px] text-md leading-normal bg-gradient-to-r from-blue-400 to-[#7a6eca] text-transparent bg-clip-text">
+              <p className="text-center sm:text-[25px] md:text-[30px] text-md leading-normal bg-gradient-to-r from-blue-600 via-pink-500 to-[#6a57e6] text-transparent bg-clip-text">
                 Working with AI to enhance your prompts and for accurate
                 results.
               </p>

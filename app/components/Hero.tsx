@@ -11,7 +11,7 @@ const poppins = Poppins( {
 
 export default function Hero() {
   return (
-      <section className="mt-[20px] md:mt-[30px] text-white flex items-center justify-around  mx-auto px-2 py-2 w-full">
+      <section className="text-white flex items-center justify-around  mx-auto px-2 py-2 w-full">
              {/**LEFT CONTENT */}
                <div className={`${poppins.className} text-center items-center md:items-start  font-bold md:text-left  max-w-[300px] flex flex-col gap-3`}> 
                  <div className="w-full">  
