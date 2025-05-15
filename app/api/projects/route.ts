@@ -1,5 +1,5 @@
 import { auth } from "../../../auth";
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import { utapi } from "@/server/uploadthing";
 import { Pinecone } from "@pinecone-database/pinecone";
 import prisma from '../../lib/prisma';
@@ -37,7 +37,7 @@ export async function GET() {
 }
 
 {/**DELETING DOCUMENT */}
-export async function POST (req: Request, res: Response) {
+export async function POST (req: NextRequest) {
 
    const session = await auth();
    const checkGuestUser = await getUserGuestSession();
