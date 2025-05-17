@@ -5,36 +5,63 @@ import { Pinecone } from "@pinecone-database/pinecone";
 import prisma from '../../lib/prisma';
 import { getUserGuestSession } from "@/lib/getSession";
 
+// Define common document fields to avoid repetition
+const documentFields = {
+    id: true,
+    name: true,
+    file_key: true,
+    created_at: true,
+    updated_at: true,
+    file_link: true,
+    chats: true,
+};
 
 export async function GET() {
-        const session = await auth();
-        const guestUserData = await getUserGuestSession();
+  try {
+    const session = await auth();
+    const guestUserData = await getUserGuestSession();
 
-      if (!session?.user && !guestUserData) { 
-          return NextResponse.json([], { status: 200 });
-      }
- 
-      try {
-          if (guestUserData && !session?.user) {
-             return NextResponse.json(guestUserData.documents, { status: 200});
-           }
-       if (session?.user) { 
-         const data = await prisma.user.findFirst({ 
-            where: { 
-               id: session?.user.id
+    // Check authentication
+    if (!session?.user && !guestUserData) {
+      return NextResponse.json([], { status: 200 });
+    }
+
+    let documents;
+
+    if (guestUserData) {
+      documents = guestUserData.documents;
+    } else if (session?.user) {
+      const userData = await prisma.user.findFirst({
+        where: {
+          id: session.user.id,
+        },
+        include: {
+          documents: {
+            orderBy: {
+              updated_at: "desc",
             },
-             include: {
-               documents: true
-             }
-          })
-         return NextResponse.json(data?.documents, { status: 200 });
-       }
+            select: {
+              ...documentFields,
+              user_id: true,
+            },
+          },
+        },
+      });
+      documents = userData?.documents || [];
+    }
 
-      } catch (error) {
-         console.log('Error rendering data', error);
-         return  NextResponse.json(error, { status: 400});
-      }
+    return NextResponse.json(documents, { status: 200 });
+    
+  } catch (error) {
+    console.error("Error fetching projects:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch projects" },
+      { status: 500 }
+    );
+  }
 }
+
+
 
 {/**DELETING DOCUMENT */}
 export async function POST (req: NextRequest) {

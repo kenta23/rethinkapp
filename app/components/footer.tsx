@@ -90,7 +90,7 @@ export default function Footer() {
                   
                 />
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="bg-white">
                 <AlertDialogHeader>
                   <AlertDialogTitle>CONTACT US</AlertDialogTitle>
                   <AlertDialogDescription>
@@ -126,7 +126,7 @@ export default function Footer() {
                   Disclaimer
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
+              <AlertDialogContent className="bg-white">
                 <AlertDialogHeader>
                   <AlertDialogTitle>DISCLAIMER</AlertDialogTitle>
                     <Disclaimer />
@@ -144,7 +144,7 @@ export default function Footer() {
                 </Button>
               </AlertDialogTrigger>
 
-              <AlertDialogContent>
+              <AlertDialogContent className="bg-white">
                 <AlertDialogHeader>
                   <AlertDialogTitle>TERMS AND CONDITION</AlertDialogTitle>
                   <div className="h-[500px] md:h-[600px] overflow-y-auto">
@@ -164,7 +164,7 @@ export default function Footer() {
                     How to Use
                   </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent>
+                <AlertDialogContent className="bg-white">
                   <AlertDialogHeader>
                     <AlertDialogTitle>How to use</AlertDialogTitle>
                     <div className="h-[500px] md:h-[600px] overflow-y-auto">

@@ -153,7 +153,7 @@ const Home = () => {
             <h1 className="text-[#1e1e30] dark:text-white leading-normal font-normal text-[25px] sm:text-[40px]">
               Discover How It Works
             </h1>
-            <p className="font-light text-sm md:text-[18px]">
+            <p className="font-light text-sm md:text-[18px] text-black dark:text-white">
               See how easy it is to upload document files and interact
               seamlessly with our AI. Watch the demo now!
             </p>
@@ -222,7 +222,7 @@ const Home = () => {
                 whileInView={{ scale: 1.1 }}
                 exit={{ scale: 0 }}
                 transition={{ type: "spring" }}
-                className="text-[17px] text-wrap md:text-[25px]"
+                className="text-[17px] text-black dark:text-white text-wrap md:text-[25px]"
               >
                 Discover exclusive features on our site
               </motion.p>
@@ -236,7 +236,7 @@ const Home = () => {
                   variants={itemVariants}
                   viewport={{ once: true }}
                   key={index}
-                  className="w-auto shadow-xs justify-center rounded-lg flex items-center py-2 px-4 h-[150px]  "
+                  className="w-auto shadow-xs justify-center border-b border-rose-200 rounded-lg flex items-center py-2 px-4 h-[150px]  "
                 >
                   <div className="flex items-start min-w-[250px] max-w-[400px] gap-4 ">
                     <Image
@@ -251,7 +251,7 @@ const Home = () => {
                       <h2 className="text-[20px] text-[#381E6F] dark:text-[#a493ca] md:text-sm lg:text-xl font-normal">
                         {item.title}
                       </h2>
-                      <p className="text-sm font-light md:text-xs lg:text-[14px] text-pretty">
+                      <p className="text-sm font-light md:text-xs lg:text-[14px] text-black dark:text-white text-pretty">
                         {item.description}
                       </p>
                     </div>
@@ -274,10 +274,9 @@ const Home = () => {
                 className="flex items-center gap-3"
               >
                 <CheckCircle2
-                  color="white"
-                  className="bg-secondaryColor size-[12px] sm:size-[15px] md:size-[20px] lg:size[25px] text-md rounded-full"
+                  className="text-blue-400 size-[12px] sm:size-[15px] md:size-[20px] lg:size[25px] text-md rounded-full"
                 />
-                <p className="font-medium text-xs sm:text-sm md:text-lg text-secondaryColor">
+                <p className="text-black dark:text-white font-medium text-xs sm:text-sm md:text-lg text-secondaryColor">
                   {item.title}
                 </p>
               </motion.div>

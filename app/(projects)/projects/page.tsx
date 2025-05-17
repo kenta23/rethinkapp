@@ -2,20 +2,21 @@
 'use client'
 
 import Link from 'next/link'
-import React, { ChangeEvent,  useState } from 'react'
+import React, { ChangeEvent,  useEffect,  useState } from 'react'
 import { Plus  } from 'lucide-react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import UserPopover from '@/components/UserPopover'
 import AddProjectDialog from './addProjectDialog'
+import { useRouter } from 'next/navigation'
 
 
 
 export default function Projects() {
     const session = useSession();
 
- 
+
   return (
     <div className="px-5 md:px-[55px] w-full h-screen min-h-full max-h-auto py-4 md:py-[24px]">
       {/**NAV BAR */}
@@ -47,8 +48,8 @@ export default function Projects() {
 
       {/**ARCHIVES */}
       <div
-        className="border-gray-20
-               max-w-3/4 shadow-lg relative border-[1px] rounded-md  w-full mt-[30px] 
+        className="border border-violet-400
+               max-w-3/4 shadow-lg relative rounded-md  w-full mt-[30px] 
                h-svh max-h-auto md:mt-[50px] mx-auto"
       >
         <div className="flex w-auto mt-[30px] mx-[10px] p-2 md:p-6 gap-4 items-start flex-col">

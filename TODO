@@ -55,6 +55,15 @@ Todolist to improve system ui and performance:
   ✘ add cron jobs for deleting temporary data @cancelled(25-05-14 20:21)
   ✔ use cookies for guest user @done(25-05-13 21:53)
   ✔ Fix login page UI @done(25-05-14 13:36)
+
+
+ May 16, 2025 (Problems in production):
+  ✔ fix the project api where data error issue even im not authenticated @done(25-05-17 18:02)
+  ✘ refresh the projects data if you going back to projects from main @cancelled(25-05-17 21:27)
+  ✔ dark mode styling not implemented correctly in production @done(25-05-17 19:13)
+  ✔ sidebar menu display when folded @done(25-05-17 21:27)
+  ✔ chats realtime error issue when the ai question clicked. @done(25-05-17 19:13)
+  ✔ sort the projects data by desc @done(25-05-15 21:49)
   
 
 

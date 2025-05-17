@@ -26,7 +26,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
    
 
     const { data: chatdata, isLoading: loading, error, isFetching } = useQuery({  
-      queryKey: ['chats', data?.id], 
+      queryKey: ['chats'], 
       queryFn: async () => {
         const response = await axios.post<Message[]>("/api/getMessages", {
             id: data?.id 
@@ -39,16 +39,12 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
     const { input, handleSubmit, handleInputChange, messages, status, append } = useChat({
         api: '/api/openai',
         maxSteps: 3,
-        onToolCall({ toolCall, }) {
-            console.log('tool call', toolCall);
-        },
         body: {
           fileKey: data?.file_key, 
           userId: data?.user?.id,
           guestUserId: data?.guestUser?.id,
           id: data?.id
         },
-        sendExtraMessageFields: true,
         onFinish: (res) => {
              console.log("Successfully created chat");
         },
@@ -56,8 +52,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
     })
     
 
-   
-
+  
    useEffect(() => {
     if (messageContainer.current) {
       setTimeout(() => {
@@ -69,20 +64,24 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
     }
    }, [messages, status]);
    
-
+   const fetchQuestions = async () => {
+    try {
+      const { text } = await getSuggestionContext(data?.file_key || '');
+      const questions = text.split(/\d+\./).map(q => q.trim()).filter(Boolean);
+      setAiquestions(questions);
+    } catch (error) {
+      console.error('Error fetching AI questions:', error);
+    }
+  };
 
   useEffect(() => {
-    //Questions made by AI
-    //This will get the questions made by AI from the document if theres no chat initially
-    async function getData() {
-       const { text } = await getSuggestionContext(data?.file_key as string);
-       const dividedQuestions = text.split(/\d+\./).filter(question => question.trim().length > 0);
-       setAiquestions(dividedQuestions); 
+    if (!chatdata?.length) {
+      fetchQuestions();
     }
-     if(!chatdata?.length && !loading && !isFetching) {
-       getData();
-     }
-}, [chatdata, loading, isFetching, data?.file_key]) 
+    return () => { 
+      setAiquestions([]);
+    }
+  }, [chatdata, loading, isFetching, status, data?.file_key]);
 
     return (
       <div className="h-full max-h-screen">

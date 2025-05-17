@@ -80,18 +80,18 @@ export default function AppSidebarForm ({ id }: { id: string }) {
                 sideOffset={10}
                 align="center"
                 side="bottom"
-                className="bg-black/60 relative rounded-lg px-4 py-2"
+                className="border-white bg-[#252031] relative rounded-lg px-4 py-2"
             >
                 <AlertDialog open={open} onOpenChange={setOpen}>
                     <AlertDialogTrigger asChild>
                         <DropdownMenuItem
                             onSelect={(e) => e.preventDefault()}
-                            className="cursor-pointer"
+                            className="cursor-pointer hover:bg-white/20 transition-colors duration-150 text-white"
                         >
                             <span>Edit Project</span>
                         </DropdownMenuItem>
                     </AlertDialogTrigger>
-                    <AlertDialogContent className="bg-[#252031] text-white border border-gray-700">
+                    <AlertDialogContent className="bg-[#252031] border-white text-white">
                         <AlertDialogHeader>
                             <AlertDialogTitle>
                                 Edit Project Name
@@ -117,7 +117,7 @@ export default function AppSidebarForm ({ id }: { id: string }) {
 
                             <AlertDialogFooter className='mt-6'>
                                 <AlertDialogCancel 
-                                className="bg-gray-700 text-white hover:bg-gray-600">
+                                className="bg-gray-700 cursor-pointer text-white hover:bg-gray-600">
                                     Cancel
                                 </AlertDialogCancel>
                                 <AlertDialogAction type='button' onClick={handleSubmit} className="bg-[#8E61EC] cursor-pointer text-white hover:bg-[#7d4fd9]">
@@ -136,12 +136,12 @@ export default function AppSidebarForm ({ id }: { id: string }) {
                             onSelect={(e) => e.preventDefault()}
                             className="cursor-pointer"
                           >
-                            <span>Delete Project</span>
+                            <span className='text-white hover:bg-white/20 transition-colors duration-150'>Delete Project</span>
                           </DropdownMenuItem>
                        </AlertDialogTrigger>
                        <AlertDialogContent className="bg-[#252031] text-white border border-gray-700">
                         <AlertDialogHeader>
-                            <AlertDialogTitle>
+                            <AlertDialogTitle className='text-white'>
                                 Delete Project
                             </AlertDialogTitle>
                             <AlertDialogDescription className="text-gray-400">

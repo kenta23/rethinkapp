@@ -43,7 +43,7 @@ export function AppSidebar() {
     return (
       <Sidebar
         collapsible="icon"
-        className="bg-linear-to-b overflow-x-hidden from-[#252031] to-[#383440]"
+        className="bg-linear-to-b text-white overflow-x-hidden from-[#252031] to-[#383440]"
       >
         <SidebarHeader>
           <SidebarGroup className="flex flex-row justify-between items-center">
@@ -72,7 +72,7 @@ export function AppSidebar() {
               chatHistory?.data.map((chat: any) => (
                 <SidebarMenuItem
                   key={chat.id}
-                  className={`px-3 py-2 rounded-xl bg-white/10 ${pathname === `/main/${chat.id}` && "bg-white/5"} backdrop-blur-sm w-full flex justify-between items-center`}
+                  className={`px-3 py-2 rounded-xl text-white bg-white/10 ${pathname === `/main/${chat.id}` && "bg-white/5"} backdrop-blur-sm w-full flex justify-between items-center`}
                 >
                   <Link className="cursor-pointer w-full" href={`/main/${chat.id}`}>
                     <SidebarMenuButton asChild>
@@ -99,11 +99,11 @@ export function AppSidebar() {
               height={110}
               objectFit="cover"
             />
-            <p className="text-sm">{session.data?.user?.name || "Anonymous"}</p>
+            <p className="text-sm text-white">{session.data?.user?.name || "Anonymous"}</p>
           </div>
 
           <Link href={"/projects"} className="">
-            <Archive cursor={"pointer"} />
+            <Archive cursor={"pointer"} color="white"/>
           </Link>
         </SidebarFooter>
       </Sidebar>

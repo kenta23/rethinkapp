@@ -42,7 +42,7 @@ export default function UserPopover({ data }: { data: Session | null}) {
 
         <PopoverContent className="bg-white/25 text-white flex flex-col gap-2 w-[200px] h-auto py-2  ">
           <div className="w-full pb-2 border-b-2 border-gray-300 flex items-center flex-row-reverse justify-end gap-3">
-            <p className="text-gray-200 font-medium text-sm">
+            <p className="text-gray-600 dark:text-gray-200 darktext-gray-200 font-medium text-sm">
               {data?.user.name ? data?.user.name : data?.user.email}
             </p>
             <div className="h-[30px] w-[30px]">
@@ -59,7 +59,7 @@ export default function UserPopover({ data }: { data: Session | null}) {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <div className="flex items-center hover:text-gray-300 transition-all duration-200 gap-3 cursor-pointer">
+                <div className="flex items-center text-black dark:text-white hover:text-gray-300 transition-all duration-200 gap-3 cursor-pointer">
                   <LogOut size={20}/>
                   <span
                     className={`font-normal text-md`}
@@ -68,7 +68,7 @@ export default function UserPopover({ data }: { data: Session | null}) {
                   </span>
                 </div>
               </AlertDialogTrigger>
-              <AlertDialogContent className='bg-black/80'>
+              <AlertDialogContent className='bg-[#252031] text-white'>
                 <AlertDialogHeader>
                   <AlertDialogTitle>
                     Are you absolutely sure you want to logout?

@@ -12,19 +12,6 @@ import {
 } from "@/components/ui/popover";
 import Image from "next/image";
 import Avatar from "./Avatar";
-import { Card, CardContent } from "./ui/card";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "./ui/alert-dialog";
-import { signOut } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
 import UserPopover from "./UserPopover";
 
 
@@ -40,7 +27,7 @@ export const LinkButton = ({
   className?: string;
 }) => {
   return (
-    <Link href={href} className="flex hover:text-gray-300 transition-all duration-200 items-center gap-3 cursor-pointer ">
+    <Link href={href} className="flex text-black dark:text-white hover:text-gray-300 transition-all duration-200 items-center gap-3 cursor-pointer ">
       {icon}
       <span
         className={`font-normal text-md ${className}`}

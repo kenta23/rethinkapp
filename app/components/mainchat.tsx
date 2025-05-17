@@ -1,5 +1,3 @@
-"use client"
-
 import React from 'react'
 import DocumentFile from './documentViewer'
 import Chats from './chats'

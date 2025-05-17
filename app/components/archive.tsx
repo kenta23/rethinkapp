@@ -22,7 +22,7 @@ export default function Archive() {
   const { isPending, error, data } = useQuery({
     queryKey: ['projects'],
     queryFn: () => axios.get('/api/projects').then((res) => res.data),
-    staleTime: 1000 * 60, //1 minute staletime
+    staleTime: 2000 * 60, //2 minute staletime
   })
 
 

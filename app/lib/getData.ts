@@ -4,6 +4,7 @@ import { Turret_Road } from 'next/font/google';
 import { auth } from '../../auth';
 import prisma from './prisma';
 import { cookies } from "next/headers";
+import { getUserGuestSession } from './getSession';
 
 
 export async function getData(id: string) {
@@ -13,13 +14,9 @@ export async function getData(id: string) {
    const guestUser = cookieStore.get("guest_user")?.value;
    
    // Fetch the guest user from the db
-   const guestUserFromDB = await prisma.guestUser.findFirst({ 
-       where: { 
-         cookieId: guestUser
-       }
-   });
+   const guestUserFromDB = await getUserGuestSession();
 
-   if (!session?.user && !guestUserFromDB?.id) {
+   if (!session?.user && !guestUserFromDB?.cookieId) {
        return null;
    } else {
       const data = await prisma.documents.findFirst({ 
