@@ -10,7 +10,7 @@ import { ourFileRouter } from "./api/uploadthing/core"
 import { Toaster } from "sonner"
 import Footer from "./components/footer"
 import { SessionProvider } from "next-auth/react"
-
+import { Analytics } from "@vercel/analytics/next"
 
 
 /**DEFAULT FONT */ 
@@ -42,6 +42,7 @@ export default function RootLayout({
                           <Footer />
                  </NextThemeProvider>
                </ReactQueryProvider> 
+              <Analytics />
             </body> 
         </html>
     )
