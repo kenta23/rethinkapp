@@ -27,6 +27,7 @@ export default function AppSidebarForm ({ id }: { id: string }) {
 
        await deleteProject(id).then(() => { 
             toast.success('Project successfully deleted please wait...');
+            queryClient.invalidateQueries({ queryKey: ['chats'] });
             queryClient.invalidateQueries({ queryKey: ['chat-history'] });
         }).catch((err) => toast.error(err.message || 'Failed to delete project'));
     }
@@ -58,6 +59,7 @@ export default function AppSidebarForm ({ id }: { id: string }) {
              onSuccess: () => { 
                 toast.success('Project successfully updated');
                 queryClient.invalidateQueries({ queryKey: ['chat-history'] });
+                queryClient.invalidateQueries({ queryKey: ['chats'] });
                 setName("");
                 setOpen(false);
                 router.refresh();

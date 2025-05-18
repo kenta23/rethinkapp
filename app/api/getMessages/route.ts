@@ -3,6 +3,7 @@ import { auth } from "../../../auth";
 import prisma from '../../lib/prisma';
 import { getUserGuestSession } from "@/lib/getSession";
 
+
 export async function POST(req: Request) {
     const { id } = await req.json();
     const session = await auth();
@@ -45,10 +46,12 @@ export async function POST(req: Request) {
       })
   
       return NextResponse.json(res[0]?.chats || [], { status: 200 }); 
+     
     }
     else { 
        return NextResponse.json('Something went wrong', { status: 400 })
     }
+
 
   } catch (error) {
     console.log('SOME ERROR OCCURED', error)

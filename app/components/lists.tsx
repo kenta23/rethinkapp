@@ -48,6 +48,7 @@ export default function Lists({ data }: { data: savedDataDbType }) {
            console.log('Done deleted!');
            toast.success(`${data?.name} Successfully deleted!`);
            await queryClient.invalidateQueries({ queryKey: ['projects'] });
+           await queryClient.invalidateQueries({ queryKey: ['chats'] });
            router.refresh();
          }
        })
@@ -56,6 +57,10 @@ export default function Lists({ data }: { data: savedDataDbType }) {
   return (
     <Link
       href={`/main/${data?.id }`}
+      key={data?.id}
+      onClick={() => {
+        queryClient.invalidateQueries({ queryKey: ['chats'] });
+      }}
       className="border flex items-center gap-4
       border-[#8A7BE8] px-4 py-2 
       w-full

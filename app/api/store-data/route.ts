@@ -37,24 +37,42 @@ export async function POST(req: NextRequest) {
           .setExpirationTime('30d')
           .sign(secret);
 
-      const guestUser = await prisma.guestUser.create({   //1. create guest user and store cookie id
-           data: { 
-             cookieId: token,
-           },
-        })
-
-      const documentResult = await prisma.documents.create({
+      const guestUser = await prisma.guestUser.create({
+        //1. create guest user and store cookie id
         data: {
-          guest_user_id: guestUser.id,
-          name: file_key,
-          file_link: url,
-          file_key: file_key, 
+          cookieId: token,
+          documents: {
+            create: {
+              name: file_key,
+              file_link: url,
+              file_key: file_key,
+            }
+          },
+        },
+        include: { 
+           documents: { 
+              select: {
+                id: true,
+                name: true,
+                file_link: true,
+                file_key: true,
+              }
+           }
         }
       });
 
-    if (guestUser && documentResult) { 
-       if (documentResult.file_key && documentResult.file_link) {  //3. embed the document to pinecone
-        const embeddedDocument = await saveVectorToPinecone(documentResult.file_key); 
+      // const documentResult = await prisma.documents.create({
+      //   data: {
+      //     guest_user_id: guestUser.id,
+      //     name: file_key,
+      //     file_link: url,
+      //     file_key: file_key, 
+      //   }
+      // });
+
+    if (guestUser) { 
+       if (guestUser.documents[0].file_key && guestUser.documents[0].file_link) {  //3. embed the document to pinecone
+        const embeddedDocument = await saveVectorToPinecone(guestUser.documents[0].file_key); 
         console.log("Successfully created data to the database", embeddedDocument);  
 
 
@@ -65,7 +83,7 @@ export async function POST(req: NextRequest) {
           maxAge: 60 * 60 * 24 * 30, // 30 days
         });
 
-          return NextResponse.json({ message: "Document created successfully", id: documentResult.id }, { status: 200 });
+          return NextResponse.json({ message: "Document created successfully", id: guestUser.documents[0].id }, { status: 200 });
         }    
 
         else { 
@@ -110,7 +128,7 @@ export async function POST(req: NextRequest) {
              const embeddedDocument = await saveVectorToPinecone(result.file_key); 
              console.log("Successfully created data to the database", embeddedDocument);  
 
-             return NextResponse.json(result.id, {status: 200})
+             return NextResponse.json({ message: "Document created successfully", id: result.id }, {status: 200})
           } else {
              return NextResponse.json({ message: "Failed to create document" }, { status: 500 });
           }    

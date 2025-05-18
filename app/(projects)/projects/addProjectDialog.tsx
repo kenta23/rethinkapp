@@ -2,15 +2,13 @@
 
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { Plus } from 'lucide-react';
 import Archive from '@/components/archive';
 import { UploadDropzone } from '@/lib/uploadthing';
-import { Session } from 'next-auth';
-import prisma from '@/lib/prisma';
-import { UploadThingError } from 'uploadthing/server';
+
 
 
 
@@ -21,6 +19,7 @@ type documentType = {
 
 export default function AddProjectDialog() {
     const router = useRouter(); 
+    const queryClient = useQueryClient();
 
   
     const { mutate,  data } = useMutation({
@@ -67,12 +66,13 @@ export default function AddProjectDialog() {
               url: res[0].ufsUrl,
               file_key: res[0].key,
             },
-            
             {
               onSuccess: (result) => {
                 //result from the Response api
                 toast.success("Redirecting you to the next page please wait...");
-                router.push(`/main/${result.data}`);
+                queryClient.invalidateQueries({ queryKey: ['projects'] });
+                queryClient.invalidateQueries({ queryKey: ['chats'] });
+                router.push(`/main/${result.data.id}`);
                 console.log("result: ", result);
               },
               onError: (err) => {

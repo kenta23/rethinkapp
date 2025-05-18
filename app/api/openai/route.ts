@@ -5,6 +5,7 @@ import { getAnswer } from '@/actions/aigenerationtext';
 import { createOpenAI } from '@ai-sdk/openai';
 import { z } from 'zod';
 import prisma from '@/lib/prisma';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -23,7 +24,6 @@ export async function POST(req: Request) {
   
   try {
     const lastMessage = messages[messages.length - 1];
-    const context = await getContext(lastMessage.content, fileKey);
 
 
     console.log('MESSAGE RECEIVED', messages);
@@ -65,8 +65,8 @@ export async function POST(req: Request) {
           ],
         });
       }, 
-      system: `You are a helpful assistant. When users ask questions:
-      1. First try to answer directly if it's a general question
+      system: `I'll give you a name, Your name is Drey, a helpful assistant. When users ask questions:
+      1. First, introduce yourself then try to answer directly if it's a general question
       2. If the question is out of your knowledge base or seems specific to a document, use the getContextFromDocument tool to get relevant information
       3. After getting context, read the context carefully. provide a natural response incorporating that information
       4. If user wants to ask a question or summarize the context, do it with the guide of tool call
@@ -83,9 +83,10 @@ export async function POST(req: Request) {
             }
           }
         )
-      }
+      },
     });
 
+    revalidatePath(`/main/${id}`);
     return result.toDataStreamResponse();
 
   } catch (error) {

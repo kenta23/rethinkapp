@@ -41,10 +41,11 @@ export async function getAllDocuments() {
 {/**EDITING THE PROJECT */}
 export async function editProject(name: string, id: string) { 
    const session = await auth();
+   const guestUser = await getUserGuestSession();
 
-   if(!session?.user) {
+   if(!session?.user && !guestUser) {
       return {
-         message: "User not authenticated"
+         message: "User can't update the document"
       }
    }
 
@@ -149,14 +150,20 @@ export async function deleteProject (id: string) {
             //go to the next document 
             const nextDocument = await prisma.documents.findFirst({ 
                where: { 
-                  user_id: session?.user.id
+                  OR: [
+                    { user_id: session?.user.id },
+                    { guest_user_id: checkGuestUser?.id },
+                  ],
                },
                orderBy: { 
                   updated_at: 'desc'
                }
-            });
-            nextDocument ? redirect(`/main/${nextDocument.id}`) : redirect("/projects");
+            }); 
+
+            return redirect(`/main/${nextDocument?.id}`) ?? redirect("/projects");
          }
+
+
       }
    } catch (error) { 
       console.error('Error deleting project:', error);

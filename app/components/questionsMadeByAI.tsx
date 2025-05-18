@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { CreateMessage, } from 'ai/react'
 import { Lightbulb, SendHorizontal } from 'lucide-react';
 import axios from 'axios';
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { QueryClient, QueryObserverResult, RefetchOptions, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Message } from 'ai/react';
 import { useRouter } from 'next/navigation';
 import { ChatRequestOptions } from 'ai';
@@ -21,7 +21,7 @@ export default function QuestionsMadeByAI({
   Aiquestions: string[];
   id: string;
 }) {
-  console.log('Aiquestions', Aiquestions);
+  const queryClient = useQueryClient();
 
   return (
     <div>
@@ -30,7 +30,11 @@ export default function QuestionsMadeByAI({
             (question, index) =>
               index < 3 && (
                 <form
-                  onSubmit={handleSubmit}
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    handleSubmit(e);
+                    await queryClient.invalidateQueries({ queryKey: ['chats'] });
+                  }}
                   key={index}
                   className="p-2 flex gap-2 items-center justify-center cursor-pointer shadow-sm text-[#40545e] 
                          rounded-lg bg-white hover:bg-gray-100 "

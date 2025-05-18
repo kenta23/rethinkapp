@@ -47,7 +47,7 @@ export default function Footer() {
   };
   return (
     <main
-      className={`w-full min-w-full  relative bottom-0 bg-[#24202b] text-gray-400 text-xs md:text-[18px] py-8 px-2 md:px-12  ${
+      className={`w-full min-w-full relative bottom-0 bg-[#24202b] text-gray-400 text-xs md:text-[18px] py-8 px-2 md:px-12  ${
         pathname.includes("/main")
           ? "hidden"
           : "flex"
@@ -90,27 +90,27 @@ export default function Footer() {
                   
                 />
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-white">
+              <AlertDialogContent className="bg-white dark:bg-[#24202b] dark:text-white">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>CONTACT US</AlertDialogTitle>
+                  <AlertDialogTitle className="text-black dark:text-white">CONTACT US</AlertDialogTitle>
                   <AlertDialogDescription>
-                    <div className="flex justify-between items-center gap-2 ">
-                      <span className="font-medium text-[16px]">
-                        +639606810484
+                    <div className="flex text-black  justify-between items-center gap-2 ">
+                      <span className="font-medium text-[16px] text-black dark:text-white">
+                        +639489120162
                       </span>
 
                       <Button
                         variant={"outline"}
-                        className="self-center "
+                        className="self-center text-black dark:text-white"
                         onClick={copyToClipboard}
                       >
-                        <Copy className="" />
+                        <Copy className="text-black dark:text-white" />
                       </Button>
                     </div>
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Exit</AlertDialogCancel>
+                  <AlertDialogCancel className="text-black dark:text-white cursor-pointer">Exit</AlertDialogCancel>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -122,17 +122,17 @@ export default function Footer() {
           <div className="flex flex-row items-center text-white">
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="link" className="text-gray-400 ">
+                <Button variant="link" className="text-black dark:text-white">
                   Disclaimer
                 </Button>
               </AlertDialogTrigger>
-              <AlertDialogContent className="bg-white">
+              <AlertDialogContent className="bg-white text-black dark:bg-[#24202b] dark:text-white">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>DISCLAIMER</AlertDialogTitle>
+                  <AlertDialogTitle className="text-black dark:text-white">DISCLAIMER</AlertDialogTitle>
                     <Disclaimer />
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Exit</AlertDialogCancel>
+                  <AlertDialogCancel className="cursor-pointer text-black dark:text-white">Exit</AlertDialogCancel>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -144,15 +144,15 @@ export default function Footer() {
                 </Button>
               </AlertDialogTrigger>
 
-              <AlertDialogContent className="bg-white">
+              <AlertDialogContent className="bg-white dark:bg-[#24202b] dark:text-white">
                 <AlertDialogHeader>
                   <AlertDialogTitle>TERMS AND CONDITION</AlertDialogTitle>
-                  <div className="h-[500px] md:h-[600px] overflow-y-auto">
+                  <div className="h-[500px] text-black dark:text-white md:h-[600px] overflow-y-auto">
                         <TermsAndCondition />
                   </div>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Exit</AlertDialogCancel>
+                  <AlertDialogCancel className="text-black dark:text-white cursor-pointer">Exit</AlertDialogCancel>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -164,7 +164,7 @@ export default function Footer() {
                     How to Use
                   </Button>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="bg-white">
+                <AlertDialogContent className="bg-white text-black dark:bg-[#24202b] dark:text-white">
                   <AlertDialogHeader>
                     <AlertDialogTitle>How to use</AlertDialogTitle>
                     <div className="h-[500px] md:h-[600px] overflow-y-auto">
@@ -172,7 +172,7 @@ export default function Footer() {
                     </div>
                   </AlertDialogHeader>
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Exit</AlertDialogCancel>
+                    <AlertDialogCancel className="text-black dark:text-white cursor-pointer">Exit</AlertDialogCancel>
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>

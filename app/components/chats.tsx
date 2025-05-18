@@ -5,7 +5,7 @@ import { Send } from 'lucide-react';
 import React, { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState, type JSX } from 'react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { getSuggestionContext } from '@/actions/aigenerationtext';
@@ -20,12 +20,13 @@ export const maxDuration = 30;
 export default function Chats ({ data }: { data: DocumentType | null }) {
     const session = useSession();
     const [Aiquestions, setAiquestions] = useState<string[]>([]);
+    const queryClient = useQueryClient();
     
     const messageContainer = useRef<HTMLDivElement>(null);
     const [clicked, setClicked] = useState<boolean>(false);
    
 
-    const { data: chatdata, isLoading: loading, error, isFetching } = useQuery({  
+    const { data: chatdata, refetch } = useQuery({  
       queryKey: ['chats'], 
       queryFn: async () => {
         const response = await axios.post<Message[]>("/api/getMessages", {
@@ -33,7 +34,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
         });
         return response.data;
       },
-      staleTime: 40 * 1000, //40 seconds staletime
+      staleTime: 60 * 1000, //60 seconds staletime
    })
   
     const { input, handleSubmit, handleInputChange, messages, status, append } = useChat({
@@ -45,10 +46,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
           guestUserId: data?.guestUser?.id,
           id: data?.id
         },
-        onFinish: (res) => {
-             console.log("Successfully created chat");
-        },
-        initialMessages: chatdata || [],
+        initialMessages: chatdata    
     })
     
 
@@ -74,14 +72,20 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
     }
   };
 
+  console.log('CHAT length', chatdata?.length);
+
   useEffect(() => {
-    if (!chatdata?.length) {
-      fetchQuestions();
-    }
-    return () => { 
+    console.log('running');
+
+    if(!chatdata?.length && status === 'ready') {
+       fetchQuestions();
+     }
+
+     return () => { 
       setAiquestions([]);
     }
-  }, [chatdata, loading, isFetching, status, data?.file_key]);
+
+  }, [chatdata, status, data?.file_key]);
 
     return (
       <div className="h-full max-h-screen">
@@ -91,7 +95,7 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
             className={`w-full p-3 h-auto flex flex-col overflow-y-auto`}
           > 
           {/**If there is no chat data, loading, and clicked is false, then show the questions made by AI */}
-            {!chatdata?.length && !loading ? (
+            {!chatdata?.length ? (
               <div className="h-auto justify-end mx-auto w-full flex flex-col items-center gap-2">
                 <QuestionsMadeByAI
                   fileKey={data?.file_key as string}
@@ -105,13 +109,12 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
             ) :             
           <div className="flex self-end flex-col gap-4 w-full">
             {/** CHAT STREAMING HERE */}
-             {isFetching ? (
+             {!chatdata?.length ? (
               Array.from({length: 2}).map((__, index) => { 
                 return (
                    <div key={index} className='flex flex-row gap-3 mb-3'> 
                         <Skeleton key={index} className={`px-3 py-2 h-10 rounded-xl bg-white/15 backdrop-blur-sm w-full flex-1`}>                         
                        </Skeleton>    
-
                        <Skeleton className='size-10 rounded-full bg-white/15 backdrop-blur-sm'/>               
                    </div>
                 )
@@ -162,7 +165,10 @@ export default function Chats ({ data }: { data: DocumentType | null }) {
 
           {/** USER INPUTS HERE */}
           <form
-              onSubmit={handleSubmit}
+              onSubmit={async (e) => { 
+                handleSubmit(e)
+                await queryClient.invalidateQueries({ queryKey: ['chats'] });
+              }}
               className="flex items-center justify-center w-full gap-1 px-2"
             >
               <input
